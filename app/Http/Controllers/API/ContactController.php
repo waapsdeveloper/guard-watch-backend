@@ -10,18 +10,18 @@ use App\Services\ContactService;
 class ContactController extends Controller
 {
     //
-    protected $contactService;
+    protected $service;
 
-    public function __construct(ContactService $contactService){
-        $this->contactService = $contactService;
+    public function __construct(ContactService $service){
+        $this->service = $service;
     }
 
-    public function contactList(Request $request){
+    public function list(Request $request){
 
         $data = $request->all();
 
         //
-        $res = $this->contactService->contactList($data);
+        $res = $this->service->list($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -31,7 +31,7 @@ class ContactController extends Controller
 
     }
 
-    public function contactById(Request $request, $id){
+    public function byId(Request $request, $id){
 
         $data = $request->all();
         $data['id'] = $id;
@@ -47,7 +47,7 @@ class ContactController extends Controller
         }
 
         //
-        $res = $this->contactService->contactById($data);
+        $res = $this->service->byId($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -57,7 +57,7 @@ class ContactController extends Controller
 
     }
 
-    public function contactAdd(Request $request){
+    public function add(Request $request){
 
         $data = $request->all();
 
@@ -74,7 +74,7 @@ class ContactController extends Controller
         }
 
         //
-        $res = $this->contactService->contactAdd($data);
+        $res = $this->service->add($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -85,7 +85,7 @@ class ContactController extends Controller
 
     }
 
-    public function contactEdit(Request $request, $id){
+    public function edit(Request $request, $id){
 
         $data = $request->all();
         $data['id'] = $id;
@@ -104,7 +104,7 @@ class ContactController extends Controller
         }
 
         //
-        $res = $this->contactService->contactEdit($data);
+        $res = $this->service->edit($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -114,7 +114,7 @@ class ContactController extends Controller
 
     }
 
-    public function contactDelete(Request $request, $id){
+    public function delete(Request $request, $id){
 
         $data = $request->all();
         $data['id'] = $id;
@@ -130,7 +130,7 @@ class ContactController extends Controller
         }
 
         //
-        $res = $this->contactService->contactDelete($data);
+        $res = $this->service->delete($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);

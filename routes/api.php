@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
+use App\Http\Controllers\API\SpaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,20 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function () {
 
-    Route::get('/list', [ContactController::class, 'contactList'] );
-    Route::get('/by-id/{id}', [ContactController::class, 'contactById'] );
-    Route::post('/add', [ContactController::class, 'contactAdd'] );
-    Route::post('/edit/{id}', [ContactController::class, 'contactEdit'] );
-    Route::delete('/delete/{id}', [ContactController::class, 'contactDelete'] );
+    Route::get('/list', [ContactController::class, 'list'] );
+    Route::get('/by-id/{id}', [ContactController::class, 'byId'] );
+    Route::post('/add', [ContactController::class, 'add'] );
+    Route::post('/edit/{id}', [ContactController::class, 'edit'] );
+    Route::delete('/delete/{id}', [ContactController::class, 'delete'] );
+
+});
+
+Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [SpaceController::class, 'list'] );
+    Route::get('/by-id/{id}', [SpaceController::class, 'byId'] );
+    Route::post('/add', [SpaceController::class, 'add'] );
+    Route::post('/edit/{id}', [SpaceController::class, 'edit'] );
+    Route::delete('/delete/{id}', [SpaceController::class, 'delete'] );
 
 });

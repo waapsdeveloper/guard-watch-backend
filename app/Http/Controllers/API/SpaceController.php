@@ -5,37 +5,23 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Services\AuthService;
+use App\Services\SpaceService;
 
-class AuthController extends Controller
+class SpaceController extends Controller
 {
+    //
     protected $service;
 
-    public function __construct(AuthService $service){
+    public function __construct(SpaceService $service){
         $this->service = $service;
     }
 
-    //
-    public function register(Request $request){
+    public function list(Request $request){
 
         $data = $request->all();
 
-        // validating the required fields
-        $validation = Validator::make($data, [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'phone_number' => 'required|min:10',
-            'password' => 'required|string',
-            'dial_code' => 'required|string'
-        ]);
-
-        // if validation failed
-        if ($validation->fails()) {
-            return self::failure($validation->errors()->first());
-        }
-
         //
-        $res = $this->service->userSignup($data);
+        $res = $this->service->list($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -45,16 +31,14 @@ class AuthController extends Controller
 
     }
 
-    public function login(Request $request){
-
+    public function byId(Request $request, $id){
 
         $data = $request->all();
+        $data['id'] = $id;
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'phone_number' => 'required|min:10',
-            'dial_code' => 'required|string',
-            'password' => 'required|string'
+            'id' => 'required|exists:spaces,id'
         ]);
 
         // if validation failed
@@ -63,7 +47,65 @@ class AuthController extends Controller
         }
 
         //
-        $res = $this->service->userLogin($data);
+        $res = $this->service->byId($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+    public function add(Request $request){
+
+        $data = $request->all();
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->service->add($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Test Result", $res);
+
+
+    }
+
+    public function edit(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:spaces,id',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->service->edit($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -73,13 +115,14 @@ class AuthController extends Controller
 
     }
 
-    public function forgetPassword(Request $request){
+    public function delete(Request $request, $id){
 
         $data = $request->all();
+        $data['id'] = $id;
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'email' => 'required|email'
+            'id' => 'required|exists:spaces,id'
         ]);
 
         // if validation failed
@@ -88,33 +131,13 @@ class AuthController extends Controller
         }
 
         //
-        $res = $this->service->userForget($data);
+        $res = $this->service->delete($data);
 
-        return self::success("Email send Successfully", $res);
-
-    }
-
-    public function verifyForgetPassword(Request $request){
-
-        $data = $request->all();
-
-        // validating the required fields
-        $validation = Validator::make($data, [
-            'email' => 'required|email',
-            'code' => 'required',
-            'password' => 'required',
-        ]);
-
-        // if validation failed
-        if ($validation->fails()) {
-            return self::failure($validation->errors()->first());
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
         }
 
-        //
-        $res = $this->service->verifyUserForget($data);
-
-        return self::success("Email send Successfully", $res);
+        return self::success("", $res);
 
     }
-
 }
