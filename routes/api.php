@@ -34,6 +34,6 @@ Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function ()
     Route::get('/by-id/{id}', [ContactController::class, 'contactById'] );
     Route::post('/add', [ContactController::class, 'contactAdd'] );
     Route::post('/edit/{id}', [ContactController::class, 'contactEdit'] );
-    Route::post('/delete', [ContactController::class, 'contactDelete'] );
+    Route::delete('/delete/{id}', [ContactController::class, 'contactDelete'] );
 
 });

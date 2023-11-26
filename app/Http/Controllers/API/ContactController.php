@@ -36,6 +36,16 @@ class ContactController extends Controller
         $data = $request->all();
         $data['id'] = $id;
 
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:contacts,id'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
         //
         $res = $this->contactService->contactById($data);
 
@@ -104,7 +114,29 @@ class ContactController extends Controller
 
     }
 
-    public function contactDelete(Request $request){
+    public function contactDelete(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:contacts,id'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->contactService->contactDelete($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
 
     }
 }

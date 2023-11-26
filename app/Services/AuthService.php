@@ -37,8 +37,6 @@ class AuthService {
         $user->role_id = 2;
         $user->save();
 
-
-
         $res = new UserResource($user);
 
         return ServiceResponse::success('User', $res);

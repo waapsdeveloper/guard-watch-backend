@@ -102,7 +102,22 @@ class ContactService {
 
     public function contactDelete($data){
 
+        $user = Auth::user();
+        // check existing contact
+        $contact = Contact::where([
+            'id' => $data['id'],
+            'user_id' => $user->id,
+        ])->first();
 
+        if(!$contact){
+            return ServiceResponse::error('Contact Does not Exist With Phone Number');
+        }
+
+        $contact->delete();
+
+        $res = ['id' => $data['id']];
+
+        return ServiceResponse::success('Contact Deleted', $res);
 
     }
 
