@@ -14,6 +14,7 @@ class Contact extends Model
         'name',
         'email',
         'phone_number',
-        'dial_code'
+        'dial_code',
+        'created_by'
     ];
 }

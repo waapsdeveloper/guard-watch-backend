@@ -23,7 +23,7 @@ class ContactService {
     public function contactList($data){
 
         $user = Auth::user();
-        $contacts = Contact::where(['user_id' => $user->id])->get();
+        $contacts = Contact::where(['created_by' => $user->id])->get();
         return ServiceResponse::success('Contacts List', $contacts);
 
     }
@@ -33,7 +33,7 @@ class ContactService {
         $user = Auth::user();
         // check existing contact
         $contact = Contact::where([
-            'user_id' => $user->id,
+            'created_by' => $user->id,
             'dial_code' => $data['dial_code'],
             'phone_number' => $data['phone_number'],
         ])->first();
@@ -43,7 +43,7 @@ class ContactService {
         }
 
         $contact = new Contact();
-        $contact->user_id = $user->id;
+        $contact->created_by = $user->id;
         $contact->name = $data['name'];
         $contact->phone_number = $data['phone_number'];
         $contact->dial_code = $data['dial_code'];
@@ -62,7 +62,7 @@ class ContactService {
         // check existing contact
         $contact = Contact::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$contact){
@@ -87,7 +87,7 @@ class ContactService {
         // check existing contact
         $contact = Contact::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$contact){
@@ -106,7 +106,7 @@ class ContactService {
         // check existing contact
         $contact = Contact::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$contact){
