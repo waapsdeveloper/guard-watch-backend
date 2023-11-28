@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\SpaceController;
+use App\Http\Controllers\API\InvitesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,16 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
     Route::delete('/delete/{id}', [SpaceController::class, 'delete'] );
 
 });
+
+
+Route::group(['prefix' => 'invites', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [InvitesController::class, 'list'] );
+    Route::get('/by-id/{id}', [InvitesController::class, 'byId'] );
+    Route::post('/add', [InvitesController::class, 'add'] );
+    Route::post('/edit/{id}', [InvitesController::class, 'edit'] );
+    Route::delete('/delete/{id}', [InvitesController::class, 'delete'] );
+
+});
+
+
