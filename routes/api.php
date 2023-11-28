@@ -8,8 +8,9 @@ use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\SpaceController;
 use App\Http\Controllers\API\InvitesController;
 use App\Http\Controllers\API\EventsController;
-
 use App\Http\Controllers\API\VehiclesController;
+use App\Http\Controllers\API\QrcodeController;
+
 
 
 /*
@@ -87,3 +88,14 @@ Route::group(['prefix' => 'vehicles', 'middleware' => ['auth:api']], function ()
     Route::delete('/delete/{id}', [VehiclesController::class, 'delete'] );
 
 });
+
+Route::group(['prefix' => 'qrcode', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [QrcodeController::class, 'list'] );
+    Route::get('/by-id/{id}', [QrcodeController::class, 'byId'] );
+    Route::post('/add', [QrcodeController::class, 'add'] );
+    Route::post('/edit/{id}', [QrcodeController::class, 'edit'] );
+    Route::delete('/delete/{id}', [QrcodeController::class, 'delete'] );
+
+});
+
