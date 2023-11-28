@@ -7,6 +7,10 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\SpaceController;
 use App\Http\Controllers\API\InvitesController;
+use App\Http\Controllers\API\EventsController;
+
+use App\Http\Controllers\API\VehiclesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +66,24 @@ Route::group(['prefix' => 'invites', 'middleware' => ['auth:api']], function () 
 });
 
 
+Route::group(['prefix' => 'events', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [EventsController::class, 'list'] );
+    Route::get('/by-id/{id}', [EventsController::class, 'byId'] );
+    Route::post('/add', [EventsController::class, 'add'] );
+    Route::post('/edit/{id}', [EventsController::class, 'edit'] );
+    Route::delete('/delete/{id}', [EventsController::class, 'delete'] );
+
+});
+
+
+
+Route::group(['prefix' => 'vehicles', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [VehiclesController::class, 'list'] );
+    Route::get('/by-id/{id}', [VehiclesController::class, 'byId'] );
+    Route::post('/add', [VehiclesController::class, 'add'] );
+    Route::post('/edit/{id}', [VehiclesController::class, 'edit'] );
+    Route::delete('/delete/{id}', [VehiclesController::class, 'delete'] );
+
+});

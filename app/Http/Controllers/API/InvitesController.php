@@ -39,52 +39,51 @@ class InvitesController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:spaces,id'
+            'id' => 'required|exists:invites,id'
         ]);
 
         // if validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-
         //
         $res = $this->service->byId($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
         }
-
         return self::success("", $res);
-
     }
-
     public function add(Request $request){
-
         $data = $request->all();
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'location' => 'required|string',
-
+        'pass_validity' => 'required|int',
+        'pass_type' => 'required|string',
+        'visitor_type' => 'required|string',
+        'description' => 'required|string',
+        'space_id' => 'required|int',
+        'event_id' => 'required|int',
+        'is_quick_pass'=> 'required|int',
+        'pass_start_date'=> 'required|date',
+        'pass_date' => 'required|date',
+        'lat' => 'required|int',
+        'lng' => 'required|int',
+        'is_sent_by_sms' => 'required|int',
         ]);
 
         // if validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-
         //
         $res = $this->service->add($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
         }
-
         return self::success("Test Result", $res);
-
-
     }
 
     public function edit(Request $request, $id){
@@ -94,10 +93,8 @@ class InvitesController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:spaces,id',
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'location' => 'required|string',
+            'id' => 'required|exists:invites,id',
+
         ]);
 
         // if validation failed
@@ -123,7 +120,7 @@ class InvitesController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:spaces,id'
+            'id' => 'required|exists:invites,id'
         ]);
 
         // if validation failed

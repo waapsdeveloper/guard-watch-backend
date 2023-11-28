@@ -5,15 +5,14 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Services\EventsService;
+use App\Services\VehicleService;
 
-
-class EventsController extends Controller
+class VehiclesController extends Controller
 {
+    //
     protected $service;
 
-    public function __construct(EventsService $service){
-
+    public function __construct(VehicleService $service){
         $this->service = $service;
     }
 
@@ -39,7 +38,7 @@ class EventsController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:events,id'
+            'id' => 'required|exists:vehicles,id'
         ]);
 
         // if validation failed
@@ -64,8 +63,10 @@ class EventsController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'year' => 'required|string',
+            'color' => 'required|string',
 
         ]);
 
@@ -93,9 +94,10 @@ class EventsController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:events,id',
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'year' => 'required|string',
+            'color' => 'required|string',
         ]);
 
         // if validation failed
@@ -121,7 +123,7 @@ class EventsController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:events,id'
+            'id' => 'required|exists:vehicles,id'
         ]);
 
         // if validation failed

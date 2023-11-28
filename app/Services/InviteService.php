@@ -18,37 +18,43 @@ class InviteService {
     }
 
     public function list($data){
-
         $user = Auth::user();
-        $spaces = Invite::where(['created_by' => $user->id])->get();
-        $list = new InviteCollection($spaces);
-        return ServiceResponse::success('Spaces List', $list);
-
+        $invites = Invite::where(['created_by' => $user->id])->get();
+        $list = new InviteCollection($invites);
+        return ServiceResponse::success('Invite List', $list);
     }
 
     public function add($data){
-
         $user = Auth::user();
         // check existing contact
         $item = Invite::where([
             'created_by' => $user->id,
-            'title' => $data['title']
+            'description' => $data['description']
         ])->first();
 
         if($item){
-            return ServiceResponse::error('Space Already Exist With title');
+            return ServiceResponse::error('Invite Already Exist With title');
         }
 
         $item = new Invite();
         $item->created_by = $user->id;
-        $item->title = $data['title'];
         $item->description = $data['description'];
-        $item->location = $data['location'];
+        $item->pass_validity = $data['pass_validity'];
+        $item->pass_type = $data['pass_type'];
+        $item->visitor_type = $data['visitor_type'];
+        $item->space_id = $data['space_id'];
+        $item->event_id = $data['event_id'];
+        $item->is_quick_pass = $data['is_quick_pass'];
+        $item->pass_start_date = $data['pass_start_date'];
+        $item->pass_date = $data['pass_date'];
+        $item->lat = $data['lat'];
+        $item->lng = $data['lng'];
+        $item->is_sent_by_sms = $data['is_sent_by_sms'];
         $item->save();
 
         $res = new InviteResource($item);
 
-        return ServiceResponse::success('Spaces Add', $res);
+        return ServiceResponse::success('Invite Add', $res);
 
     }
 
@@ -62,17 +68,14 @@ class InviteService {
         ])->first();
 
         if(!$item){
-            return ServiceResponse::error('Space Does not Exist');
+            return ServiceResponse::error('Invite Does not Exist');
         }
-
-        $item->title = $data['title'];
         $item->description = $data['description'];
-        $item->location = $data['location'];
         $item->save();
 
         $res = new InviteResource($item);
 
-        return ServiceResponse::success('Spaces Edit', $res);
+        return ServiceResponse::success('Invite Edit', $res);
 
     }
 
@@ -86,7 +89,7 @@ class InviteService {
         ])->first();
 
         if(!$item){
-            return ServiceResponse::error('Contact Does not Exist With Phone Number');
+            return ServiceResponse::error('Invite Does not Exist');
         }
 
         $res = new InviteResource($item);
@@ -105,14 +108,14 @@ class InviteService {
         ])->first();
 
         if(!$item){
-            return ServiceResponse::error('Space Does not Exist');
+            return ServiceResponse::error('Invite Does not Exist');
         }
 
         $item->delete();
 
         $res = ['id' => $data['id']];
 
-        return ServiceResponse::success('Space Deleted', $res);
+        return ServiceResponse::success('Invite Deleted', $res);
 
     }
 
