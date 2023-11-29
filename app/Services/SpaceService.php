@@ -45,11 +45,8 @@ class SpaceService {
         $item->description = $data['description'];
         $item->location = $data['location'];
         $item->save();
-
         $res = new SpaceResource($item);
-
         return ServiceResponse::success('Spaces Add', $res);
-
     }
 
     public function edit($data){
