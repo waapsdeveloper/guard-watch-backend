@@ -38,7 +38,7 @@ class QrcodeController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:Qrcode,id'
+            'id' => 'required|exists:qrcodes,id'
         ]);
 
         // if validation failed
@@ -123,7 +123,7 @@ class QrcodeController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:Qrcode,id'
+            'id' => 'required|exists:qrcodes,id'
         ]);
 
         // if validation failed

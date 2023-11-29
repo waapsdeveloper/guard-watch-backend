@@ -32,6 +32,7 @@ class QrcodeService {
         // check existing contact
         $item = Qrcode::where([
             'created_by' => $user->id,
+            'space_id' => $data['space_id']
         ])->first();
 
         if($item){
