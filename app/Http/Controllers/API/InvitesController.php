@@ -143,7 +143,7 @@ class InvitesController extends Controller
         $data['id'] = $id;
 
         // validating the required fields
-        dd($id, $data);
+
         $validation = Validator::make($data, [
             'id' => 'required|exists:invites,id'
         ]);
@@ -153,6 +153,7 @@ class InvitesController extends Controller
             return self::failure($validation->errors()->first());
         }
         //
+        dd($id, $data);
         $res = $this->service->getInviteWithContacts($data);
 
         if($res['bool'] == false){
