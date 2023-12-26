@@ -206,8 +206,11 @@ class InvitesController extends Controller
         $arr = collect([]);
 
         foreach($contacts as $contact){
-            $contact['invite_id'] = $data['invite_id'];
-            $arr->push($contact);
+            $obj = [
+                'invite_id' => $data['invite_id'],
+                'contact_id' => $data['id']
+            ];
+            $arr->push($obj);
         }
 
         $res = $this->service->inviteContactsDelete($arr);

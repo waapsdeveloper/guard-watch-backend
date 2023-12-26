@@ -182,7 +182,25 @@ class InviteService {
 
     public function inviteContactsDelete($arr){
 
+        $deleted = collect([]);
 
+        foreach($arr as $item){
+
+            $ivt = InviteContact::where([
+                'invite_id' => $item['invite_id'],
+                'contact_id' => $item['contact_id'],
+            ])->first();
+
+            if($ivt){
+                $deleted->push($ivt->id);
+            }
+
+        }
+
+        $ids = $deleted->toArray();
+        InviteContact::whereIn(['id' => $ids])->delete();
+
+        return ServiceResponse::success('Invite Contacts Deleted', $ids);
 
 
     }
