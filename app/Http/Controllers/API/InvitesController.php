@@ -143,6 +143,7 @@ class InvitesController extends Controller
         $data['id'] = $id;
 
         // validating the required fields
+        dd($id, $data);
         $validation = Validator::make($data, [
             'id' => 'required|exists:invites,id'
         ]);
