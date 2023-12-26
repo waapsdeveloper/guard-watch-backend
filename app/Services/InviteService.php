@@ -144,7 +144,7 @@ class InviteService {
         // check existing contact
         $item = Invite::where([
             'id' => $data['id'],
-            'created_by' => $user->id,
+            'user_id' => $user->id,
         ])->first();
 
         if(!$item){

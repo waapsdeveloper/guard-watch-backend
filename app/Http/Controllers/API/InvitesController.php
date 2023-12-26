@@ -152,8 +152,7 @@ class InvitesController extends Controller
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-        //
-        dd($id, $data);
+
         $res = $this->service->getInviteWithContacts($data);
 
         if($res['bool'] == false){
