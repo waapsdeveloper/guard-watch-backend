@@ -152,6 +152,8 @@ class InvitesController extends Controller
             return self::failure($validation->errors()->first());
         }
 
+        dd("ABC");
+
         //
         $res = $this->service->getInvitesBySpaceId($data);
 
