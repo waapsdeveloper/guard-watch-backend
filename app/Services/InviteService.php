@@ -4,11 +4,13 @@ namespace App\Services;
 use App\Http\Resources\API\SpaceResource;
 use App\Models\Invite;
 use App\Models\Space;
+use App\Models\InviteContact;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
 use App\Http\Resources\API\InviteCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+
 
 class InviteService {
 
@@ -42,9 +44,33 @@ class InviteService {
         $item->comments = $data['comments'];
         $item->save();
 
-        $res = new InviteResource($item);
+        $invite = new InviteResource($item);
 
-        return ServiceResponse::success('Invite Add', $res);
+        // add contacts to invite
+
+        $contacts = collect($data['contacts']);
+
+        $arr = collect([]);
+        foreach($contacts as $contact){
+
+            $anv = InviteContact::updateOrCreate([
+                'contact_id' => $contact->id,
+                'invite_id' => $item->id
+            ], [
+                'name' => $contact->name,
+                'phone_number' => $contact->phone_number,
+            ]);
+
+            $arr->push($anv);
+
+        }
+
+        $result = [
+            'invite' => $invite,
+            'invite_contacts' => $arr
+        ];
+
+        return ServiceResponse::success('Invite Add', $result);
 
     }
 
