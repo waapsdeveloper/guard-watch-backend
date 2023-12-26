@@ -14,6 +14,7 @@ class InviteContact extends Model
         'invite_id',
         'contact_id',
         'name',
+        'dial_code',
         'phone_number',
     ];
 }

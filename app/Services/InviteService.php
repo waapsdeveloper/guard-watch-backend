@@ -55,11 +55,12 @@ class InviteService {
         foreach($contacts as $contact){
 
             $anv = InviteContact::updateOrCreate([
-                'contact_id' => $contact->id,
-                'invite_id' => $item->id
+                'contact_id' => $contact['id'],
+                'invite_id' => $item['id']
             ], [
-                'name' => $contact->name,
-                'phone_number' => $contact->phone_number,
+                'name' => $contact['name'],
+                'phone_number' => $contact['phone_number'],
+                'dial_code' => $contact['dial_code'],
             ]);
 
             $arr->push($anv);
