@@ -111,7 +111,7 @@ class InviteService {
 
     public function getInvitesBySpaceId($data){
         $user = Auth::user();
-        $invites = Invite::where(['user_id' => $user->id, 'space_id' => $data['id'] ])->get();
+        $invites = Invite::where(['user_id' => $user->id, 'space_id' => $data['id'] ])->with(['user', 'space', 'event'])->get();
         $list = new InviteCollection($invites);
 
         $space = new SpaceResource(Space::where(['id' => $data['id']])->first());
