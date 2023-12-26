@@ -26,7 +26,7 @@ class InviteResource extends JsonResource
         return [
             "id" => $obj->id,
             'user_id' => $obj->user_id,
-            'user' => UserResource::toObject($obj->user),
+            // 'user' => UserResource::toObject($obj->user),
             'space_id' => $obj->space_id,
             'space' => SpaceResource::toObject($obj->space),
             'event_id'  => $obj->event_id,
