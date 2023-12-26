@@ -138,7 +138,7 @@ class InviteService {
 
     }
 
-    public function getInviteWithContacts(){
+    public function getInviteWithContacts($data){
 
         $user = Auth::user();
         // check existing contact
