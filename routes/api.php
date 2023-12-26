@@ -65,8 +65,10 @@ Route::group(['prefix' => 'invites', 'middleware' => ['auth:api']], function () 
     Route::post('/add', [InvitesController::class, 'add'] );
     Route::post('/edit/{id}', [InvitesController::class, 'edit'] );
     Route::delete('/delete/{id}', [InvitesController::class, 'delete'] );
+    Route::get('/by-id/{id}/with-contacts', [InvitesController::class, 'getInviteWithContacts'] );
 
     Route::get('/list/by-space-id/{id}', [InvitesController::class, 'getInvitesBySpaceId'] );
+    Route::post('/delete-invite-contacts', [InvitesController::class, 'inviteContactsDelete'] );
 
 });
 

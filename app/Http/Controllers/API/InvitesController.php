@@ -137,6 +137,30 @@ class InvitesController extends Controller
 
     }
 
+    public function getInviteWithContacts(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:invites,id'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+        //
+        $res = $this->service->getInviteWithContacts($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+        return self::success("", $res);
+
+    }
+
     public function getInvitesBySpaceId(Request $request, $id){
 
         $data = $request->all();
@@ -160,6 +184,40 @@ class InvitesController extends Controller
         }
 
         return self::success("", $res);
+
+    }
+
+    public function inviteContactsDelete(Request $request, $inviteId, $contactId){
+
+        $data = $request->all();
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'invite_id' => 'required|exists:invites,id',
+            'contacts' => 'required|array'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        $contacts = $data['contacts'];
+        $arr = collect([]);
+
+        foreach($contacts as $contact){
+            $contact['invite_id'] = $data['invite_id'];
+            $arr->push($contact);
+        }
+
+        $res = $this->service->inviteContactsDelete($arr);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
 
     }
 

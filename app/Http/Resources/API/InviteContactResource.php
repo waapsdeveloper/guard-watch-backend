@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\API;
+namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class QrcodeResource extends JsonResource
+class InviteContactResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,9 +22,9 @@ class QrcodeResource extends JsonResource
     {
         return [
             "id" => $obj->id,
-            "space_id" => $obj->space_id,
-            "User_id" => $obj->user_id,
-            "qr_code" => $obj->qr_code,
+            "name" => $obj->name,
+            "dial_code" => $obj->dial_code,
+            "phone_number" => $obj->phone_number,
 
         ];
     }

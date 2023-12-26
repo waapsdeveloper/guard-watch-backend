@@ -8,6 +8,7 @@ use App\Models\InviteContact;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
 use App\Http\Resources\API\InviteCollection;
+use App\Http\Resources\API\InviteContactCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -137,6 +138,33 @@ class InviteService {
 
     }
 
+    public function getInviteWithContacts(){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Invite::where([
+            'id' => $data['id'],
+            'created_by' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Invite Does not Exist');
+        }
+
+        $invite = new InviteResource($item);
+        $list = InviteContact::where(['invite_id' => $item['id']])->get();
+        $contacts = new InviteContactCollection($list);
+
+        $obj =[
+            'invite' => $invite,
+            'contacts' => $contacts
+        ];
+
+
+        return ServiceResponse::success('Invite with Contacts', $obj);
+
+    }
+
     public function getInvitesBySpaceId($data){
         $user = Auth::user();
         $invites = Invite::where(['user_id' => $user->id, 'space_id' => $data['id'] ])->with(['user', 'space', 'event'])->get();
@@ -150,6 +178,13 @@ class InviteService {
         ];
 
         return ServiceResponse::success('Invite List', $obj);
+    }
+
+    public function inviteContactsDelete($arr){
+
+
+
+
     }
 
 
