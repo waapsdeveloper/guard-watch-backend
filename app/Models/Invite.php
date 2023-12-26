@@ -9,19 +9,38 @@ class Invite extends Model
 {
     use HasFactory;
 
+    // event_id: -1,
+    // validity: 60,
+    // start_date: '',
+    // end_date: '',
+    // visitor_type: 'guest',
+    // pass_type: 'one-time',
+    // contacts: []
+
     protected $fillable = [
-        'created_by',
-        'pass_validity',
+        'user_id',
+        'space_id',
+        'event_id',
+        'start_date',
+        'end_date',
+        'validity',
         'pass_type',
         'visitor_type',
-        'description',
-        'event_id',
-        'space_id',
-        'is_quick_pass',
-        'pass_start_date',
-        'pass_date',
-        'lat',
-        'lng',
-        'is_sent_by_sms'
+        'comments'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function space()
+    {
+        return $this->belongsTo(Space::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

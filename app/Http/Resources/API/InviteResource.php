@@ -4,6 +4,9 @@ namespace App\Http\Resources\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\API\UserResource;
+use App\Http\Resources\API\SpaceResource;
+use App\Http\Resources\API\EventResource;
 
 class InviteResource extends JsonResource
 {
@@ -22,9 +25,18 @@ class InviteResource extends JsonResource
     {
         return [
             "id" => $obj->id,
-            "title" => $obj->title,
-            "description" => $obj->description,
-            "location" => $obj->location,
+            'user_id' => $obj->user_id,
+            'user' => UserResource::toObject($obj->user),
+            'space_id' => $obj->space_id,
+            'space' => SpaceResource::toObject($obj->space),
+            'event_id'  => $obj->event_id,
+            'event' => EventResource::toObject($obj->event),
+            'comments' => $obj->comments,
+            'start_date' => $obj->start_date,
+            'end_date' => $obj->end_date,
+            'validity' => $obj->validity,
+            'pass_type' => $obj->pass_type,
+            'visitor_type' => $obj->visitor_type,
         ];
     }
 }

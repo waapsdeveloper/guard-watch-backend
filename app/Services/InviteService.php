@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Services;
+use App\Http\Resources\API\SpaceResource;
 use App\Models\Invite;
+use App\Models\Space;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
 use App\Http\Resources\API\InviteCollection;
@@ -27,29 +29,17 @@ class InviteService {
     public function add($data){
         $user = Auth::user();
         // check existing contact
-        $item = Invite::where([
-            'created_by' => $user->id,
-            'description' => $data['description']
-        ])->first();
-
-        if($item){
-            return ServiceResponse::error('Invite Already Exist With title');
-        }
 
         $item = new Invite();
-        $item->created_by = $user->id;
-        $item->description = $data['description'];
-        $item->pass_validity = $data['pass_validity'];
+        $item->space_id = $data['space_id'];
+        $item->user_id = $user->id;
+        $item->event_id = $data['event_id'];
+        $item->end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
+        $item->start_date = Carbon::parse($data['start_date'])->format('Y-m-d H:i:s');
         $item->pass_type = $data['pass_type'];
         $item->visitor_type = $data['visitor_type'];
-        $item->space_id = $data['space_id'];
-        $item->event_id = $data['event_id'];
-        $item->is_quick_pass = $data['is_quick_pass'];
-        $item->pass_start_date = $data['pass_start_date'];
-        $item->pass_date = $data['pass_date'];
-        $item->lat = $data['lat'];
-        $item->lng = $data['lng'];
-        $item->is_sent_by_sms = $data['is_sent_by_sms'];
+        $item->validity = $data['validity'];
+        $item->comments = $data['comments'];
         $item->save();
 
         $res = new InviteResource($item);
@@ -117,6 +107,21 @@ class InviteService {
 
         return ServiceResponse::success('Invite Deleted', $res);
 
+    }
+
+    public function getInvitesBySpaceId($data){
+        $user = Auth::user();
+        $invites = Invite::where(['user_id' => $user->id, 'space_id' => $data['id'] ])->get();
+        $list = new InviteCollection($invites);
+
+        $space = new SpaceResource(Space::where(['id' => $data['id']])->first());
+
+        $obj = [
+            'space' => $space,
+            'invites' => $list
+        ];
+
+        return ServiceResponse::success('Invite List', $obj);
     }
 
 

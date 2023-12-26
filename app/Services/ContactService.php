@@ -45,7 +45,6 @@ class ContactService {
         $item->name = $data['name'];
         $item->phone_number = $data['phone_number'];
         $item->dial_code = $data['dial_code'];
-        $item->email = $data['email'];
         $item->save();
 
         $res = new ContactResource($item);
@@ -70,7 +69,6 @@ class ContactService {
         $item->name = $data['name'];
         $item->phone_number = $data['phone_number'];
         $item->dial_code = $data['dial_code'];
-        $item->email = $data['email'];
         $item->save();
 
         $res = new ContactResource($item);

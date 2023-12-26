@@ -83,12 +83,12 @@ class SpaceService {
         ])->first();
 
         if(!$item){
-            return ServiceResponse::error('Contact Does not Exist With Phone Number');
+            return ServiceResponse::error('Space Does not Exist With Phone Number');
         }
 
         $res = new SpaceResource($item);
 
-        return ServiceResponse::success('Contact One', $res);
+        return ServiceResponse::success('Space One', $res);
 
     }
 
@@ -110,6 +110,29 @@ class SpaceService {
         $res = ['id' => $data['id']];
 
         return ServiceResponse::success('Space Deleted', $res);
+
+    }
+
+    public function getSpaceDetailsById($data){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Space::where([
+            'id' => $data['id'],
+            'created_by' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Space Does not Exist');
+        }
+
+        $inviteCount = $item->invites()->count();
+
+        $item['invite_count'] = $inviteCount;
+
+
+        // get space details
+        return ServiceResponse::success('Space Details', $item);
 
     }
 

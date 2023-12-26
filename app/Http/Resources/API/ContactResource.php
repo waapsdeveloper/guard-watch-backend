@@ -25,7 +25,6 @@ class ContactResource extends JsonResource
             "name" => $obj->name,
             "phone_number" => $obj->phone_number,
             "dial_code" => $obj->dial_code,
-            "email" => $obj->email,
         ];
     }
 }

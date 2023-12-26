@@ -15,4 +15,12 @@ class Space extends Model
         'description',
         'location',
     ];
+
+    public function events(){
+        return $this->hasMany(Event::class, 'space_id', 'id');
+    }
+
+    public function invites(){
+        return $this->hasMany(Invite::class, 'space_id', 'id');
+    }
 }

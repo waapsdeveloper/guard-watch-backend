@@ -59,19 +59,17 @@ class InvitesController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-        'pass_validity' => 'required|int',
-        'pass_type' => 'required|string',
-        'visitor_type' => 'required|string',
-        'description' => 'required|string',
-        'space_id' => 'required|int',
-        'event_id' => 'required|int',
-        'is_quick_pass'=> 'required|int',
-        'pass_start_date'=> 'required|date',
-        'pass_date' => 'required|date',
-        'lat' => 'required|int',
-        'lng' => 'required|int',
-        'is_sent_by_sms' => 'required|int',
+            'space_id' => 'required|int|exists:spaces,id',
+            'contacts' => 'required|array',
+            'end_date' => 'required|string',
+            'start_date' => 'required|string',
+            'event_id' => 'required|int|exists:events,id',
+            'pass_type' => 'required|string',
+            'validity' => 'required|int',
+            'visitor_type' => 'required|string',
+            'comments' => 'required|string',
         ]);
+
 
         // if validation failed
         if ($validation->fails()) {
@@ -138,4 +136,31 @@ class InvitesController extends Controller
         return self::success("", $res);
 
     }
+
+    public function getInvitesBySpaceId(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:spaces,id'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->service->getInvitesBySpaceId($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
 }
