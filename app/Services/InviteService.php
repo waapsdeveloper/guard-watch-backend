@@ -48,7 +48,8 @@ class InviteService {
 
         // add contacts to invite
 
-        $contacts = collect($data['contacts']);
+        $contacts = $data['contacts'];
+
 
         $arr = collect([]);
         foreach($contacts as $contact){
