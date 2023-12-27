@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Space;
+use App\Models\SpaceAdmin;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\SpaceResource;
 use App\Http\Resources\API\SpaceCollection;
@@ -45,6 +46,14 @@ class SpaceService {
         $item->description = $data['description'];
         $item->location = $data['location'];
         $item->save();
+
+        // add a role entry to space admins
+        SpaceAdmin::create([
+            'user_id' => $user->id,
+            'space_id' => $item->id,
+            'role_id' => 5,
+        ]);
+
         $res = new SpaceResource($item);
         return ServiceResponse::success('Spaces Add', $res);
     }
@@ -114,6 +123,29 @@ class SpaceService {
     }
 
     public function getSpaceDetailsById($data){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Space::where([
+            'id' => $data['id'],
+            'created_by' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Space Does not Exist');
+        }
+
+        $inviteCount = $item->invites()->count();
+
+        $item['invite_count'] = $inviteCount;
+
+
+        // get space details
+        return ServiceResponse::success('Space Details', $item);
+
+    }
+
+    public function addSpaceAdmin($data){
 
         $user = Auth::user();
         // check existing contact
