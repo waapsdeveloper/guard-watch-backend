@@ -167,4 +167,34 @@ class SpaceController extends Controller
 
     }
 
+    public function addSpaceAdmin(Request $request){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'space_id' => 'required|exists:spaces,id',
+            'role_id' => 'required|exists:roles,id',
+            'contact_id' => 'required|exists:contacts,id',
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+
+
+        //
+        $res = $this->service->addSpaceAdmin($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
 }
