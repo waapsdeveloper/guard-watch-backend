@@ -198,7 +198,7 @@ class InviteService {
         }
 
         $ids = $deleted->toArray();
-        InviteContact::whereIn(['id' => $ids])->delete();
+        InviteContact::whereIn('id',$ids)->delete();
 
         return ServiceResponse::success('Invite Contacts Deleted', $ids);
 
