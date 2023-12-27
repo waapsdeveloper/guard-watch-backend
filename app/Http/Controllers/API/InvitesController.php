@@ -188,7 +188,7 @@ class InvitesController extends Controller
 
     }
 
-    public function inviteContactsDelete(Request $request, $inviteId, $contactId){
+    public function inviteContactsDelete(Request $request){
 
         $data = $request->all();
 
