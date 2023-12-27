@@ -185,9 +185,6 @@ class InviteService {
         $deleted = collect([]);
 
         foreach($arr as $item){
-
-            dd($item);
-
             $ivt = InviteContact::where([
                 'invite_id' => $item['invite_id'],
                 'contact_id' => $item['contact_id'],
