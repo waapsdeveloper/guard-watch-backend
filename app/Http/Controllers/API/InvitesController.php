@@ -209,7 +209,7 @@ class InvitesController extends Controller
         foreach($contacts as $contact){
             $obj = [
                 'invite_id' => $data['invite_id'],
-                'contact_id' => $data['id']
+                'contact_id' => $contact['id']
             ];
             $arr->push($obj);
         }
