@@ -150,7 +150,7 @@ class SpaceService {
         $user = Auth::user();
         // check existing contact
         $item = Space::where([
-            'id' => $data['id'],
+            'id' => $data['space_id'],
             'created_by' => $user->id,
         ])->first();
 
@@ -158,10 +158,13 @@ class SpaceService {
             return ServiceResponse::error('Space Does not Exist');
         }
 
-        $inviteCount = $item->invites()->count();
-
-        $item['invite_count'] = $inviteCount;
-
+        // check if user is already a space admin
+        $spaceAdmin = SpaceAdmin::updateOrCreate([
+            'user_id' => $data['user_id'],
+            'space_id' => $data['space_id']
+        ], [
+            'role_id' => $data['role_id'],
+        ]);
 
         // get space details
         return ServiceResponse::success('Space Details', $item);

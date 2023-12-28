@@ -170,7 +170,6 @@ class SpaceController extends Controller
     public function addSpaceAdmin(Request $request){
 
         $data = $request->all();
-        $data['id'] = $id;
 
         // validating the required fields
         $validation = Validator::make($data, [
@@ -183,7 +182,6 @@ class SpaceController extends Controller
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-
 
 
         //
