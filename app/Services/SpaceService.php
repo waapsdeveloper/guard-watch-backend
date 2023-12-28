@@ -224,6 +224,15 @@ class SpaceService {
 
     }
 
+    public function getGlobalSpaces(){
+
+        $user = Auth::user();
+        $spaces = Space::all();
+        $list = new SpaceCollection($spaces);
+        return ServiceResponse::success('Spaces List', $list);
+
+    }
+
 
 
 }

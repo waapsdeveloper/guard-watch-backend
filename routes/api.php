@@ -47,6 +47,8 @@ Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function ()
 
 Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
 
+
+
     Route::get('/list', [SpaceController::class, 'list'] );
     Route::get('/by-id/{id}', [SpaceController::class, 'byId'] );
     Route::post('/add', [SpaceController::class, 'add'] );
@@ -55,8 +57,10 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
     Route::get('/details/by-id/{id}', [SpaceController::class, 'getSpaceDetailsById'] );
 
     Route::get('/get-space-admins/{id}', [SpaceController::class, 'getSpaceAdmins'] );
-    Route::post('/add-space-admin', [SpaceController::class, 'addSpaceAdmin'] );    
+    Route::post('/add-space-admin', [SpaceController::class, 'addSpaceAdmin'] );
     Route::post('/delete-space-admin', [SpaceController::class, 'deleteSpaceAdmin'] );
+
+    Route::get('/get-global-spaces', [SpaceController::class, 'getGlobalSpaces'] );
 
 
 });
