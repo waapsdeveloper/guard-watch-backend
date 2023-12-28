@@ -54,7 +54,9 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
     Route::delete('/delete/{id}', [SpaceController::class, 'delete'] );
     Route::get('/details/by-id/{id}', [SpaceController::class, 'getSpaceDetailsById'] );
 
-    Route::post('/add-space-admin', [SpaceController::class, 'addSpaceAdmin'] );
+    Route::get('/get-space-admins/{id}', [SpaceController::class, 'getSpaceAdmins'] );
+    Route::post('/add-space-admin', [SpaceController::class, 'addSpaceAdmin'] );    
+    Route::post('/delete-space-admin', [SpaceController::class, 'deleteSpaceAdmin'] );
 
 
 });

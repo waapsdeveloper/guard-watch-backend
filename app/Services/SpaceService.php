@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Space;
 use App\Models\SpaceAdmin;
+use App\Models\Contact;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\SpaceResource;
 use App\Http\Resources\API\SpaceCollection;
@@ -163,11 +164,63 @@ class SpaceService {
             'contact_id' => $data['contact_id'],
             'space_id' => $data['space_id']
         ], [
-            'role_id' => $data['role_id'],
+            'role_id' => 4,
         ]);
 
         // get space details
         return ServiceResponse::success('Space Details', $item);
+
+    }
+
+    public function deleteSpaceAdmin($data){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Space::where([
+            'id' => $data['space_id'],
+            'created_by' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Space Does not Exist');
+        }
+
+        // check if user is already a space admin
+        $spaceAdmin = SpaceAdmin::where([
+            'id' => $data['id']
+        ])->delete();
+
+        // get space details
+        return ServiceResponse::success('Space Admin Deleted', $data);
+
+    }
+
+    public function getSpaceAdmins($data){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Space::where([
+            'id' => $data['id'],
+            'created_by' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Space Does not Exist');
+        }
+
+        // check if user is already a space admin
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->get();
+        $arr = collect([]);
+
+        foreach($spaceAdmins as $item){
+            $contact = Contact::where(['id' => $item['contact_id']])->first();
+            if($contact){
+                $arr->push($contact);
+            }
+        }
+
+        // get space details
+        return ServiceResponse::success('Space Admin Deleted', $arr);
 
     }
 

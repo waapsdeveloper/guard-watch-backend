@@ -174,7 +174,6 @@ class SpaceController extends Controller
         // validating the required fields
         $validation = Validator::make($data, [
             'space_id' => 'required|exists:spaces,id',
-            'role_id' => 'required|exists:roles,id',
             'contact_id' => 'required|exists:contacts,id',
         ]);
 
@@ -186,6 +185,60 @@ class SpaceController extends Controller
 
         //
         $res = $this->service->addSpaceAdmin($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+    public function deleteSpaceAdmin(Request $request){
+
+        $data = $request->all();
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:space_admins,id',
+            'space_id' => 'required|exists:spaces,id',
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+
+        //
+        $res = $this->service->deleteSpaceAdmin($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+    public function getSpaceAdmins(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:spaces,id',
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+
+        //
+        $res = $this->service->getSpaceAdmins($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
