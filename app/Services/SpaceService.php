@@ -160,7 +160,7 @@ class SpaceService {
 
         // check if user is already a space admin
         $spaceAdmin = SpaceAdmin::updateOrCreate([
-            'user_id' => $data['user_id'],
+            'contact_id' => $data['contact_id'],
             'space_id' => $data['space_id']
         ], [
             'role_id' => $data['role_id'],

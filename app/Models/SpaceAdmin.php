@@ -11,6 +11,7 @@ class SpaceAdmin extends Model
 
     protected $fillable = [
         'user_id',
+        'contact_id',
         'space_id',
         'role_id',
     ];
