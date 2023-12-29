@@ -15,4 +15,16 @@ class SpaceAdmin extends Model
         'space_id',
         'role_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function contact(){
+        return $this->belongsTo(Contact::class);
+    }
+
+    public function space(){
+        return $this->belongsTo(Space::class);
+    }
 }
