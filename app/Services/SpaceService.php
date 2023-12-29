@@ -199,7 +199,6 @@ class SpaceService {
         // check existing contact
         $item = Space::where([
             'id' => $data['id'],
-            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
