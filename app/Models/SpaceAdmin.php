@@ -27,4 +27,8 @@ class SpaceAdmin extends Model
     public function space(){
         return $this->belongsTo(Space::class);
     }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }
