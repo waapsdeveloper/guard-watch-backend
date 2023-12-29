@@ -248,10 +248,11 @@ class SpaceController extends Controller
 
     }
 
-    public function getGlobalSpaces(){
+    public function getGlobalSpaces(Request $request){
 
         $data = $request->all();
         //
+        // dd($data ,"hello");
         $res = $this->service->getGlobalSpaces($data);
 
         if($res['bool'] == false){

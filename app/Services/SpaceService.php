@@ -220,7 +220,7 @@ class SpaceService {
         }
 
         // get space details
-        return ServiceResponse::success('Space Admin Deleted', $arr);
+        return ServiceResponse::success('Space Admins', $arr);
 
     }
 
