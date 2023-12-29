@@ -207,18 +207,10 @@ class SpaceService {
         }
 
         // check if user is already a space admin
-        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->get();
-        $arr = collect([]);
-
-        foreach($spaceAdmins as $item){
-            $contact = Contact::where(['id' => $item['contact_id']])->first();
-            if($contact){
-                $arr->push($contact);
-            }
-        }
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact', 'role'])->get();
 
         // get space details
-        return ServiceResponse::success('Space Admins', $arr);
+        return ServiceResponse::success('Space Admins', $spaceAdmins);
 
     }
 
