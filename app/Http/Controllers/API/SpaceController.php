@@ -197,6 +197,7 @@ class SpaceController extends Controller
     public function deleteSpaceAdmin(Request $request){
 
         $data = $request->all();
+        $data[id] = $id;
 
         // validating the required fields
         $validation = Validator::make($data, [
