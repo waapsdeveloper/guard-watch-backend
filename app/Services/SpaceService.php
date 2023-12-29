@@ -176,8 +176,8 @@ class SpaceService {
 
         $user = Auth::user();
         // check existing contact
-        $item = Space::where([
-            'id' => $data['space_id'],
+        $item = SpaceAdmin::where([
+            'id' => $data['id'],
             'created_by' => $user->id,
         ])->first();
 
@@ -186,9 +186,7 @@ class SpaceService {
         }
 
         // check if user is already a space admin
-        $spaceAdmin = SpaceAdmin::where([
-            'id' => $data['id']
-        ])->delete();
+        $item->delete();
 
         // get space details
         return ServiceResponse::success('Space Admin Deleted', $data);
