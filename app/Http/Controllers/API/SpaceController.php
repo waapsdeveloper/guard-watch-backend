@@ -175,6 +175,7 @@ class SpaceController extends Controller
         $validation = Validator::make($data, [
             'space_id' => 'required|exists:spaces,id',
             'contact_id' => 'required|exists:contacts,id',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         // if validation failed
@@ -254,6 +255,21 @@ class SpaceController extends Controller
         //
         // dd($data ,"hello");
         $res = $this->service->getGlobalSpaces($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+    public function getSpaceRoles(){
+
+        $data = $request->all();
+        //
+        // dd($data ,"hello");
+        $res = $this->service->getSpaceRoles($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);

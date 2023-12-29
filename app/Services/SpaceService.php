@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Space;
 use App\Models\SpaceAdmin;
 use App\Models\Contact;
+use App\Models\Role;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\SpaceResource;
 use App\Http\Resources\API\SpaceCollection;
@@ -162,9 +163,9 @@ class SpaceService {
         // check if user is already a space admin
         $spaceAdmin = SpaceAdmin::updateOrCreate([
             'contact_id' => $data['contact_id'],
-            'space_id' => $data['space_id']
+            'space_id' => $data['space_id'],
         ], [
-            'role_id' => 4,
+            'role_id' => $data['role_id'],
         ]);
 
         // get space details
@@ -222,6 +223,19 @@ class SpaceService {
 
     }
 
+    public function getSpaceRoles(){
+
+        $list = Role::whereIn('id', [4,5,6])->get()->map(function($item, $key) {
+            $obj = [
+                'id' => $item['id'],
+                'name' => $item['display_name'],
+                'slug' => $item['name'],
+            ];
+            return $obj;
+         });
+        return ServiceResponse::success('Spaces List', $list);
+
+    }
 
 
 }
