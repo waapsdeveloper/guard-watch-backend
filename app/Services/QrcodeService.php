@@ -20,7 +20,7 @@ class QrcodeService {
     public function list($data){
 
         $user = Auth::user();
-        $Qrcode = Qrcode::where(['user_id' => $user->id])->get();
+        $Qrcode = Qrcode::where(['created_by' => $user->id])->get();
         $list = new QrcodeCollection($Qrcode);
         return ServiceResponse::success('Qrcode List', $list);
 
@@ -31,7 +31,7 @@ class QrcodeService {
         $user = Auth::user();
         // check existing contact
         $item = Qrcode::where([
-            'user_id' => $user->id,
+            'created_by' => $user->id,
             'space_id' => $data['space_id']
         ])->first();
 
@@ -40,7 +40,7 @@ class QrcodeService {
         }
 
         $item = new Qrcode();
-        $item->user_id = $user->id;
+        $item->created_by = $user->id;
         $item->space_id = $data['space_id'];
         $item->User_id = $data['User_id'];
         $item->qr_code = $data['qr_code'];
@@ -60,7 +60,7 @@ class QrcodeService {
         // check existing contact
         $item = Qrcode::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
@@ -86,7 +86,7 @@ class QrcodeService {
         // check existing contact
         $item = Qrcode::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
@@ -105,7 +105,7 @@ class QrcodeService {
         // check existing contact
         $item = Qrcode::where([
             'id' => $data['id'],
-            'user_id' => $user->id,
+            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
