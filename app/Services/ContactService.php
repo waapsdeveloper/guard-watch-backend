@@ -117,6 +117,20 @@ class ContactService {
 
     }
 
+    public function getContactByContactId($id){
+
+        $item = Contact::where([
+            'id' => $id,
+        ])->first();
+
+        if(!$item){
+            return null;
+        }
+
+        $res = new ContactResource($item);
+        return $res;
+    }
+
 
 
 }

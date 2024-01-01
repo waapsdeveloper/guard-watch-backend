@@ -279,4 +279,19 @@ class SpaceController extends Controller
 
     }
 
+    public function getMyModerationSpacesByUserId(){
+
+        $data = $request->all();
+        //
+        // dd($data ,"hello");
+        $res = $this->service->getMyModerationSpacesByUserId($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
 }

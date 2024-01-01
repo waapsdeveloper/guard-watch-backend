@@ -131,5 +131,34 @@ class AuthService {
 
     }
 
+    public function checkIfUserExist($idal_code, $phone_number){
+
+
+        $user = User::where(['phone_number' => $phone_number, 'dial_code' => $idal_code])->first();
+        return $user;
+
+
+    }
+
+    public function createUserIfNotExistViaModerators($data){
+
+        $user = User::where([ 'phone_number' => $data['phone_number'], 'dial_code' => $data['dial_code'] ])->first();
+        if($user){
+            return $res = new UserResource($user);
+        }
+
+        $user = new User();
+        $user->name = $data['name'];
+        $user->phone_number = $data['phone_number'];
+        $user->dial_code = $data['dial_code'];
+        $user->role_id = 2;
+        $user->save();
+
+        $res = new UserResource($user);
+
+        return ServiceResponse::success('User', $res);
+
+    }
+
 
 }

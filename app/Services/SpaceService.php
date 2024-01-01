@@ -160,12 +160,31 @@ class SpaceService {
             return ServiceResponse::error('Space Does not Exist');
         }
 
+
+
+        // check if user exist - else create it
+
+        $contactService = new ContactService();
+        $contact = $contactService->getContactByContactId($data['contact_id']);
+
+        if(!$contact){
+            return ServiceResponse::error('Contact Does not Exist');
+        }
+
+        $authService = new AuthService();
+        $user = $authService->checkIfUserExist($contact['dial_code'], $contact['phone_number']);
+        if(!$user){
+            // call create user
+            $user = $authService->createUserIfNotExistViaModerators($contact);
+        }
+
         // check if user is already a space admin
         $spaceAdmin = SpaceAdmin::updateOrCreate([
             'contact_id' => $data['contact_id'],
             'space_id' => $data['space_id'],
         ], [
             'role_id' => $data['role_id'],
+            'user_id' => $user['id'],
         ]);
 
         // check if user is already a space admin
@@ -239,6 +258,20 @@ class SpaceService {
             return $obj;
          });
         return ServiceResponse::success('Spaces List', $list);
+
+    }
+
+    public function getMyModerationSpacesByUserId(){
+
+        $user = Auth::user();
+
+
+
+        // check if user is already a space admin
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact', 'role'])->get();
+
+        // get space details
+        return ServiceResponse::success('Space Admins', $spaceAdmins);
 
     }
 

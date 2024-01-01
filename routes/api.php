@@ -60,6 +60,7 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
     Route::get('/get-space-admins/{id}', [SpaceController::class, 'getSpaceAdmins'] );
     Route::post('/add-space-admin', [SpaceController::class, 'addSpaceAdmin'] );
     Route::delete('/delete-space-admin/{id}', [SpaceController::class, 'deleteSpaceAdmin'] );
+    Route::get('/get-my-moderation-spaces-by-user-id', [SpaceController::class, 'getMyModerationSpacesByUserId'] );
 
     Route::get('/get-global-spaces', [SpaceController::class, 'getGlobalSpaces'] );
 
