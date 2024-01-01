@@ -265,15 +265,20 @@ class SpaceService {
 
         $user = Auth::user();
 
-
-
         // check if user is already a space admin
-        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact', 'role'])->get();
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $user['id']])->with(['contact', 'role'])->get();
 
         // get space details
         return ServiceResponse::success('Space Admins', $spaceAdmins);
 
     }
+
+    public function getCheckerSpaces($data){
+
+
+
+    }
+
 
 
 }
