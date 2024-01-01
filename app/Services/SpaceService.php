@@ -168,6 +168,11 @@ class SpaceService {
             'role_id' => $data['role_id'],
         ]);
 
+        // check if user is already a space admin
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact'])->get();
+
+
+
         // get space details
         return ServiceResponse::success('Space Details', $item);
 
@@ -207,7 +212,7 @@ class SpaceService {
         }
 
         // check if user is already a space admin
-        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact'])->get();
+        $spaceAdmins = SpaceAdmin::where(['space_id' => $data['id']])->with(['contact', 'role'])->get();
 
         // get space details
         return ServiceResponse::success('Space Admins', $spaceAdmins);
