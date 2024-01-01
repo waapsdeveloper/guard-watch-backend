@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgetPassword;
 use Carbon\Carbon;
+use App\Models\SpaceAdmin;
 
 class AuthService {
 
@@ -63,7 +64,12 @@ class AuthService {
         $user = Auth::user();
         $token = $user->createToken('ZUUL Systems')->accessToken;
         $res = collect(new UserResource($user));
+
         $res['token'] = $token;
+
+        // check if user is a guard of any space
+        $gspaces = SpaceAdmin::where(['user_id' => $user->id])->get();
+        $res['guard_spaces'] = $gspaces;
 
         return ServiceResponse::success('User', $res);
 
