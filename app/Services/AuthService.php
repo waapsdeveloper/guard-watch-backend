@@ -156,7 +156,7 @@ class AuthService {
 
         $res = new UserResource($user);
 
-        return ServiceResponse::success('User', $res);
+        return $res;
 
     }
 
