@@ -245,7 +245,7 @@ class InviteService {
 
 
     public function getInviteWithContacts($data){
-        dd($data);
+
         $user = Auth::user();
         // check existing contact
         $item = Invite::where([
