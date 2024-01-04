@@ -66,7 +66,7 @@ class InviteService {
             "qrcode" => $item->qrcode,
             "dial_code" => $item->dial_code,
             "phone_number" => $item->phone_number,
-            "user_id" => $item->$invite->user_id,
+            "user_id" => $item->user_id,
             "start_date" => $item->start_date,
             "end_date" => $item->end_date,
             "pass_type" => $item->pass_type,
