@@ -47,9 +47,9 @@ class InviteService {
         // });
 
         // if($data['type'] == 'active'){
-        //     $currentDateTime = Carbon::now();
-        //     $query = $query->where('start_date', '<=', $currentDateTime);
-        //     $query = $query->where('end_date', '>=', $currentDateTime);
+            $currentDateTime = Carbon::now();
+            $query = $query->where('start_date', '<=', $currentDateTime);
+            $query = $query->where('end_date', '>=', $currentDateTime);
         // }
 
         $result = $query->get();
