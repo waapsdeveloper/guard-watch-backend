@@ -10,6 +10,16 @@ use App\Http\Controllers\API\InvitesController;
 use App\Http\Controllers\API\EventsController;
 use App\Http\Controllers\API\VehiclesController;
 use App\Http\Controllers\API\QrcodeController;
+use App\Http\Controllers\Controller;
+// include ('Helper.php');
+use App\Helpers\Helper;
+
+
+Route::get('/generate-random-code', function () {
+    $apiCode = Helper::generateRandomCode();
+    return response()->json(['api_code' => $apiCode]);
+});
+
 
 
 
@@ -23,6 +33,8 @@ use App\Http\Controllers\API\QrcodeController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+
 
 
 
@@ -71,8 +83,15 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
 Route::group(['prefix' => 'invites', 'middleware' => ['auth:api']], function () {
 
     Route::get('/list', [InvitesController::class, 'list'] );
+    Route::get('/received', [InvitesController::class, 'received'] );
+
+
+
     Route::get('/by-id/{id}', [InvitesController::class, 'byId'] );
     Route::post('/add', [InvitesController::class, 'add'] );
+    Route::post('/scan-qrcode', [InvitesController::class, 'scanQrcode'] );
+    Route::get('/by-id/{id}/scan-qr-code-with-contacts', [InvitesController::class, 'getScanQrcodeWithContacts'] );
+
     Route::post('/edit/{id}', [InvitesController::class, 'edit'] );
     Route::delete('/delete/{id}', [InvitesController::class, 'delete'] );
     Route::get('/by-id/{id}/with-contacts', [InvitesController::class, 'getInviteWithContacts'] );

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Services\InviteService;
+use App\Helpers\Helper;
 
 class InvitesController extends Controller
 {
@@ -23,6 +24,31 @@ class InvitesController extends Controller
 
         //
         $res = $this->service->list($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+    public function received(Request $request){
+
+        $data = $request->all();
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'type' => 'required|string'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->service->received($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
@@ -54,10 +80,11 @@ class InvitesController extends Controller
         }
         return self::success("", $res);
     }
-    public function add(Request $request){
+    public function add(Request $request)
+    {
         $data = $request->all();
 
-        // validating the required fields
+        // Validating the required fields (excluding 'qr_code')
         $validation = Validator::make($data, [
             'space_id' => 'required|int|exists:spaces,id',
             'contacts' => 'required|array',
@@ -70,19 +97,44 @@ class InvitesController extends Controller
             'comments' => 'required|string',
         ]);
 
-
-        // if validation failed
+        // dd($validation);
+        // If validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-        //
-        $res = $this->service->add($data);
 
-        if($res['bool'] == false){
+        // Your existing logic to add the data
+        $res = $this->service->add($data);
+        if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }
+
         return self::success("Test Result", $res);
     }
+
+
+
+
+    public function scanQrcode(Request $request)
+    {
+
+        $data = $request->all();
+
+        // Validating the required fields (excluding 'qr_code')
+        $validation = Validator::make($data, [
+            'qrcode' => 'required|string'
+        ]);
+
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        $res = $this->service->scanQrcode($data);
+            // dd($res);
+        return self::success("Test Result", $res);
+
+    }
+
 
     public function edit(Request $request, $id){
 

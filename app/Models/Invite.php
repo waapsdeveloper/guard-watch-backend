@@ -46,4 +46,9 @@ class Invite extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function inviteContacts()
+    {
+        return $this->hasMany(InviteContact::class);
+    }
 }

@@ -11,7 +11,14 @@ use App\Http\Resources\API\InviteCollection;
 use App\Http\Resources\API\InviteContactCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Helpers\Helper;
+use App\Http\Resources\API\ContactResource;
+use App\Http\Resources\API\UserResource;
 
+// use App\Models\Invite;
+use App\Models\User;
+use App\Models\Contact;
+use App\Controllers\API\ContactController;
 
 class InviteService {
 
@@ -28,6 +35,29 @@ class InviteService {
         $list = new InviteCollection($invites);
         return ServiceResponse::success('Invite List', $list);
     }
+
+    public function received($data){
+
+        $user = Auth::user();
+        $query = Invite::query();
+
+        $query = $query->whereHas('inviteContacts', function ($query) use ($user) {
+            $query->where('phone_number', '=', $user->phone_number);
+            $query->where('dial_code', '=', $user->dial_code);
+        });
+
+        if($data['type'] == 'active'){
+            $currentDateTime = Carbon::now();
+            $query = $query->where('start_date', '<=', $currentDateTime);
+            $query = $query->where('end_date', '>=', $currentDateTime);
+        }
+
+        $result = $query->get();
+
+        return ServiceResponse::success('Invite List', $result);
+    }
+
+
 
     public function add($data){
         $user = Auth::user();
@@ -55,6 +85,9 @@ class InviteService {
         $arr = collect([]);
         foreach($contacts as $contact){
 
+            // Generate a random code using the Helper class
+            $qr = Helper::generateRandomCode();
+
             $anv = InviteContact::updateOrCreate([
                 'contact_id' => $contact['id'],
                 'invite_id' => $item['id']
@@ -62,6 +95,7 @@ class InviteService {
                 'name' => $contact['name'],
                 'phone_number' => $contact['phone_number'],
                 'dial_code' => $contact['dial_code'],
+                'qrcode' => $qr
             ]);
 
             $arr->push($anv);
@@ -76,6 +110,42 @@ class InviteService {
         return ServiceResponse::success('Invite Add', $result);
 
     }
+
+    public function scanQrcode($data)
+    {
+        $invite = InviteContact::where(['user' => $user, 'contact' => $contact ])->with(['user', 'contact'])->get();
+
+        $invite = InviteContact::with(['user', 'contact'])->where('qrcode', $data['qrcode'])->first();
+
+        if ($invite) {
+            if ($invite->is_scanned) {
+                return ServiceResponse::error('Person already scanned');
+            }
+
+            $invite->update(['is_scanned' => 1]);
+
+            $user = $invite->user;
+            $contact = $invite->contact;
+
+            $obj = [
+                'invite' => $invite,
+                'user' => $user, // You may need to create a UserResource class if not already done
+                'contact' =>$contact, // You may need to create a ContactResource class if not already done
+            ];
+
+            return ServiceResponse::success('Person found and scanned', $obj);
+        } else {
+            return ServiceResponse::error('Scan correctly');
+        }
+    }
+
+
+
+
+
+
+
+
 
     public function edit($data){
 
@@ -138,8 +208,44 @@ class InviteService {
 
     }
 
-    public function getInviteWithContacts($data){
 
+
+
+
+
+    public function getScanQrcodeWithContacts($data){
+        // dd($data);
+        $user = Auth::user();
+        // check existing contact
+        $item = Invite::where([
+            'id' => $data['id'],
+            'user_id' => $user->id,
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Invite Does not Exist');
+        }
+
+        $invite = new InviteResource($item);
+        $list = InviteContact::where(['invite_id' => $item['id']])->with(['user', 'space', 'event'])->get();
+        $contacts = new InviteContactCollection($list);
+
+        $obj =[
+            'invite' => $invite,
+            'contacts' => $contacts
+        ];
+
+
+        return ServiceResponse::success('Invite with Contacts', $obj);
+
+    }
+
+
+
+
+
+    public function getInviteWithContacts($data){
+        dd($data);
         $user = Auth::user();
         // check existing contact
         $item = Invite::where([
@@ -164,6 +270,9 @@ class InviteService {
         return ServiceResponse::success('Invite with Contacts', $obj);
 
     }
+
+
+
 
     public function getInvitesBySpaceId($data){
         $user = Auth::user();

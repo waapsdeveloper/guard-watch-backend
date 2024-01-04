@@ -22,4 +22,16 @@ class Helper
             'result' => $data
         ];
     }
+    public static function generateRandomCode($length = 20) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomCode = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomCode .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomCode;
+    }
 }
+
+
