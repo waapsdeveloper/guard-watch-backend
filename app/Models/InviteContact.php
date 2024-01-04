@@ -32,12 +32,12 @@ class InviteContact extends Model
 
     public function invite()
     {
-        return $this->belongsTo(User::class, 'invite_id');
+        return $this->belongsTo(Invite::class, 'invite_id');
     }
 
 
     public function contact()
     {
-        return $this->belongsTo(User::class, 'contact_id');
+        return $this->belongsTo(Contact::class, 'contact_id');
     }
 }
