@@ -57,7 +57,7 @@ class InviteService {
 
         $result = $query->get();
 
-        $collection = $result->map( function($item , $invite){
+        $collection = $result->map( function($item){
 
             $obj = [
                 "invite_id" => $item->invite_id,
@@ -66,12 +66,12 @@ class InviteService {
             "qrcode" => $item->qrcode,
             "dial_code" => $item->dial_code,
             "phone_number" => $item->phone_number,
-            "user_id" => $invite->user_id,
-            "start_date" => $invite->start_date,
-            "end_date" => $invite->end_date,
-            "pass_type" => $invite->pass_type,
-            "visitor_type" => $invite->visitor_type,
-            "comments" => $invite->comments
+            "user_id" => $item->user_id,
+            "start_date" => $item->start_date,
+            "end_date" => $item->end_date,
+            "pass_type" => $item->pass_type,
+            "visitor_type" => $item->visitor_type,
+            "comments" => $item->comments
             ];
             // dd($obj);
             return $obj;
