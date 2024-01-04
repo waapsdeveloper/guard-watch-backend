@@ -60,7 +60,18 @@ class InviteService {
         $collection = $result->map( function($item){
 
             $obj = [
-                "id" => $item->id
+                "invite_id" => $item->invite_id,
+            "contact_id" => $item->contact_id,
+            "name" => $item->name,
+            "qrcode" => $item->qrcode,
+            "dial_code" => $item->dial_code,
+            "phone_number" => $item->phone_number,
+            "user_id" => $item->user_id,
+            "start_date" => $item->satrt_date,
+            "end_date" => $item->end_date,
+            "pass_type" => $item->pass_type,
+            "visitor_type" => $item->visitor_type,
+            "comments" => $item->comments
             ];
 
             return $obj;
