@@ -9,6 +9,7 @@ use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
 use App\Http\Resources\API\InviteCollection;
 use App\Http\Resources\API\InviteContactCollection;
+use App\Http\Resources\API\InviteReceivedCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Helpers\Helper;
@@ -56,7 +57,9 @@ class InviteService {
 
         $result = $query->get();
 
-        return ServiceResponse::success('Invite List', $result);
+        $collection = new InviteReceivedCollection($result);
+
+        return ServiceResponse::success('Invite List', $collection);
     }
 
 
