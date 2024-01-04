@@ -41,16 +41,16 @@ class InviteService {
         $user = Auth::user();
         $query = Invite::query();
 
-        // $query = $query->whereHas('inviteContacts', function ($query) use ($user) {
-        //     $query->where('phone_number', '=', $user->phone_number);
-        //     $query->where('dial_code', '=', $user->dial_code);
-        // });
+        $query = $query->whereHas('inviteContacts', function ($query) use ($user) {
+            $query->where('phone_number', '=', $user->phone_number);
+            $query->where('dial_code', '=', $user->dial_code);
+        });
 
-        // if($data['type'] == 'active'){
-        //     $currentDateTime = Carbon::now();
-        //     $query = $query->where('start_date', '<=', $currentDateTime);
-        //     $query = $query->where('end_date', '>=', $currentDateTime);
-        // }
+        if($data['type'] == 'active'){
+            $currentDateTime = Carbon::now();
+            $query = $query->where('start_date', '<=', $currentDateTime);
+            $query = $query->where('end_date', '>=', $currentDateTime);
+        }
 
         $result = $query->get();
 
