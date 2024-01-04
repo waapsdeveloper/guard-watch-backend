@@ -46,6 +46,9 @@ class InviteService {
             $query->where('dial_code', '=', $user->dial_code);
         });
 
+        return $query->get();
+
+
         if($data['type'] == 'active'){
             $currentDateTime = Carbon::now();
             $query = $query->where('start_date', '<=', $currentDateTime);
