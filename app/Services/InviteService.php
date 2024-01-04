@@ -57,7 +57,18 @@ class InviteService {
 
         $result = $query->get();
 
-        $collection = new InviteReceivedCollection($result);
+        $collection = $result->map( function($item){
+
+            $obj = [
+                "id" => $item->id
+            ];
+
+            return $obj;
+
+        });
+
+
+
         return ServiceResponse::success('Invite List', $collection);
     }
 
