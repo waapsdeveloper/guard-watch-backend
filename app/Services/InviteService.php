@@ -41,7 +41,7 @@ class InviteService {
         $user = Auth::user();
         $query = Invite::query();
 
-        $query = $query->whereHas('inviteContacts', function ($query) use ($user) {
+        $query = $query->with(['inviteContacts'])->whereHas('inviteContacts', function ($query) use ($user) {
             $query->where('phone_number', '=', $user->phone_number);
             $query->where('dial_code', '=', $user->dial_code);
         });
