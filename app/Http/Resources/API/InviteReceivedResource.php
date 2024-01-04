@@ -20,6 +20,8 @@ class InviteReceivedResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
+
+        dd("err");
         return [
             // "id": 116,
             // "user_id": null,
