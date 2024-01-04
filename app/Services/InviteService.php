@@ -39,12 +39,13 @@ class InviteService {
     public function received($data){
 
         $user = Auth::user();
-        $query = Invite::query();
+        $query = InviteContact::query();
 
-        $query = $query->with(['inviteContacts'])->whereHas('inviteContacts', function ($query) use ($user) {
-            $query->where('phone_number', '=', $user->phone_number);
-            $query->where('dial_code', '=', $user->dial_code);
-        });
+
+
+
+        $query->where('phone_number', '=', $user->phone_number);
+        $query->where('dial_code', '=', $user->dial_code);
 
         // if($data['type'] == 'active'){
         //     $currentDateTime = Carbon::now();
