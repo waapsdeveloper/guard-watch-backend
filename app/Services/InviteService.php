@@ -66,12 +66,12 @@ class InviteService {
             "qrcode" => $item->qrcode,
             "dial_code" => $item->dial_code,
             "phone_number" => $item->phone_number,
-            "user_id" => $item->user_id,
-            "start_date" => $item->start_date,
-            "end_date" => $item->end_date,
-            "pass_type" => $item->pass_type,
-            "visitor_type" => $item->visitor_type,
-            "comments" => $item->comments
+            "user_id" => $item->invite->user_id,
+            "start_date" => $item->invite->start_date,
+            "end_date" => $item->invite->end_date,
+            "pass_type" => $item->invite->pass_type,
+            "visitor_type" => $item->invite->visitor_type,
+            "comments" => $item->invite->comments
             ];
             // dd($obj);
             return $obj;
