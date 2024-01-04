@@ -73,7 +73,7 @@ class InviteService {
             "visitor_type" => $item->visitor_type,
             "comments" => $item->comments
             ];
-
+            dd($obj);
             return $obj;
 
         });
