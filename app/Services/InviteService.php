@@ -67,7 +67,7 @@ class InviteService {
             "dial_code" => $item->dial_code,
             "phone_number" => $item->phone_number,
             "user_id" => $item->user_id,
-            "start_date" => $item->satrt_date,
+            "start_date" => $item->start_date,
             "end_date" => $item->end_date,
             "pass_type" => $item->pass_type,
             "visitor_type" => $item->visitor_type,
