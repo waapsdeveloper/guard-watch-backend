@@ -58,7 +58,7 @@ class InviteService {
         $result = $query->get();
 
         $collection = new InviteReceivedCollection($result);
-            dd($collection);
+            // dd($collection);
         return ServiceResponse::success('Invite List', $collection);
     }
 
