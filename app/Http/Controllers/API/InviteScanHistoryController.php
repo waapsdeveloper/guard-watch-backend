@@ -13,24 +13,19 @@ class InviteScanHistoryController extends Controller
 {
 
 
-    public function list(Request $request){
+    // public function list(Request $request){
 
-        $data = $request->all();
+    //     $data = $request->all();
 
-        //
-        $res = $data;
+    //     //
+    //     $res = $data;
 
-        // if($res['bool'] == false){
-        //     return self::failure($res['message'], $res);
-        // }
+    //     if ($res == false) {
+    //         return self::failure($res['message'], $res);
+    //     }
 
-        // return self::success("", $res);
-        if ($res == false) {
-            return self::failure($res['message'], $res);
-        }
-
-        return self::success("Test Result", $res);
-    }
+    //     return self::success("Test Result", $res);
+    // }
 
 
     public function add(Request $request)
@@ -92,4 +87,34 @@ class InviteScanHistoryController extends Controller
 
         return self::success("Test Result", $res);
     }
+
+
+
+    public function delete(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:invites,id'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $data;
+
+        if ($res == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Test Result", $res);
+
+    }
+
+
 }
