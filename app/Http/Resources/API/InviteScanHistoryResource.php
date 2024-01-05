@@ -25,7 +25,7 @@ class InviteScanHistoryResource extends JsonResource
     public static function toObject($obj, $lang = 'en')
     {
         return [
-            // "invite_id" =>InviteResource::toObject($obj->invite_id),
+            "invite_id" =>InviteResource::toObject($obj->invite_id),
             'invite_contact_id' => $obj->invite_contact_id,
             'scan_by_user_id' => $obj->scan_by_user_id,
             'scan_date_time'  => $obj->scan_date_time,
