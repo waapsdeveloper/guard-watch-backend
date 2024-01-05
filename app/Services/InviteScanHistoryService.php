@@ -58,30 +58,6 @@ class InviteScanHistoryService {
 
         $invite = new InviteScanHistoryResource($item);
 
-        // add contacts to invite
-
-        $contacts = $data['contacts'];
-
-
-        $arr = collect([]);
-        foreach($contacts as $contact){
-
-            // Generate a random code using the Helper class
-            $qr = Helper::generateRandomCode();
-
-            $anv = InviteContact::updateOrCreate([
-                'contact_id' => $contact['id'],
-                'invite_id' => $item['id']
-            ], [
-                'name' => $contact['name'],
-                'phone_number' => $contact['phone_number'],
-                'dial_code' => $contact['dial_code'],
-                'qrcode' => $qr
-            ]);
-
-            $arr->push($anv);
-
-        }
 
         $result = [
             'invite' => $invite,
