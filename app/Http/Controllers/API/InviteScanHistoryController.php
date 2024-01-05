@@ -22,7 +22,7 @@ class InviteScanHistoryController extends Controller
         $data = $request->all();
 
         // Call the service to get the data
-        // $res = $this->service->list($data);
+        $res = $this->service->list($data);
 
         // Check if the service response is successful
         if ($res['bool'] == false) {
