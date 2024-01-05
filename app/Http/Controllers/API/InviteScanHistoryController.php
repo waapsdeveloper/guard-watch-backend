@@ -53,8 +53,10 @@ class InviteScanHistoryController extends Controller
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-        $res =$data;
-        if ($res == false) {
+
+        // Your existing logic to add the data
+        $res = $this->service->add($data);
+        if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }
 
