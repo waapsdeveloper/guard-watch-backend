@@ -11,6 +11,8 @@ use App\Http\Controllers\API\EventsController;
 use App\Http\Controllers\API\VehiclesController;
 use App\Http\Controllers\API\QrcodeController;
 use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\API\InviteScanHistoryController;
 // include ('Helper.php');
 use App\Helpers\Helper;
 
@@ -136,3 +138,12 @@ Route::group(['prefix' => 'qrcode', 'middleware' => ['auth:api']], function () {
 
 
 
+Route::group(['prefix' => 'invite-scan-history', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [InviteScanHistoryController::class, 'list'] );
+    Route::get('/by-id/{id}', [InviteScanHistoryController::class, 'byId'] );
+    Route::post('/add', [InviteScanHistoryController::class, 'add'] );
+    Route::post('/edit/{id}', [InviteScanHistoryController::class, 'edit'] );
+    Route::delete('/delete/{id}', [InviteScanHistoryController::class, 'delete'] );
+
+});
