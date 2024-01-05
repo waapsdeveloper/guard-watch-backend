@@ -19,7 +19,7 @@ class InviteScanHistoryController extends Controller
             'invite_id' => 'required|int|exists:invites,id',
             'invite_contact_id' => 'required|int',
             'scan_by_user_id' => 'required|int',
-            'scan_date_time' => 'required|datetime',
+            'scan_date_time' => 'required|string',
             'status' => 'required|string'
 
 
