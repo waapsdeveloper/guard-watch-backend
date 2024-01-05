@@ -44,18 +44,19 @@ class InviteScanHistoryService {
         // check existing contact
 
         $item = new Invite();
-        $item->space_id = $data['space_id'];
-        $item->user_id = $user->id;
-        $item->event_id = $data['event_id'];
-        $item->end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
-        $item->start_date = Carbon::parse($data['start_date'])->format('Y-m-d H:i:s');
-        $item->pass_type = $data['pass_type'];
-        $item->visitor_type = $data['visitor_type'];
-        $item->validity = $data['validity'];
-        $item->comments = $data['comments'];
+        $item->invite_id = $data['invite_id'];
+        $item->invite_contact_id = $data['invite_contact_id'];
+        $item->scan_by_user_id = $data['scan_by_user_id'];
+        $item->scan_date_time = $data['scan_date_time'];
+        $item->status = $data['status'];
+
+        // $item->user_id = $user->id;
+        // $item->end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
+        // $item->start_date = Carbon::parse($data['start_date'])->format('Y-m-d H:i:s');
+        // $item->comments = $data['comments'];
         $item->save();
 
-        $invite = new InviteResource($item);
+        $invite = new InviteScanHistoryResource($item);
 
         // add contacts to invite
 
