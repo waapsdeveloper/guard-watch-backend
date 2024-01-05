@@ -7,7 +7,7 @@ use App\Models\Space;
 use App\Models\InviteContact;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
-use App\Http\Resources\API\InviteCollection;
+use App\Http\Resources\API\InviteScanHistoryCollection;
 use App\Http\Resources\API\InviteContactCollection;
 use App\Http\Resources\API\InviteReceivedCollection;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ class InviteScanHistoryService {
     public function list($data){
         $user = Auth::user();
         $invites = Invite::where(['created_by' => $user->id])->get();
-        $list = new InviteCollection($invites);
+        $list = new InviteScanHistoryCollection($invites);
         return ServiceResponse::success('Invite List', $list);
     }
 
