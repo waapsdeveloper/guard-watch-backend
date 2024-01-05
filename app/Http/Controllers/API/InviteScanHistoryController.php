@@ -26,7 +26,7 @@ class InviteScanHistoryController extends Controller
         $res = $this->service->list($data);
 
         // Check if the service response is successful
-        if ($res['bool'] == false) {
+        if ($res == false) {
             return self::failure($res['message'], $res);
         }
 
