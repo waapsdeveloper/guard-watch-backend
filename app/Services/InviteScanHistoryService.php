@@ -47,7 +47,7 @@ class InviteScanHistoryService {
     {
         $user = Auth::user();
 
-        $scanHistory = new InviteScanHistory();
+        $scanHistory = new ScanHistory();
         $scanHistory->invite_id = $data['invite_id'];
         $scanHistory->invite_contact_id = $data['invite_contact_id'];
         $scanHistory->scan_by_user_id = $data['scan_by_user_id'];
