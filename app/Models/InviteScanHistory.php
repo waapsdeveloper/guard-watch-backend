@@ -12,43 +12,15 @@ class InviteScanHistory extends Model
 {
     use HasFactory;
 
-    // event_id: -1,
-    // validity: 60,
-    // start_date: '',
-    // end_date: '',
-    // visitor_type: 'guest',
-    // pass_type: 'one-time',
-    // contacts: []
 
-    // protected $fillable = [
-    //     'user_id',
-    //     'space_id',
-    //     'event_id',
-    //     'start_date',
-    //     'end_date',
-    //     'validity',
-    //     'pass_type',
-    //     'visitor_type',
-    //     'comments'
-    // ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    protected $fillable = [
+        'invite_id',
+        'invite_contact_id',
+        'scan_by_user_id',
+        'scan_date_time',
+        'status'
+    ];
 
-    // public function space()
-    // {
-    //     return $this->belongsTo(Space::class);
-    // }
 
-    // public function event()
-    // {
-    //     return $this->belongsTo(Event::class);
-    // }
-
-    // public function inviteContacts()
-    // {
-    //     return $this->hasMany(InviteContact::class);
-    // }
 }
