@@ -49,6 +49,7 @@ class InviteScanHistoryController extends Controller
             'scan_date_time' => 'required|date',
             'status' => 'required|string',
         ]);
+        dd($validation);
 
         // If validation failed
         if ($validation->fails()) {
