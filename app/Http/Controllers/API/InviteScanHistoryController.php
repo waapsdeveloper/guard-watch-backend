@@ -10,12 +10,12 @@ class InviteScanHistoryController extends Controller
 {
 
 
-    // protected $service;
+    protected $service;
 
-    // public function __construct(YourService $service)
-    // {
-    //     $this->service = $service;
-    // }
+    public function __construct(InviteScanHistoryService $service)
+    {
+        $this->service = $service;
+    }
 
     public function list(Request $request)
     {
