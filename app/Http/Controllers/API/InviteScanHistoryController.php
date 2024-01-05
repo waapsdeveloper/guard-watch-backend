@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Helper;
-// use App\Services\InviteService;
+use App\Services\InviteScanHistoryService;
 // use App\Helpers\Helper;
 
 class InviteScanHistoryController extends Controller
