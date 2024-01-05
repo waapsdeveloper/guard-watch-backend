@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\InviteScanHistoryController;
+namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller\InviteScanHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
