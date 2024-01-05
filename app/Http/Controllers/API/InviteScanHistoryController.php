@@ -37,25 +37,25 @@ class InviteScanHistoryController extends Controller
 
     public function add(Request $request)
     {
-        $data =$request->all();
+        $data = $request->all();
 
-        $validation = Validator::make($data,[
+        // Validating the required fields
+        $validation = Validator::make($data, [
             'invite_id' => 'required|int|exists:invites,id',
-            'invite_contact_id' => 'required|int',
-            'scan_by_user_id' => 'required|int',
+            'invite_contact_id' => 'required|int|exists:invite_contacts,id',
+            'scan_by_user_id' => 'required|int|exists:users,id',
             'scan_date_time' => 'required|string',
-            'status' => 'required|string'
-
-
+            'status' => 'required|string',
         ]);
-        // dd($validation);
-        // return ($validation);
+
+        // If validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
 
         // Your existing logic to add the data
         $res = $this->service->add($data);
+
         if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }

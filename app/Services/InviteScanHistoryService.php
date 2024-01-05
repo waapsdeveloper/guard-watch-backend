@@ -39,35 +39,27 @@ class InviteScanHistoryService {
 
 
 
-    public function add($data){
+    public function add($data)
+    {
         $user = Auth::user();
-        // check existing contact
 
-        $item = new Invite();
-        $item->invite_id = $data['invite_id'];
-        $item->invite_contact_id = $data['invite_contact_id'];
-        $item->scan_by_user_id = $data['scan_by_user_id'];
-        $item->scan_date_time = $data['scan_date_time'];
-        $item->status = $data['status'];
+        $scanHistory = new InviteScanHistory();
+        $scanHistory->invite_id = $data['invite_id'];
+        $scanHistory->invite_contact_id = $data['invite_contact_id'];
+        $scanHistory->scan_by_user_id = $data['scan_by_user_id'];
+        $scanHistory->scan_date_time = Carbon::parse($data['scan_date_time'])->format('Y-m-d H:i:s');
+        $scanHistory->status = $data['status'];
+        $scanHistory->save();
 
-        // $item->user_id = $user->id;
-        // $item->end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
-        // $item->start_date = Carbon::parse($data['start_date'])->format('Y-m-d H:i:s');
-        // $item->comments = $data['comments'];
-        $item->save();
-
-        $invite = new InviteScanHistoryResource($item);
-
+        $scanHistoryResource = new InviteScanHistoryResource($scanHistory);
 
         $result = [
-            'invite' => $invite,
-            'invite_contacts' => $arr
+            'scan_history' => $scanHistoryResource,
+            // add other data if needed
         ];
 
-        return ServiceResponse::success('Invite Add', $result);
-
+        return ServiceResponse::success('Scan History Add', $result);
     }
-
 
 
 
