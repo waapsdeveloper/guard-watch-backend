@@ -17,11 +17,11 @@ class InviteScanHistoryController extends Controller
         $data = $request->all();
 
         //
-        $res = $data;
+        $res = $this->list($data);
 
-        // if($res == false){
-        //     return self::failure(['message'], $res);
-        // }
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
 
         return self::success("", $res);
 
