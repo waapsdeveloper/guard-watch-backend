@@ -20,7 +20,7 @@ use App\Http\Resources\API\UserResource;
 // use App\Models\Invite;
 use App\Models\User;
 use App\Models\Contact;
-use App\Controllers\API\ContactController;
+use App\Controllers\API\InviteScanHistoryController;
 
 class InviteScanHistoryService {
 
@@ -68,14 +68,6 @@ class InviteScanHistoryService {
         return ServiceResponse::success('Invite scan history Add', $result);
 
     }
-
-
-
-
-
-
-
-
 
 
     public function edit($data){
@@ -126,105 +118,12 @@ class InviteScanHistoryService {
 
 
 
-    public function getScanQrcodeWithContacts($data){
-        // dd($data);
-        $user = Auth::user();
-        // check existing contact
-        $item = Invite::where([
-            'id' => $data['id'],
-            'user_id' => $user->id,
-        ])->first();
-
-        if(!$item){
-            return ServiceResponse::error('Invite Does not Exist');
-        }
-
-        $invite = new InviteResource($item);
-        $list = InviteContact::where(['invite_id' => $item['id']])->with(['user', 'space', 'event'])->get();
-        $contacts = new InviteContactCollection($list);
-
-        $obj =[
-            'invite' => $invite,
-            'contacts' => $contacts
-        ];
-
-
-        return ServiceResponse::success('Invite with Contacts', $obj);
-
-    }
 
 
 
 
 
-    public function getInviteWithContacts($data){
 
-        $user = Auth::user();
-        // check existing contact
-        $item = Invite::where([
-            'id' => $data['id'],
-            'user_id' => $user->id,
-        ])->first();
-
-        if(!$item){
-            return ServiceResponse::error('Invite Does not Exist');
-        }
-
-        $invite = new InviteResource($item);
-        $list = InviteContact::where(['invite_id' => $item['id']])->get();
-        $contacts = new InviteContactCollection($list);
-
-        $obj =[
-            'invite' => $invite,
-            'contacts' => $contacts
-        ];
-
-
-        return ServiceResponse::success('Invite with Contacts', $obj);
-
-    }
-
-
-
-
-    public function getInvitesBySpaceId($data){
-        $user = Auth::user();
-        $invites = Invite::where(['user_id' => $user->id, 'space_id' => $data['id'] ])->with(['user', 'space', 'event'])->get();
-        $list = new InviteCollection($invites);
-
-        $space = new SpaceResource(Space::where(['id' => $data['id']])->first());
-
-        $obj = [
-            'space' => $space,
-            'invites' => $list
-        ];
-
-        return ServiceResponse::success('Invite List', $obj);
-    }
-
-    public function inviteContactsDelete($arr){
-
-        $deleted = collect([]);
-
-        foreach($arr as $item){
-            $ivt = InviteContact::where([
-                'invite_id' => $item['invite_id'],
-                'contact_id' => $item['contact_id'],
-            ])->first();
-
-            if($ivt){
-                $deleted->push($ivt->id);
-            }
-
-        }
-
-        $ids = $deleted->toArray();
-        InviteContact::whereIn('id',$ids)->delete();
-
-        return ServiceResponse::success('Invite Contacts Deleted', $ids);
-
-
-    }
 
 
 
