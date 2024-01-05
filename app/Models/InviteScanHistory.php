@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class InviteScanHistory extends Model
+{
+    use HasFactory;
+        protected $fillable =[
+            'invite_id',
+            'invite_contact_id',
+            'scan_by_user_id',
+            'scan_date_time',
+            'status'
+        ];
+}
