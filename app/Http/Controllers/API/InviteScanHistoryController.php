@@ -12,19 +12,24 @@ use App\Helpers\Helper;
 class InviteScanHistoryController extends Controller
 {
 
+    protected $service;
+
+    public function __construct(InviteScanHistoryService $service){
+        $this->service = $service;
+    }
 
     public function list(Request $request){
 
         $data = $request->all();
 
         //
-        $res = $data;
+        $res = $this->service->list($data);
 
         if($res['bool'] == false){
-            return self::failure($res['message']);
+            return self::failure($res['message'], $res);
         }
 
-        return self::success("Invite scan list", $res);
+        return self::success("", $res);
 
     }
 
