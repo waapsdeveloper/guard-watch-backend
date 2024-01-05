@@ -44,7 +44,7 @@ class InviteScanHistoryService {
         // check existing contact
 
         $item = new Invite();
-        $item->invite_id = $data['invite_id'];
+        // $item->invite_id = $data['invite_id'];
         $item->invite_contact_id = $data['invite_contact_id'];
         $item->scan_by_user_id = $data['scan_by_user_id'];
         $item->scan_date_time = $data['scan_date_time'];
