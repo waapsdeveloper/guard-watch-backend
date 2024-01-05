@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Validator;
 class InviteScanHistoryController extends Controller
 {
 
+
+    public function list(Request $request){
+
+        $data = $request->all();
+
+        //
+        $res = $data;
+
+        if($res == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+
     public function add(Request $request)
     {
         $data =$request->all();
