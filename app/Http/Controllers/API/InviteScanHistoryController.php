@@ -17,7 +17,7 @@ class InviteScanHistoryController extends Controller
 
         $validation = Validator::make($data,[
             'invite_id' => 'required|int|exists:invites,id',
-            'invite_contact_id' => 'required|int|exists:invitecontacts,id',
+            'invite_contact_id' => 'required|int|',
             'scan_by_user_id' => 'required',
             'scan_date_time' => 'required|datetime',
             'status' => 'required|string'
