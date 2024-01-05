@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\API\UserResource;
 use App\Http\Resources\API\SpaceResource;
 use App\Http\Resources\API\EventResource;
+use App\Http\Resources\API\InviteResource;
 
 class InviteScanHistoryResource extends JsonResource
 {
