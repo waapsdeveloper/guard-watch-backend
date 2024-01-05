@@ -17,7 +17,7 @@ class InviteScanHistoryController extends Controller
         $data = $request->all();
 
         //
-        $res = $this->list($data);
+        $res = $this->service->list($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
