@@ -29,7 +29,7 @@ class InviteScanHistoryController extends Controller
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
-        $res =add($data);
+        $res =$data;
         if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }
