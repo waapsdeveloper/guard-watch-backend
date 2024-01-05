@@ -41,6 +41,7 @@ class InviteScanHistoryController extends Controller
 
         $data = $request->all();
 
+        dd($request,"helloo");
         // Validating the required fields
         $validation = Validator::make($data, [
             'invite_id' => 'required|int|exists:invites,id',
@@ -49,7 +50,6 @@ class InviteScanHistoryController extends Controller
             'scan_date_time' => 'required|date',
             'status' => 'required|string',
         ]);
-        dd($validation);
 
         // If validation failed
         if ($validation->fails()) {
