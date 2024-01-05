@@ -32,7 +32,7 @@ class InviteScanHistoryService {
 
     public function list($data){
         $user = Auth::user();
-        $invites = Invite::where(['invite_id' => $invites->id])->get();
+        $invites = Invite::where(['created_by' => $user->id])->get();
         $list = new InviteScanHistoryCollection($invites);
         return ServiceResponse::success('Invite List', $list);
     }
