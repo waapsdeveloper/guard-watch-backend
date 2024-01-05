@@ -61,7 +61,7 @@ class InviteScanHistoryService {
             'scan_history' => $scanHistoryResource,
             // add other data if needed
         ];
-
+        dd($result);
         return ServiceResponse::success('Scan History Add', $result);
     }
 
