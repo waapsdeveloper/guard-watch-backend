@@ -24,7 +24,8 @@ class InviteScanHistoryController extends Controller
 
 
         ]);
-        return ($validation);
+        // return ($validation);
+        dd($validation);
         // if ($validation->fails()) {
         //     return self::failure($validation->errors()->first());
         // }
