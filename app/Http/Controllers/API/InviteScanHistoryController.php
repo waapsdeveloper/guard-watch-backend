@@ -20,7 +20,7 @@ class InviteScanHistoryController extends Controller
         $res = $data;
 
         if($res == false){
-            return self::failure($res['message'], $res);
+            return self::failure(['message'], $res);
         }
 
         return self::success("", $res);
