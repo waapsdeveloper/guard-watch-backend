@@ -33,7 +33,7 @@ class InviteScanHistoryService {
 
     public function list($data){
         // $user = Auth::user();
-        dd($data);
+        // dd($data);
         // return ("heloooooo");
         // $invitehistory = InviteScanHistory::where(['created_by' => $user->id])->get();
         // $list = new InviteScanHistoryCollection($invitehistory);
@@ -43,6 +43,7 @@ class InviteScanHistoryService {
 
 
     public function add($data){
+        dd($data);
         $user = Auth::user();
         // check existing contact
 
