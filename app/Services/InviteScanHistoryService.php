@@ -78,7 +78,7 @@ class InviteScanHistoryService {
         if(!$item){
             return ServiceResponse::error('Invite Does not Exist');
         }
-        $item->description = $data['description'];
+        $item->description = $data['invite_id'];
         $item->save();
 
         $res = new InviteScanHistoryResource($item);
