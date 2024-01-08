@@ -72,8 +72,7 @@ class InviteScanHistoryService {
         $user = Auth::user();
         // check existing contact
         $item = InviteScanHistories::where([
-            'id' => $data['id'],
-            // 'created_by' => $user->id,
+            'invite_id' => $data['invite_id'],
         ])->first();
 
         if(!$item){
