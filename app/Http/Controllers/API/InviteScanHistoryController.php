@@ -83,20 +83,15 @@ class InviteScanHistoryController extends Controller
         }
 
         //
-        $res =$data;
+        $res = $this->service->edit($data);
 
-        // if($res['bool'] == false){
-        //     return self::failure($res['message'], $res);
-        // }
 
-        // return self::success("Test Result", $res);
-        if ($res == false) {
+        if($res['bool'] == false){
             return self::failure($res['message'], $res);
         }
 
         return self::success("Test Result", $res);
     }
-
 
 
     public function delete(Request $request, $id){
