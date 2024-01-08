@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 // use App\Models\Space;
 // use App\Models\Event;
 
-class InviteScanHistory extends Model
+class InviteScanHistories extends Model
 {
     use HasFactory;
 

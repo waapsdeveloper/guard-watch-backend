@@ -16,7 +16,7 @@ use App\Helpers\Helper;
 use App\Http\Resources\API\ContactResource;
 use App\Http\Resources\API\UserResource;
 use Carbon\Carbon;
-use App\Models\InviteScanHistory; // Add the correct namespace for your model
+use App\Models\InviteScanHistories; // Add the correct namespace for your model
 use App\Http\Resources\InviteScanHistoryResource; // Add the correct namespace for your resource
 use Illuminate\Support\Facades\Auth;
 use App\Services\InviteScanHistoryService;
@@ -61,7 +61,7 @@ class InviteScanHistoryService {
             'scan_history' => $scanHistoryResource,
             // add other data if needed
         ];
-        dd($result);
+
         return ServiceResponse::success('Scan History Add', $result);
     }
 
