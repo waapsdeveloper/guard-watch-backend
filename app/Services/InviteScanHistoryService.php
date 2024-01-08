@@ -81,7 +81,7 @@ class InviteScanHistoryService {
         $item->invite_id = $data['invite_id'];
         $item->save();
 
-        $res = new InviteScanHistoryResource($item);
+        // $res = new InviteScanHistoryResource($item);
 
         return ServiceResponse::success('Invite Edit', $res);
 
