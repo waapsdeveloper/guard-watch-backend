@@ -55,10 +55,10 @@ class InviteScanHistoryService {
         $scanHistory->status = $data['status'];
         $scanHistory->save();
 
-        $scanHistoryResource = new InviteScanHistoryResource($scanHistory);
+        // $scanHistoryResource = new InviteScanHistoryResource($scanHistory);
 
         $result = [
-            'scan_history' => $scanHistoryResource,
+            'scan_history' => $scanHistory,
             // add other data if needed
         ];
 
