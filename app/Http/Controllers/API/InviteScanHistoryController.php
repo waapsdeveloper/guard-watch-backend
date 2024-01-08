@@ -65,16 +65,14 @@ class InviteScanHistoryController extends Controller
 
 
 
-
-    public function edit(Request $request, $id){
-
+    public function edit(Request $request, InviteScanHistory $inviteScanHistory){
         $data = $request->all();
-        $data['id'] = $id;
+        $data['id'] = $inviteScanHistory->id;
 
         // validating the required fields
         $validation = Validator::make($data, [
             'id' => 'required|exists:invites,id',
-
+            // Add other validation rules as needed
         ]);
 
         // if validation failed
@@ -82,15 +80,10 @@ class InviteScanHistoryController extends Controller
             return self::failure($validation->errors()->first());
         }
 
-        //
-        $res =$data;
+        // Call the service to handle the editing logic
+        $res = $this->service->edit($data);
 
-        // if($res['bool'] == false){
-        //     return self::failure($res['message'], $res);
-        // }
-
-        // return self::success("Test Result", $res);
-        if ($res == false) {
+        if($res['bool'] == false){
             return self::failure($res['message'], $res);
         }
 
