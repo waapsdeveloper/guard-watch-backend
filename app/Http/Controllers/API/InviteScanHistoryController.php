@@ -93,7 +93,6 @@ class InviteScanHistoryController extends Controller
         return self::success("Test Result", $res);
     }
 
-
     public function delete(Request $request, $id){
 
         $data = $request->all();
@@ -101,7 +100,7 @@ class InviteScanHistoryController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:invites,id'
+            'id' => 'required'
         ]);
 
         // if validation failed
@@ -110,13 +109,13 @@ class InviteScanHistoryController extends Controller
         }
 
         //
-        $res = $data;
+        $res = $this->service->delete($data);
 
-        if ($res == false) {
+        if($res['bool'] == false){
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Test Result", $res);
+        return self::success("", $res);
 
     }
 

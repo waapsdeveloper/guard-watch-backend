@@ -71,24 +71,16 @@ class InviteScanHistoryService {
     {
         $user = Auth::user();
 
-        // Check if the invite scan history exists
         $item = InviteScanHistories::where('invite_id', $data['invite_id'])->first();
 
-        // If the invite scan history does not exist, return an error response
         if (!$item) {
             return ServiceResponse::error('Invite Scan History does not exist.');
         }
 
-        // Update the relevant fields based on what you want to modify
-        // For example, if you want to update the invite_id, you may not need to do anything here.
 
-        // You can add more update logic here if needed
-        // $item->some_field = $data['some_field'];
-
-        // Save the changes
         $item->save();
 
-        // You can return the updated item if necessary
+
         return ServiceResponse::success('Invite Scan History successfully edited.', $item);
     }
 
@@ -98,20 +90,19 @@ class InviteScanHistoryService {
 
         $user = Auth::user();
         // check existing contact
-        $item = Invite::where([
+        $item = InviteScanHistories::where([
             'id' => $data['id'],
-            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
-            return ServiceResponse::error('Invite Does not Exist');
+            return ServiceResponse::error('Invite scan Does not Exist');
         }
 
         $item->delete();
 
         $res = ['id' => $data['id']];
 
-        return ServiceResponse::success('Invite Deleted', $res);
+        return ServiceResponse::success('Invite scan Deleted', $res);
 
     }
 
