@@ -69,7 +69,7 @@ class InviteScanHistoryService {
 
     public function edit($data){
 
-        $scanHistory = InviteScanHistories::user();
+        $user = Auth::user();
         // check existing contact
         $item = InviteScanHistories::where([
             'id' => $data['id'],
