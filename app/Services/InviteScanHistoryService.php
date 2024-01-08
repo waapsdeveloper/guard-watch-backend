@@ -6,21 +6,17 @@ use App\Models\Invite;
 use App\Models\Space;
 use App\Models\InviteContact;
 use App\Helpers\ServiceResponse;
-// use App\Http\Resources\API\InviteScanHistoryResource;
 use App\Http\Resources\API\InviteScanHistoryCollection;
 use App\Http\Resources\API\InviteContactCollection;
 use App\Http\Resources\API\InviteReceivedCollection;
-// use Illuminate\Support\Facades\Auth;
-// use Carbon\Carbon;
 use App\Helpers\Helper;
 use App\Http\Resources\API\ContactResource;
 use App\Http\Resources\API\UserResource;
 use Carbon\Carbon;
-use App\Models\InviteScanHistories; // Add the correct namespace for your model
-use App\Http\Resources\InviteScanHistoryResource; // Add the correct namespace for your resource
+use App\Models\InviteScanHistories;
+use App\Http\Resources\InviteScanHistoryResource;
 use Illuminate\Support\Facades\Auth;
 use App\Services\InviteScanHistoryService;
-// use App\Models\Invite;
 use App\Models\User;
 use App\Models\Contact;
 use App\Controllers\API\ContactController;
