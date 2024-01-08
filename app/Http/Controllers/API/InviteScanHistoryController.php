@@ -18,19 +18,20 @@ class InviteScanHistoryController extends Controller
         $this->service = $service;
     }
 
-    public function list(Request $request){
-
+    public function list(Request $request)
+    {
         $data = $request->all();
 
-        //
+        // Call the service to retrieve the list of InviteScanHistories
         $res = $this->service->list($data);
 
-        if($res['bool'] == false){
-            return self::failure($res['message'], $res);
+        // Check if the service response indicates an error
+        if ($res['bool'] === false) {
+            return self::failure($res['message'], $res['data']);
         }
 
-        return self::success("", $res);
-
+        // Return a success response with the list of InviteScanHistories
+        return self::success('Invite Scan History List', $res['data']);
     }
 
 
