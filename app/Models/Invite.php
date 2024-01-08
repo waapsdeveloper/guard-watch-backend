@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Space;
 use App\Models\Event;
+use App\Models\InviteScanHistories;
 
 class Invite extends Model
 {
@@ -50,5 +51,9 @@ class Invite extends Model
     public function inviteContacts()
     {
         return $this->hasMany(InviteContact::class);
+    }
+    public function scanHistory()
+    {
+        return $this->hasMany(InviteScanHistories::class);
     }
 }

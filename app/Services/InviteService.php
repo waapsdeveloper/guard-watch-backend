@@ -5,6 +5,7 @@ use App\Http\Resources\API\SpaceResource;
 use App\Models\Invite;
 use App\Models\Space;
 use App\Models\InviteContact;
+use App\Models\InviteScanHistories;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteResource;
 use App\Http\Resources\API\InviteCollection;
@@ -139,31 +140,40 @@ class InviteService {
 
     public function scanQrcode($data)
     {
-        $invite = InviteContact::where(['user' => $user, 'contact' => $contact ])->with(['user', 'contact'])->get();
-
-        $invite = InviteContact::with(['user', 'contact'])->where('qrcode', $data['qrcode'])->first();
-
-        if ($invite) {
-            if ($invite->is_scanned) {
-                return ServiceResponse::error('Person already scanned');
-            }
-
-            $invite->update(['is_scanned' => 1]);
+        $invite = InviteContact::with(['user', 'contact'])
+            ->where('qrcode', $data['qrcode'])
+            ->first();
 
             $user = $invite->user;
             $contact = $invite->contact;
 
+            // Retrieve scan history data for the current invite
+            $scanHistory = InviteScanHistories::get();
+
             $obj = [
                 'invite' => $invite,
-                'user' => $user, // You may need to create a UserResource class if not already done
-                'contact' =>$contact, // You may need to create a ContactResource class if not already done
+                'user' => $user,
+                'contact' => $contact,
+                'scan_history' => $scanHistory,
             ];
 
-            return ServiceResponse::success('Person found and scanned', $obj);
-        } else {
+        if (!$invite) {
             return ServiceResponse::error('Scan correctly');
         }
+
+        if ($invite->is_scanned) {
+            return ServiceResponse::error('Person already scanned',$scanHistory);
+        }
+
+        // Update the invite as scanned
+        $invite->update(['is_scanned' => 1]);
+
+
+
+        return ServiceResponse::success('Person found and scanned', $obj);
     }
+
+
 
 
 
