@@ -67,31 +67,25 @@ class InviteScanHistoryService {
 
 
 
-    public function edit($data)
-    {
-        // Get the authenticated user
-        $user = Auth::user();
+    public function edit($data){
 
-        // Check if the invite scan history exists for the authenticated user
-        $item = InviteScanHistory::where([
+        $user = Auth::user();
+        // check existing contact
+        $item = Invite::where([
             'id' => $data['id'],
             'created_by' => $user->id,
         ])->first();
 
-        // If the invite scan history does not exist, return an error response
-        if (!$item) {
-            return ServiceResponse::error('Invite Scan History does not exist or you do not have permission to edit it.');
+        if(!$item){
+            return ServiceResponse::error('Invite Does not Exist');
         }
-
-        // Update the invite scan history's description or other relevant fields
         $item->description = $data['description'];
         $item->save();
 
-        // Transform the updated invite scan history data using a resource
-        $res = new InviteScanHistoryResource($item);
+        $res = new InviteResource($item);
 
-        // Return a success response with the updated invite scan history resource
-        return ServiceResponse::success('Invite Scan History successfully edited.', $res);
+        return ServiceResponse::success('Invite Edit', $res);
+
     }
 
 
