@@ -80,12 +80,15 @@ class InviteScanHistoryService {
             return ServiceResponse::error('Invite Scan History does not exist.');
         }
 
-
-        $item->save();
-
+        // Assuming you have fields to update in the InviteScanHistories model
+        $item->update([
+            'status' => $data['status'],
+            // Add other fields as needed
+        ]);
 
         return ServiceResponse::success('Invite Scan History successfully edited.', $item);
     }
+
 
 
 
