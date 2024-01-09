@@ -38,48 +38,47 @@ class InviteService {
         return ServiceResponse::success('Invite List', $list);
     }
 
-    public function received($data){
-
+    public function received($data)
+    {
         $user = Auth::user();
         $query = InviteContact::query();
-
-
-
 
         $query->where('phone_number', '=', $user->phone_number);
         $query->where('dial_code', '=', $user->dial_code);
 
         $query->with(['invite']);
-        // if($data['type'] == 'active'){
-        //     $currentDateTime = Carbon::now();
-        //     $query = $query->where('start_date', '<=', $currentDateTime);
-        //     $query = $query->where('end_date', '>=', $currentDateTime);
-        // }
 
         $result = $query->get();
 
-        $collection = $result->map( function($item){
+        $collection = $result->map(function ($item) {
 
-            $obj = [
-                "invite_id" => $item->invite_id,
-            "contact_id" => $item->contact_id,
-            "name" => $item->name,
-            "qrcode" => $item->qrcode,
-            "dial_code" => $item->dial_code,
-            "phone_number" => $item->phone_number,
-            "user_id" => $item->invite->user_id,
-            "start_date" => $item->invite->start_date,
-            "end_date" => $item->invite->end_date,
-            "pass_type" => $item->invite->pass_type,
-            "visitor_type" => $item->invite->visitor_type,
-            "comments" => $item->invite->comments
-            ];
-            // dd($obj);
-            return $obj;
+            // Check if the "invite" relationship exists
+            if ($item->invite) {
+                $obj = [
+                    "invite_id" => $item->invite_id,
+                    "contact_id" => $item->contact_id,
+                    "name" => $item->name,
+                    "qrcode" => $item->qrcode,
+                    "dial_code" => $item->dial_code,
+                    "phone_number" => $item->phone_number,
+                    "user_id" => $item->invite->user_id,
+                    "start_date" => $item->invite->start_date,
+                    "end_date" => $item->invite->end_date,
+                    "pass_type" => $item->invite->pass_type,
+                    "visitor_type" => $item->invite->visitor_type,
+                    "comments" => $item->invite->comments
+                ];
+
+                return $obj;
+            } else {
+                // Handle the case where the "invite" relationship is null
+                return null;
+            }
 
         });
 
-
+        // Remove null values from the collection
+        $collection = $collection->filter();
 
         return ServiceResponse::success('Invite List', $collection);
     }
