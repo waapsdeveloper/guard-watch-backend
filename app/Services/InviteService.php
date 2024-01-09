@@ -52,7 +52,6 @@ class InviteService {
 
         $collection = $result->map(function ($item) {
 
-            // Check if the "invite" relationship exists
             if ($item->invite) {
                 $obj = [
                     "invite_id" => $item->invite_id,
@@ -71,14 +70,13 @@ class InviteService {
 
                 return $obj;
             } else {
-                // Handle the case where the "invite" relationship is null
                 return null;
             }
 
         });
 
         // Remove null values from the collection
-        $collection = $collection->filter();
+        // $collection = $collection;
 
         return ServiceResponse::success('Invite List', $collection);
     }
