@@ -48,7 +48,6 @@ class InviteService {
 
         $query->where('phone_number', '=', $user->phone_number);
         $query->where('dial_code', '=', $user->dial_code);
-        $query->where('user_id', '=', $user->id);
 
         $query->with(['invite']);
         // if($data['type'] == 'active'){
@@ -68,7 +67,7 @@ class InviteService {
             "qrcode" => $item->qrcode,
             "dial_code" => $item->dial_code,
             "phone_number" => $item->phone_number,
-            // "user_id" => $item->invite->user_id,
+            "user_id" => $item->invite->user_id,
             "start_date" => $item->invite->start_date,
             "end_date" => $item->invite->end_date,
             "pass_type" => $item->invite->pass_type,
