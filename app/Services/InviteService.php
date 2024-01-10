@@ -141,31 +141,31 @@ class InviteService {
             ->where('qrcode', $data['qrcode'])
             ->first();
 
-            $user = $invite->user;
-            $contact = $invite->contact;
-
-            // Retrieve scan history data for the current invite
-            $scanHistory = InviteScanHistories::get();
-
-            $obj = [
-                'invite' => $invite,
-                'user' => $user,
-                'contact' => $contact,
-                'scan_history' => $scanHistory,
-            ];
-
+        // Check if $invite exists before accessing its properties
         if (!$invite) {
             return ServiceResponse::error('Scan correctly');
         }
 
+        // Move the code inside the conditional block
+        $user = $invite->user;
+        $contact = $invite->contact;
+
+        // Retrieve scan history data for the current invite
+        $scanHistory = InviteScanHistories::get();
+
+        $obj = [
+            'invite' => $invite,
+            'user' => $user,
+            'contact' => $contact,
+            'scan_history' => $scanHistory,
+        ];
+
         if ($invite->is_scanned) {
-            return ServiceResponse::error('Person already scanned',$scanHistory);
+            return ServiceResponse::error('Person already scanned', $obj);
         }
 
         // Update the invite as scanned
         $invite->update(['is_scanned' => 1]);
-
-
 
         return ServiceResponse::success('Person found and scanned', $obj);
     }
