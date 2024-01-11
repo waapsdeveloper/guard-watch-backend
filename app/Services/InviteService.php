@@ -148,7 +148,9 @@ class InviteService {
 
         // Move the code inside the conditional block
         $user = $invite->user;
-        $contact = $invite->contact;
+
+        // Check if contact ID is 81 and exclude it
+        $contact =  $invite->contact;
 
         // Retrieve scan history data for the current invite
         $scanHistory = InviteScanHistories::get();
@@ -160,15 +162,9 @@ class InviteService {
             'scan_history' => $scanHistory,
         ];
 
-        // if ($invite->is_scanned) {
-        //     return ServiceResponse::error('Person already scanned', $obj);
-        // }
-
-        // // Update the invite as scanned
-        // $invite->update(['is_scanned' => 1]);
-
         return ServiceResponse::success('Person found and scanned', $obj);
     }
+
 
 
 
