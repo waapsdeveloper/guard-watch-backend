@@ -137,7 +137,7 @@ class InviteService {
 
     public function scanQrcode($data)
     {
-        $invite = InviteContact::with(['user',])
+        $invite = InviteContact::with(['user', 'contact'])
             ->where('qrcode', $data['qrcode'])
             ->first();
 
@@ -148,7 +148,7 @@ class InviteService {
 
         // Move the code inside the conditional block
         $user = $invite->user;
-        // $contact = $invite->contact;
+        $contact = $invite->contact;
 
         // Retrieve scan history data for the current invite
         $scanHistory = InviteScanHistories::get();
@@ -156,7 +156,7 @@ class InviteService {
         $obj = [
             'invite' => $invite,
             'user' => $user,
-            // 'contact' => $contact,
+            'contact' => $contact,
             'scan_history' => $scanHistory,
         ];
 
