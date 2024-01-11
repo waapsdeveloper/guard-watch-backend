@@ -148,7 +148,16 @@ class InviteService {
 
         // Move the code inside the conditional block
         $user = $invite->user;
-        $contact = $invite->contact;
+        // $contact = $invite->contact;
+        foreach($contacts as $contact){
+            [
+                'name' => $contact['name'],
+                'phone_number' => $contact['phone_number'],
+                'dial_code' => $contact['dial_code'],
+                'qrcode' => $qr
+            ];
+            $arr->push($anv);
+        }
 
         // Retrieve scan history data for the current invite
         $scanHistory = InviteScanHistories::get();
@@ -158,6 +167,7 @@ class InviteService {
             'user' => $user,
             'contact' => $contact,
             'scan_history' => $scanHistory,
+            'invite_contacts' => $arr
         ];
 
         // if ($invite->is_scanned) {
