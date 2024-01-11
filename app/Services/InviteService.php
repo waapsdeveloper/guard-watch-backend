@@ -137,7 +137,7 @@ class InviteService {
 
     public function scanQrcode($data)
     {
-        $invite = InviteContact::with(['user', 'contact'])
+        $invite = InviteContact::with(['user', 'contact', 'invite', 'invite.user' ])
             ->where('qrcode', $data['qrcode'])
             ->first();
 
