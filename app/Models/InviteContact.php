@@ -21,6 +21,7 @@ class InviteContact extends Model
         'name',
         'dial_code',
         'phone_number',
+        'space'
     ];
 
 

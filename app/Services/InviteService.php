@@ -64,6 +64,7 @@ class InviteService {
                     "start_date" => $item->invite->start_date,
                     "end_date" => $item->invite->end_date,
                     "pass_type" => $item->invite->pass_type,
+                    "space" => $item->invite->space,
                     "visitor_type" => $item->invite->visitor_type,
                     "comments" => $item->invite->comments
                 ];
@@ -141,16 +142,13 @@ class InviteService {
             ->where('qrcode', $data['qrcode'])
             ->first();
 
-        // Check if $invite exists before accessing its properties
         if (!$invite) {
             return ServiceResponse::error('Scan correctly');
         }
 
-        // Move the code inside the conditional block
         // $user = $invite->user;
         $contact = $invite->contact;
 
-        // Retrieve scan history data for the current invite
         $scanHistory = InviteScanHistories::get();
 
         $obj = [
