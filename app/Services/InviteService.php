@@ -160,12 +160,12 @@ class InviteService {
             'scan_history' => $scanHistory,
         ];
 
-        if ($invite->is_scanned) {
-            return ServiceResponse::error('Person already scanned', $obj);
-        }
+        // if ($invite->is_scanned) {
+        //     return ServiceResponse::error('Person already scanned', $obj);
+        // }
 
-        // Update the invite as scanned
-        $invite->update(['is_scanned' => 1]);
+        // // Update the invite as scanned
+        // $invite->update(['is_scanned' => 1]);
 
         return ServiceResponse::success('Person found and scanned', $obj);
     }
