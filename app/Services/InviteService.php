@@ -148,7 +148,7 @@ class InviteService {
 
         // Move the code inside the conditional block
         $user = $invite->user;
-        $contacts = $invite->contact;
+        $contact = $invite->contact;
 
         // Retrieve scan history data for the current invite
         $scanHistory = InviteScanHistories::get();
@@ -156,7 +156,7 @@ class InviteService {
         $obj = [
             'invite' => $invite,
             'user' => $user,
-            'contact' => $contacts,
+            'contact' => $contact,
             'scan_history' => $scanHistory,
         ];
 
