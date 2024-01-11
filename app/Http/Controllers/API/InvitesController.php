@@ -88,7 +88,8 @@ class InvitesController extends Controller
         $validation = Validator::make($data, [
             'space_id' => 'required|int|exists:spaces,id',
             'name' => 'required|string',
-            'contacts' => 'required|array',
+            'phone_number' => 'required|int',
+            'dial_code' => 'required|string',
             'end_date' => 'required|string',
             'start_date' => 'required|string',
             'event_id' => 'required|int|exists:events,id',
