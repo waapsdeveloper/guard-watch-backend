@@ -147,7 +147,7 @@ class InviteService {
         }
 
         // Move the code inside the conditional block
-        $user = $invite->user;
+        // $user = $invite->user;
         $contact = $invite->contact;
 
         // Retrieve scan history data for the current invite
