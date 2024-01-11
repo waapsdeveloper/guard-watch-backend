@@ -44,4 +44,8 @@ class User extends \TCG\Voyager\Models\User
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function scanHistory()
+    {
+        return $this->hasMany(InviteScanHistories::class);
+    }
 }
