@@ -149,7 +149,7 @@ class InviteService {
         // Move the code inside the conditional block
         $user = $invite->user;
         // $contact = $invite->contact;
-        foreach($contacts as $contact){
+        foreach($contact as $contact){
             [
                 'name' => $contact['name'],
                 'phone_number' => $contact['phone_number'],
