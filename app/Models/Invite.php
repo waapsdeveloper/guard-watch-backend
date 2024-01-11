@@ -25,6 +25,7 @@ class Invite extends Model
         'user_id',
         'space_id',
         'event_id',
+        'name',
         'start_date',
         'end_date',
         'validity',
