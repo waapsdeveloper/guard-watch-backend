@@ -23,8 +23,8 @@ class InviteRequest extends Model
         'comments'
     ];
 
-    public function spaces(){
-        return $this->hasMany(Space::class, 'name', 'id');
+    public function space(){
+        return $this->belongsTo(Space::class );
     }
 
 }

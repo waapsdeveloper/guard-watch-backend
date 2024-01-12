@@ -44,12 +44,17 @@ class InviteRequestService {
         $item->dial_code = $data['dial_code'];
         $item->comments = $data['comments'];
         $item->space_id = $space->id;
-        $item->name = $space->name;
+        $item->space_name = $space->name;
         $item->save();
 
         $result = new InviteRequestResource($item);
 
-
+        // $result = [
+        //     'name' => $item->name,
+        //     'phone_number' => $item->phone_number,
+        //     'dial_code' => $item->dial_code,
+        //     'space_name' => $item->space_name,
+        // ];
 
         return ServiceResponse::success('Invite Request Add', $result);
 
