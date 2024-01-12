@@ -5,7 +5,7 @@ use App\Models\InviteRequest;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\InviteRequestResource;
 use App\Http\Resources\API\InviteRequestCollection;
-
+use App\Models\Space;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Helpers\Helper;
