@@ -52,7 +52,7 @@ class SpaceService {
         $item->save();
 
         // add a role entry to space admins
-        dd($item);
+        // dd($item);
         SpaceAdmin::create([
             'user_id' => $user->id,
             'space_id' => $item->id,
