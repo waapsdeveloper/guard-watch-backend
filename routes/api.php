@@ -10,6 +10,7 @@ use App\Http\Controllers\API\InvitesController;
 use App\Http\Controllers\API\EventsController;
 use App\Http\Controllers\API\VehiclesController;
 use App\Http\Controllers\API\QrcodeController;
+use App\Http\Controllers\API\InviteRequestController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -145,5 +146,18 @@ Route::group(['prefix' => 'invite-scan-history', 'middleware' => ['auth:api']], 
     Route::post('/add', [InviteScanHistoryController::class, 'add'] );
     Route::post('/edit/{id}', [InviteScanHistoryController::class, 'edit'] );
     Route::delete('/delete/{id}', [InviteScanHistoryController::class, 'delete'] );
+
+});
+
+
+
+
+Route::group(['prefix' => 'invite-requests', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [InviteRequestController::class, 'list'] );
+    Route::get('/by-id/{id}', [InviteRequestController::class, 'byId'] );
+    Route::post('/add', [InviteRequestController::class, 'add'] );
+    Route::post('/edit/{id}', [InviteRequestController::class, 'edit'] );
+    Route::delete('/delete/{id}', [InviteRequestController::class, 'delete'] );
 
 });
