@@ -13,7 +13,7 @@ class InviteRequestResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request)
+    public function toArray($request)
     {
         $obj = self::toObject($this);
         return $obj;
@@ -21,14 +21,17 @@ class InviteRequestResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
+        $space = $obj->space;
+
         return [
             'id' => $obj->id,
             'name' => $obj->name,
-            'phone_number' => $obj->name,
+            'phone_number' => $obj->phone_number, // corrected property name
             'dial_code'  => $obj->dial_code,
             'comments' => $obj->comments,
-            'space_name' => $obj->space->title,
-            'space_name' => $obj->space->space
+            'space_name' => $space ? $space->title : null,
+            'space_type' => $space ? $space->space : null,
         ];
     }
 }
+
