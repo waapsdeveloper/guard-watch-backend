@@ -18,20 +18,20 @@ class InviteRequestController extends Controller
         $this->service = $service;
     }
 
-    // public function list(Request $request){
+    public function list(Request $request){
 
-    //     $data = $request->all();
+        $data = $request->all();
 
-    //     //
-    //     $res = $this->service->list($data);
 
-    //     if($res['bool'] == false){
-    //         return self::failure($res['message'], $res);
-    //     }
+        $res = $this->service->list($data);
 
-    //     return self::success("", $res);
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
 
-    // }
+        return self::success("", $res);
+
+    }
 
 
     public function add(Request $request)

@@ -19,12 +19,10 @@ class InviteRequestService {
 
     // }
 
-    // public function list($data){
-    //     $user = Auth::user();
-    //     $invites = Invite::where(['created_by' => $user->id])->get();
-    //     $list = new InviteCollection($invites);
-    //     return ServiceResponse::success('Invite List', $list);
-    // }
+    public function list($data){
+        $user = Auth::user();
+        return ServiceResponse::success('Invite List', $list);
+    }
 
 
 
