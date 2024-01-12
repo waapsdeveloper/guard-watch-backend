@@ -26,7 +26,7 @@ class InviteRequestResource extends JsonResource
             'phone_number' => $obj->name,
             'dial_code'  => $obj->dial_code,
             'space_id' => $obj->space->id,
-            'space_name' => $obj->space->name
+            'space_name' => $obj->space->title
         ];
     }
 }
