@@ -78,6 +78,7 @@ class SpaceService {
 
         $item->title = $data['title'];
         $item->description = $data['description'];
+        $item->name = $data['name'];
         $item->location = $data['location'];
         $item->save();
 
