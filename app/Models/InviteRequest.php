@@ -18,7 +18,10 @@ class InviteRequest extends Model
         'name',
         'phone_number',
         'dial_code',
-        'space_name'
+        'space_id',
+        'space_name',
+        'comments'
+
     ];
 
 }
