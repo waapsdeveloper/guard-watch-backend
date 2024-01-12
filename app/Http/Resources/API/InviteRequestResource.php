@@ -3,6 +3,7 @@
 namespace App\Http\Resources\API;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\API\SpaceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class InviteRequestResource extends JsonResource
@@ -22,11 +23,11 @@ class InviteRequestResource extends JsonResource
     {
         return [
             'id' => $obj->id,
+            'space_id' => SpaceResource::toObject($obj->space_id),
             'name' => $obj->name,
             'phone_number' => $obj->name,
             'dial_code'  => $obj->dial_code,
             'comments' => $obj->comments,
-            'space_id' => $obj->space->id,
             'space_name' => $obj->space->title
         ];
     }
