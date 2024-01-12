@@ -3,6 +3,7 @@
 namespace App\Http\Resources\API;
 
 use Illuminate\Http\Request;
+use App\Models\Space;
 use App\Http\Resources\API\SpaceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
