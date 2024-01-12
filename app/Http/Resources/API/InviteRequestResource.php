@@ -23,7 +23,7 @@ class InviteRequestResource extends JsonResource
     {
         return [
             'id' => $obj->id,
-            'space_id' => SpaceResource::toObject($obj->space_id),
+            // 'space_id' => SpaceResource::toObject($obj->space_id),
             'name' => $obj->name,
             'phone_number' => $obj->name,
             'dial_code'  => $obj->dial_code,
