@@ -14,10 +14,10 @@ class InviteRequestService {
 
 
 
-    // public function __construct()
-    // {
+    public function __construct()
+    {
 
-    // }
+    }
 
     public function list($data){
         $user = Auth::user();
