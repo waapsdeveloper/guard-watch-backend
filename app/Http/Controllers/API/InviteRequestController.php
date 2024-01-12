@@ -72,7 +72,10 @@ class InviteRequestController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists:invites,id',
+            'name' => 'required|string ',
+            'phone_number' => 'required|string',
+            'dial_code' => 'required|string',
+            'space_name' => 'required|string'
 
         ]);
 
