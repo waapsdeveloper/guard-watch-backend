@@ -65,7 +65,6 @@ class InviteRequestService {
     {
         $user = Auth::user();
 
-        // Check if the InviteRequest exists and belongs to the authenticated user
         $item = InviteRequest::where([
             'id' => $data['id'],
         ])->first();
@@ -74,16 +73,13 @@ class InviteRequestService {
             return ServiceResponse::error('Invite Request Does not Exist');
         }
 
-        // Update the fields you want to edit
         $item->name = $data['name'];
         $item->phone_number = $data['phone_number'];
         $item->dial_code = $data['dial_code'];
         $item->space_name = $data['space_name'];
-        // Add other fields as needed
 
         $item->save();
 
-        // Format the response using a resource class
         $res = new InviteRequestResource($item);
 
         return ServiceResponse::success('Invite Request Edit', $res);

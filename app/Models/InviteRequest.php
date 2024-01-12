@@ -22,6 +22,7 @@ class InviteRequest extends Model
     // contacts: []
 
     protected $fillable = [
+        'id',
         'name',
         'phone_number',
         'dial_code',
