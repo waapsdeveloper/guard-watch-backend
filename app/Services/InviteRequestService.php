@@ -95,7 +95,7 @@ class InviteRequestService {
 
         $user = Auth::user();
         // check existing contact
-        $item = Invite::where([
+        $item = InviteRequest::where([
             'id' => $data['id']
         ])->first();
 
