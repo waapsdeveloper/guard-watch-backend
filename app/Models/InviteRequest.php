@@ -21,7 +21,10 @@ class InviteRequest extends Model
         'space_id',
         'space_name',
         'comments'
-
     ];
+
+    public function space(){
+        return $this->belongsTo(Space::class);
+    }
 
 }

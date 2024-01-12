@@ -21,10 +21,12 @@ class InviteRequestResource extends JsonResource
     public static function toObject($obj, $lang = 'en')
     {
         return [
+            'id' => $obj->id,
             'name' => $obj->name,
             'phone_number' => $obj->name,
             'dial_code'  => $obj->dial_code,
-            'space_name' => $obj->space_name
+            'space_id' => $obj->space->id,
+            'space_name' => $obj->space->name
         ];
     }
 }
