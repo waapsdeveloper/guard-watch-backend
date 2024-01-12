@@ -36,7 +36,7 @@ class SpaceService {
         $item = Space::where([
             'created_by' => $user->id,
             'title' => $data['title'],
-            'name' => $data['name']
+            // 'name' => $data['name']
         ])->first();
 
         if($item){
