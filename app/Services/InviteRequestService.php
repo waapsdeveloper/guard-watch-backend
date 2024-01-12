@@ -44,7 +44,7 @@ class InviteRequestService {
         $item->dial_code = $data['dial_code'];
         $item->comments = $data['comments'];
         $item->space_id = $space->id;
-        $item->space_name = $space->name;
+        $item->name = $space->name;
         $item->save();
 
         $result = new InviteRequestResource($item);
