@@ -85,26 +85,31 @@ class InviteRequestService {
         return ServiceResponse::success('Invite Request Edit', $res);
     }
 
-    // public function delete($data){
 
-    //     $user = Auth::user();
-    //     // check existing contact
-    //     $item = Invite::where([
-    //         'id' => $data['id'],
-    //         'created_by' => $user->id,
-    //     ])->first();
 
-    //     if(!$item){
-    //         return ServiceResponse::error('Invite Does not Exist');
-    //     }
 
-    //     $item->delete();
 
-    //     $res = ['id' => $data['id']];
 
-    //     return ServiceResponse::success('Invite Deleted', $res);
 
-    // }
+    public function delete($data){
+
+        $user = Auth::user();
+        // check existing contact
+        $item = Invite::where([
+            'id' => $data['id']
+        ])->first();
+
+        if(!$item){
+            return ServiceResponse::error('Invite Does not Exist');
+        }
+
+        $item->delete();
+
+        $res = ['id' => $data['id']];
+
+        return ServiceResponse::success('Invite Deleted', $res);
+
+    }
 
 
 

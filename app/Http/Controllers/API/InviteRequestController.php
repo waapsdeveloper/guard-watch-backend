@@ -92,31 +92,39 @@ class InviteRequestController extends Controller
 
     }
 
-    // public function delete(Request $request, $id){
 
-    //     $data = $request->all();
-    //     $data['id'] = $id;
 
-    //     // validating the required fields
-    //     $validation = Validator::make($data, [
-    //         'id' => 'required|exists:invites,id'
-    //     ]);
 
-    //     // if validation failed
-    //     if ($validation->fails()) {
-    //         return self::failure($validation->errors()->first());
-    //     }
 
-    //     //
-    //     $res = $this->service->delete($data);
 
-    //     if($res['bool'] == false){
-    //         return self::failure($res['message'], $res);
-    //     }
 
-    //     return self::success("", $res);
 
-    // }
+
+    public function delete(Request $request, $id){
+
+        $data = $request->all();
+        $data['id'] = $id;
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        //
+        $res = $this->service->delete($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
 
 
 }
