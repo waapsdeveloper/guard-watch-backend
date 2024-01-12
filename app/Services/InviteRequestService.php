@@ -61,27 +61,33 @@ class InviteRequestService {
 
 
 
-    // public function edit($data){
+    public function edit($data)
+    {
+        $user = Auth::user();
 
-    //     $user = Auth::user();
-    //     // check existing contact
-    //     $item = Invite::where([
-    //         'id' => $data['id'],
-    //         'created_by' => $user->id,
-    //     ])->first();
+        // Check if the InviteRequest exists and belongs to the authenticated user
+        $item = InviteRequest::where([
+            'id' => $data['id'],
+        ])->first();
 
-    //     if(!$item){
-    //         return ServiceResponse::error('Invite Does not Exist');
-    //     }
-    //     $item->description = $data['description'];
-    //     $item->save();
+        if (!$item) {
+            return ServiceResponse::error('Invite Request Does not Exist');
+        }
 
-    //     $res = new InviteResource($item);
+        // Update the fields you want to edit
+        $item->name = $data['name'];
+        $item->phone_number = $data['phone_number'];
+        $item->dial_code = $data['dial_code'];
+        $item->space_name = $data['space_name'];
+        // Add other fields as needed
 
-    //     return ServiceResponse::success('Invite Edit', $res);
+        $item->save();
 
-    // }
+        // Format the response using a resource class
+        $res = new InviteRequestResource($item);
 
+        return ServiceResponse::success('Invite Request Edit', $res);
+    }
 
     // public function delete($data){
 
