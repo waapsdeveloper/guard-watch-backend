@@ -21,7 +21,7 @@ class InviteRequestService {
 
     public function list($data){
         $user = Auth::user();
-        return ServiceResponse::success('Invite List', $list);
+        return ServiceResponse::success('Invite List', $data);
     }
 
 
