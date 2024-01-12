@@ -13,6 +13,7 @@ class Space extends Model
         'created_by',
         'title',
         'description',
+        'name',
         'location',
     ];
 

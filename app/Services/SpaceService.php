@@ -35,7 +35,8 @@ class SpaceService {
         // check existing contact
         $item = Space::where([
             'created_by' => $user->id,
-            'title' => $data['title']
+            'title' => $data['title'],
+            'name' => $data['name']
         ])->first();
 
         if($item){
@@ -46,6 +47,7 @@ class SpaceService {
         $item->created_by = $user->id;
         $item->title = $data['title'];
         $item->description = $data['description'];
+        $item->name = $data['name'];
         $item->location = $data['location'];
         $item->save();
 
