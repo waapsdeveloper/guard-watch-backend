@@ -22,7 +22,7 @@ class InviteRequestService {
     public function list($data)
     {
         $user = Auth::user();
-        $inviteRequests = InviteRequest::where(['user_id' => $user->id])->get();
+        $inviteRequests = InviteRequest->get();
         $list = new InviteRequestCollection($inviteRequests);
 
         return ServiceResponse::success('Invite Requests List', $list);
