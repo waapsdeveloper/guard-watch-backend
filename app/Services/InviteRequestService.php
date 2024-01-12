@@ -67,7 +67,7 @@ class InviteRequestService {
 
         $item = InviteRequest::where([
             'id' => $data['id'],
-        ])->first();
+        ]);
 
         if (!$item) {
             return ServiceResponse::error('Invite Request Does not Exist');

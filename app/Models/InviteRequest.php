@@ -13,14 +13,6 @@ class InviteRequest extends Model
 {
     use HasFactory;
 
-    // event_id: -1,
-    // validity: 60,
-    // start_date: '',
-    // end_date: '',
-    // visitor_type: 'guest',
-    // pass_type: 'one-time',
-    // contacts: []
-
     protected $fillable = [
         'id',
         'name',
