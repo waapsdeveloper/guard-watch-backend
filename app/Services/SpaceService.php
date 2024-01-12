@@ -20,13 +20,13 @@ class SpaceService {
 
     }
 
-    public function list($data){
-
+    public function list($data)
+    {
         $user = Auth::user();
-        $spaces = Space::where(['created_by' => $user->id])->get();
-        $list = new SpaceCollection($spaces);
-        return ServiceResponse::success('Spaces List', $list);
+        $inviteRequests = InviteRequest::where(['user_id' => $user->id])->get();
+        $list = new InviteRequestCollection($inviteRequests);
 
+        return ServiceResponse::success('Invite Requests List', $list);
     }
 
     public function add($data){
