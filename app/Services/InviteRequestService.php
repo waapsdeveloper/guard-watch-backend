@@ -36,6 +36,7 @@ class InviteRequestService {
         $user = Auth::user();
 
         $space = Space::where(['id' => $data['space_id']])->first();
+        $space = Space::where(['name' => $data['name']])->first();
 
 
         $item = new InviteRequest();
@@ -49,12 +50,7 @@ class InviteRequestService {
 
         $result = new InviteRequestResource($item);
 
-        // $result = [
-        //     'name' => $item->name,
-        //     'phone_number' => $item->phone_number,
-        //     'dial_code' => $item->dial_code,
-        //     'space_name' => $item->space_name,
-        // ];
+
 
         return ServiceResponse::success('Invite Request Add', $result);
 
