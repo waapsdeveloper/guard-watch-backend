@@ -43,10 +43,10 @@ class InviteRequestService {
 
 
         $result = [
-            'item' => $item['name'],
-            'item' => $item['phone_number'],
-            'item' => $item['dial_code'],
-            'item' => $item['space_name'],
+            'name' => $item->name,
+            'phone_number' => $item->phone_number,
+            'dial_code' => $item->dial_code,
+            'space_name' => $item->space_name,
         ];
 
         return ServiceResponse::success('Invite Request Add', $result);
