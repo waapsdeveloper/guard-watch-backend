@@ -45,7 +45,7 @@ class InviteRequestService {
         $item->comments = $data['comments'];
         $item->date = $data['date'];
         $item->space_id = $space->id;
-        $item->space_name = $space->name;
+        $item->space_name = $space->title;
         $item->save();
 
         $result = new InviteRequestResource($item);
