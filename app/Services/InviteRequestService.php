@@ -31,10 +31,12 @@ class InviteRequestService {
 
 
 
+
     public function add($data){
         $user = Auth::user();
 
         $space = Space::where(['id' => $data['space_id']])->first();
+
 
         $item = new InviteRequest();
         $item->name = $data['name'];
@@ -42,19 +44,21 @@ class InviteRequestService {
         $item->dial_code = $data['dial_code'];
         $item->comments = $data['comments'];
         $item->space_id = $space->id;
-
-        // Set space_name if it exists in the Space model
-        if (isset($space->name)) {
-            $item->name = $space->name;
-        }
-
+        $item->space_name = $space->name;
         $item->save();
 
         $result = new InviteRequestResource($item);
 
-        return ServiceResponse::success('Invite Request Add', $result);
-    }
+        // $result = [
+        //     'name' => $item->name,
+        //     'phone_number' => $item->phone_number,
+        //     'dial_code' => $item->dial_code,
+        //     'space_name' => $item->space_name,
+        // ];
 
+        return ServiceResponse::success('Invite Request Add', $result);
+
+    }
 
 
 
