@@ -65,7 +65,7 @@ class InviteRequestService {
 
     public function getSpaceInvitesById($data){
         $user = Auth::user();
-        $inviteRequests = new InviteRequestCollection($inviteRequests);
+        $list = new InviteRequestCollection($list);
 
         $inviteRequests = new InviteRequestResource(InviteRequest::where(['id' => $data['id']])->first());
 
