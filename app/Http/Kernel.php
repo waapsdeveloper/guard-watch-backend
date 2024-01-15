@@ -69,6 +69,6 @@ class Kernel extends HttpKernel
 
     protected function schedule(Schedule $schedule)
 {
-    $schedule->command('notifications:delete-expired')->daily();
+    $schedule->command('notifications:delete-expired')->everyminute();
 }
 }
