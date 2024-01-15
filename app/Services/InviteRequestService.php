@@ -43,6 +43,7 @@ class InviteRequestService {
         $item->phone_number = $data['phone_number'];
         $item->dial_code = $data['dial_code'];
         $item->comments = $data['comments'];
+        $item->date = $data['date'];
         $item->space_id = $space->id;
         $item->space_name = $space->name;
         $item->save();

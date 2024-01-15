@@ -45,6 +45,7 @@ class InviteRequestController extends Controller
             'phone_number' => 'required|string',
             'dial_code' => 'required|string',
             'comments' => 'required|string',
+            'date' => 'required|date',
 
         ]);
 
