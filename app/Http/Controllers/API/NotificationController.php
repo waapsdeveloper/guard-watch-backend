@@ -10,6 +10,14 @@ use App\Services\NotificationService;
 
 class NotificationController extends Controller
 {
+
+
+    protected $service;
+
+    public function __construct(NotificationService $service){
+        $this->service = $service;
+    }
+
     public function add(Request $request){
 
         $data = $request->all();
