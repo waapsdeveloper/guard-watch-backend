@@ -18,6 +18,17 @@ class NotificationController extends Controller
         $this->service = $service;
     }
 
+    public function list()
+    {
+        $res = $this->service->list();
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Notification List", $res);
+    }
+
     public function add(Request $request){
 
         $data = $request->all();

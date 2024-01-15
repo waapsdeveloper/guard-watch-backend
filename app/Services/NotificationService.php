@@ -10,6 +10,25 @@ use Carbon\Carbon;
 
 class NotificationService {
 
+
+
+
+
+
+    public function list()
+    {
+        $user = Auth::user();
+
+        // Retrieve the list of notifications for the authenticated user
+        $notifications = Notification::get();
+
+        $res = NotificationResource::collection($notifications);
+
+        return ServiceResponse::success('Notification List', $res);
+    }
+
+
+
     public function add($data){
 
     $user = Auth::user();
