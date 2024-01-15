@@ -11,6 +11,7 @@ use App\Http\Controllers\API\EventsController;
 use App\Http\Controllers\API\VehiclesController;
 use App\Http\Controllers\API\QrcodeController;
 use App\Http\Controllers\API\InviteRequestController;
+use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -162,5 +163,16 @@ Route::group(['prefix' => 'invite-requests', 'middleware' => ['auth:api']], func
     Route::get('/list/space-invites/{id}', [InviteRequestController::class, 'getSpaceInvitesById'] );
     Route::post('/update-invite', [InviteRequestController::class, 'updateInviteRequest']);
 
+
+});
+
+
+
+Route::group(['prefix' => 'notifications', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [NotificationController::class, 'list'] );
+    Route::post('/add', [NotificationController::class, 'add'] );
+    Route::post('/edit/{id}', [NotificationController::class, 'edit'] );
+    Route::delete('/delete/{id}', [NotificationController::class, 'delete'] );
 
 });
