@@ -69,19 +69,19 @@ class InviteRequestService {
 
         $inviteRequests = new InviteRequestResource(InviteRequest::where(['id' => $data['id']])->first());
 
-        $obj = [
-            // 'space' => $space,
-            // 'invites' => $list,
-            'name' =>$inviteRequests,
-            'phone_number'=>$inviteRequests,
-            'dial_code'=>$inviteRequests,
-            'space_id'=>$inviteRequests,
-            'space_name'=>$inviteRequests,
-            'date'=>$inviteRequests,
-            'comments'=>$inviteRequests,
-        ];
+        // $obj = [
+        //     // 'space' => $space,
+        //     // 'invites' => $list,
+        //     'name' =>$inviteRequests,
+        //     'phone_number'=>$inviteRequests,
+        //     'dial_code'=>$inviteRequests,
+        //     'space_id'=>$inviteRequests,
+        //     'space_name'=>$inviteRequests,
+        //     'date'=>$inviteRequests,
+        //     'comments'=>$inviteRequests,
+        // ];
 
-        return ServiceResponse::success('Invite request List', $obj);
+        return ServiceResponse::success('Invite request List', $inviteRequests);
     }
 
 
