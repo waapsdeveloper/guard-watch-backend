@@ -24,7 +24,7 @@ class InviteRequest extends Model
     ];
 
     public function space(){
-        return $this->belongsTo(Space::class );
+        return $this->belongsTo(Space::class , 'id','name' );
     }
 
 }
