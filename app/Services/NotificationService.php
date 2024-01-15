@@ -36,4 +36,32 @@ class NotificationService {
 }
 
 
+
+
+
+public function edit($id, $data)
+{
+    $user = Auth::user();
+
+    // Find the notification by ID
+    $notification = Notification::where([
+        'id' => $id
+    ])->first();
+
+    if (!$notification) {
+        return ServiceResponse::error('Notification not found');
+    }
+
+    // Update the notification
+    $notification->title = $data['title'];
+    $notification->description = $data['description'];
+    $notification->type = $data['type'];
+    $notification->expiry = $data['expiry'];
+    $notification->save();
+
+    $res = new NotificationResource($notification);
+
+    return ServiceResponse::success('Notification Updated', $res);
+}
+
 }
