@@ -147,6 +147,7 @@ Route::group(['prefix' => 'invite-scan-history', 'middleware' => ['auth:api']], 
     Route::post('/add', [InviteScanHistoryController::class, 'add'] );
     Route::post('/edit/{id}', [InviteScanHistoryController::class, 'edit'] );
     Route::delete('/delete/{id}', [InviteScanHistoryController::class, 'delete'] );
+    Route::get('/delete-expired-notifications', [NotificationController::class, 'deleteExpiredNotifications']);
 
 });
 

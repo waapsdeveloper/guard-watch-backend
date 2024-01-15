@@ -104,4 +104,12 @@ public function delete($id)
     return ServiceResponse::success('Notification Deleted');
 }
 
+
+
+public function deleteExpiredNotifications()
+{
+    $expiryTime = Carbon::now()->subHours(24);
+
+    Notification::where('expiry', '<=', $expiryTime)->delete();
+}
 }
