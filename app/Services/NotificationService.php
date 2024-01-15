@@ -64,4 +64,25 @@ public function edit($id, $data)
     return ServiceResponse::success('Notification Updated', $res);
 }
 
+
+
+public function delete($id)
+{
+    $user = Auth::user();
+
+    // Find the notification by ID
+    $notification = Notification::where([
+        'id' => $id
+    ])->first();
+
+    if (!$notification) {
+        return ServiceResponse::error('Notification not found');
+    }
+
+    // Delete the notification
+    $notification->delete();
+
+    return ServiceResponse::success('Notification Deleted');
+}
+
 }

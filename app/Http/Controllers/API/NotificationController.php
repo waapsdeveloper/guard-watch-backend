@@ -75,4 +75,18 @@ class NotificationController extends Controller
     }
 
 
+
+
+    public function delete($id)
+    {
+        $res = $this->service->delete($id);
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Notification Deleted", $res);
+    }
+
+
 }
