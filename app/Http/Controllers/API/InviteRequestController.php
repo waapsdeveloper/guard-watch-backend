@@ -91,23 +91,26 @@ class InviteRequestController extends Controller
     }
 
 
-public function updateInviteRequest(Request $request, $id)
-{
-    $data = $request->all();
 
-    // Validating the required fields (excluding 'qr_code')
-    $validation = Validator::make($data, [
-        'status' => 'required',
-    ]);
+    public function updateInviteRequest(Request $request)
+    {
+        $data = $request->all();
 
-    if ($validation->fails()) {
-        return self::failure($validation->errors()->first());
+        // Validate the required fields
+        $validation = Validator::make($data, [
+            'id' => 'required|exists:invite_requests,id',
+            'status' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        $res = $this->service->updateInviteRequest($data['id'], $data['status']);
+
+        return self::success("Invite request updated", $res);
     }
 
-    $res = $this->service->updateInviteRequest($id, $data);
-
-    return self::success("Invite request updated", $res);
-}
 
 
 

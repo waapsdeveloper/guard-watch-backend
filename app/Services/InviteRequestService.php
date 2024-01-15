@@ -102,7 +102,7 @@ class InviteRequestService {
 
 
 
-    public function updateInviteRequest($id, $data)
+    public function updateInviteRequest($id, $status)
     {
         $inviteRequest = InviteRequest::find($id);
 
@@ -111,17 +111,22 @@ class InviteRequestService {
         }
 
         $inviteRequest->update([
-            'status' => $data['status'],
+            'status' => $status,
         ]);
 
+        // Refresh the model instance to get the updated values
+        $inviteRequest->refresh();
 
         $obj = [
+            'inviterequest' => [
                 'id' => $inviteRequest->id,
                 'status' => $inviteRequest->status,
+            ],
         ];
 
         return ServiceResponse::success('Invite request updated successfully', $obj);
     }
+
 
 
 
