@@ -102,7 +102,25 @@ class InviteRequestService {
 
 
 
+    public function updateInviteRequest($data)
+    {
+        $inviteRequests = InviteRequest::where('status', $data['status'])
+            ->first();
 
+        if (!$inviteRequests) {
+            return ServiceResponse::error('check');
+        }
+
+
+        $obj = [
+            'invite' => [
+                'id' => $inviteRequests->id,
+                'status' => $inviteRequests->status,
+            ]
+        ];
+
+        return ServiceResponse::success('invite accepted', $obj);
+    }
 
 
 
