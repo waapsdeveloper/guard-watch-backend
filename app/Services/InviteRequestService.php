@@ -102,24 +102,28 @@ class InviteRequestService {
 
 
 
-    public function updateInviteRequest($data)
+    public function updateInviteRequest($id, $data)
     {
-        $inviteRequests = InviteRequest::where('status', $data['status'])
-            ->first();
+        $inviteRequest = InviteRequest::find($id);
 
-        if (!$inviteRequests) {
-            return ServiceResponse::error('check');
+        if (!$inviteRequest) {
+            return ServiceResponse::error('Invite request not found');
         }
 
+        $inviteRequest->update([
+            'status' => $data['status'],
+        ]);
 
         $obj = [
             'inviterequest' => [
-                'status' => $inviteRequests->status,
-            ]
+                'id' => $inviteRequest->id,
+                'status' => $inviteRequest->status,
+            ],
         ];
 
-        return ServiceResponse::success('invite accepted', $obj);
+        return ServiceResponse::success('Invite request updated successfully', $obj);
     }
+
 
 
 
