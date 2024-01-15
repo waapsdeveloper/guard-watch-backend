@@ -114,14 +114,9 @@ class InviteRequestService {
             'status' => $data['status'],
         ]);
 
-        // Refresh the model instance to get the updated values
-        $inviteRequest->refresh();
-
         $obj = [
-            'inviterequest' => [
                 'id' => $inviteRequest->id,
                 'status' => $inviteRequest->status,
-            ],
         ];
 
         return ServiceResponse::success('Invite request updated successfully', $obj);
