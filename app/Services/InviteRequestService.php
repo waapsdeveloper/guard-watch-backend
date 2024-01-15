@@ -75,6 +75,25 @@ class InviteRequestService {
 
 
 
+
+    public function updateInviteRequest($data){
+        $user = Auth::user();
+
+
+
+        $item = new InviteRequest();
+        $item->id = $data['id'];
+        $item->status = $data['status'];
+        $item->save();
+
+        $result = new InviteRequestResource($item);
+
+
+
+        return ServiceResponse::success('status updated', $result);
+
+    }
+
     public function edit($data)
     {
         $user = Auth::user();
