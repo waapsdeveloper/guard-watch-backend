@@ -111,15 +111,14 @@ class InviteRequestService {
             return ServiceResponse::error('check');
         }
 
+        $item = new InviteRequest();
+        $item->id = $data['id'];
+        $item->status = $data['status'];
+        $item->save();
 
-        $obj = [
-            'invite' => [
-                'id' => $inviteRequests->id,
-                'status' => $inviteRequests->status,
-            ]
-        ];
+        $result = new InviteRequestResource($item);
 
-        return ServiceResponse::success('invite accepted', $obj);
+        return ServiceResponse::success('invite accepted', $result);
     }
 
 
