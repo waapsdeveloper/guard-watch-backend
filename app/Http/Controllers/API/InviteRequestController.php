@@ -71,7 +71,7 @@ class InviteRequestController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required|exists'
+            'id' => 'required'
         ]);
 
         // if validation failed
