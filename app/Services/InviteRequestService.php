@@ -44,8 +44,8 @@ class InviteRequestService {
         $item->space_id = $space->id;
 
         // Set space_name if it exists in the Space model
-        if (isset($space->space_name)) {
-            $item->space_name = $space->space_name;
+        if (isset($space->name)) {
+            $item->name = $space->name;
         }
 
         $item->save();
