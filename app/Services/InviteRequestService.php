@@ -36,8 +36,8 @@ class InviteRequestService {
         $user = Auth::user();
 
         $space = Space::where([
-            'id' => $data['space_id'],
-            'name' =>$data['name']
+            'id' => $space['space_id'],
+            'name' =>$space['name']
             ])->first();
 
 
