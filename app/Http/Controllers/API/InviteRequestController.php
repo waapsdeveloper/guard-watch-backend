@@ -94,7 +94,7 @@ class InviteRequestController extends Controller
     public function updateInviteRequest(Request $request){
         $data = $request->all();
 
-        // Validating the required fields (excluding 'qr_code')
+        // Validating the required fields
         $validation = Validator::make($data, [
             'id' => 'required',
             'status' => 'required|integer'
@@ -113,6 +113,7 @@ class InviteRequestController extends Controller
 
         return self::success("Status updated", $res);
     }
+
 
 
 
