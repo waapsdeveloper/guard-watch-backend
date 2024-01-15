@@ -83,7 +83,7 @@ class InviteRequestService {
         $item = InviteRequest::find($data['id']);
 
         if (!$item) {
-            return ServiceResponse::failure('InviteRequest not found');
+            return ServiceResponse::failure('Invite Request not found');
         }
 
         // Update the status

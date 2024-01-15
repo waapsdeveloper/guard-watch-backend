@@ -93,6 +93,8 @@ class InviteRequestController extends Controller
 
     public function updateInviteRequest(Request $request){
         $data = $request->all();
+        $data['id'] = $id;
+        $data['status'] = $status;
 
         // Validating the required fields
         $validation = Validator::make($data, [
