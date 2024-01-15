@@ -98,7 +98,6 @@ class InviteRequestController extends Controller
 
         // Validating the required fields (excluding 'qr_code')
         $validation = Validator::make($data, [
-            'id' => 'required',
             'status' => 'required',
         ]);
 

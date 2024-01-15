@@ -113,8 +113,7 @@ class InviteRequestService {
 
 
         $obj = [
-            'invite' => [
-                'id' => $inviteRequests->id,
+            'inviterequest' => [
                 'status' => $inviteRequests->status,
             ]
         ];
