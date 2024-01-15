@@ -159,5 +159,6 @@ Route::group(['prefix' => 'invite-requests', 'middleware' => ['auth:api']], func
     Route::post('/add', [InviteRequestController::class, 'add'] );
     Route::post('/edit/{id}', [InviteRequestController::class, 'edit'] );
     Route::delete('/delete/{id}', [InviteRequestController::class, 'delete'] );
+    Route::get('/list/space-invites/{id}', [InviteRequestController::class, 'getSpaceInvitesBySpaceId'] );
 
 });
