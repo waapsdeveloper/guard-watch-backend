@@ -76,26 +76,6 @@ class InviteRequestService {
 
 
 
-    public function updateInviteRequest($data){
-        $user = Auth::user();
-
-        // Find the InviteRequest by ID
-        $item = InviteRequest::find($data['id']);
-
-        if (!$item) {
-            return ServiceResponse::failure('Invite Request not found');
-        }
-
-        // Update the status
-        $item->status = $data['status'];
-        $item->save();
-
-        $result = new InviteRequestResource($item);
-
-        return ServiceResponse::success('Status updated', $result);
-    }
-
-
     public function edit($data)
     {
         $user = Auth::user();

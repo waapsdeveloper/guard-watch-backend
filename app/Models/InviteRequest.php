@@ -20,7 +20,6 @@ class InviteRequest extends Model
         'dial_code',
         'space_id',
         'space_name',
-        'status',
         'date',
         'comments'
     ];
