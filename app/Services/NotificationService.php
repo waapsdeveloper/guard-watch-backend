@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class NotificationService {
+
     public function add($data){
 
     $user = Auth::user();

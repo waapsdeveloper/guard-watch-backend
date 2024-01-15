@@ -27,7 +27,7 @@ class NotificationController extends Controller
             return self::failure($validation->errors()->first());
         }
 
-        $res = $this->notificationService->add($data);
+        $res = $this->Service->add($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
