@@ -160,6 +160,6 @@ Route::group(['prefix' => 'invite-requests', 'middleware' => ['auth:api']], func
     Route::post('/edit/{id}', [InviteRequestController::class, 'edit'] );
     Route::delete('/delete/{id}', [InviteRequestController::class, 'delete'] );
     Route::get('/list/space-invites/{id}', [InviteRequestController::class, 'getSpaceInvitesById'] );
-    Route::post('/update-invite/{id}', [InviteRequestController::class, 'updateInviteRequest'] );
+    Route::post('/update-invite', [InviteRequestController::class, 'updateInviteRequest'] );
 
 });
