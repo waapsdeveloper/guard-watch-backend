@@ -106,10 +106,5 @@ public function delete($id)
 
 
 
-public function deleteExpiredNotifications()
-{
-    $createdat = Carbon::addHours(24);
 
-    Notification::where('created_at', '<=', $expiryTime)->delete();
-}
 }

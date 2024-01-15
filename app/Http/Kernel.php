@@ -67,8 +67,5 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 
-    protected function schedule(Schedule $schedule)
-{
-    $schedule->command('notifications:delete-expired')->everyminute();
-}
+
 }

@@ -174,6 +174,5 @@ Route::group(['prefix' => 'notifications', 'middleware' => ['auth:api']], functi
     Route::post('/add', [NotificationController::class, 'add'] );
     Route::post('/edit/{id}', [NotificationController::class, 'edit'] );
     Route::delete('/delete/{id}', [NotificationController::class, 'delete'] );
-    Route::get('/delete-expired-notifications', [NotificationController::class, 'deleteExpiredNotifications']);
 
 });

@@ -101,12 +101,7 @@ class NotificationController extends Controller
 
 
 
-    public function deleteExpiredNotifications()
-    {
-        $this->service->deleteExpiredNotifications();
 
-        return response()->json(['message' => 'Expired notifications deleted successfully']);
-    }
 
 
 }
