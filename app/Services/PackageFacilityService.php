@@ -53,7 +53,7 @@ class PackageFacilityService
 
         $Packagefacilities->save();
 
-        $res = new PackageResource($Packagefacilities);
+        $res = new PackageFacilityResource($Packagefacilities);
 
         return ServiceResponse::success('Package Added', $res);
     }
