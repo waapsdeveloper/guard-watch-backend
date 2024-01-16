@@ -25,6 +25,8 @@ class PackageUserResource extends JsonResource
             "package_id" => $obj->package->id, // Assuming there's a relationship between PackageUser and Package
             "user_id" => $obj->user->id, // Assuming there's a relationship between PackageUser and User
             'cost' => $obj->cost,
+            'purchase_date' => $obj->purchase_date,
+            'expiry_date' => $obj->expiry_date,
         ];
     }
 }
