@@ -72,7 +72,6 @@ class InviteRequestService {
         $space = new SpaceResource(Space::where(['id' => $data['id']])->first());
 
         $obj = [
-            'space' => $space,
             'invites' => $list
         ];
 
