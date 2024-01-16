@@ -65,7 +65,6 @@ class InviteRequestController extends Controller
         return self::success("Test Result", $res);
     }
 
-
     public function getSpaceInvitesById(Request $request, $id)
     {
         $data = $request->all();

@@ -67,6 +67,11 @@ class InviteRequestService {
     {
         $user = Auth::user();
 
+        // Check if 'id' is present in the data
+        if (!isset($data['id'])) {
+            return ServiceResponse::success('Invite Request List', ['invites' => []]);
+        }
+
         // Fetch invite requests for the specified space ID
         $inviteRequests = InviteRequest::where('space_id', $data['id'])->get();
 
