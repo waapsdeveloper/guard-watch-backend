@@ -44,7 +44,7 @@ class PackageFacilityService
         if ($Packagefacilities) {
             return ServiceResponse::error('Package facility Already Exists with Title');
         }
-        $Packagefacilities = Package::findOrFail($data['package_id']);
+        $package = Package::findOrFail($data['package_id']);
 
         $Packagefacilities = new PackageFacility();
 
