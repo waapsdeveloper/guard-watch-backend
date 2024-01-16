@@ -36,27 +36,40 @@ class PackageFacilityService
     {
         $user = Auth::user();
 
-        // check existing package
-        $Packagefacilities = PackageFacility::where([
-            'title' => $data['title']
-        ])->first();
-
-        if ($Packagefacilities) {
-            return ServiceResponse::error('Package facility Already Exists with Title');
+        // Check if the 'package_id' is present in the data
+        if (!isset($data['package_id'])) {
+            return ServiceResponse::error('Package ID is required.');
         }
+
+        // Check if the package with the given 'package_id' exists
         $package = Package::findOrFail($data['package_id']);
 
-        $Packagefacilities = new PackageFacility();
+        // Check existing package facility with the same title
+        $existingFacility = PackageFacility::where([
+            'title' => $data['title'],
+            'package_id' => $data['package_id'], // Also check for the package_id
+        ])->first();
 
-        $Packagefacilities->title = $data['title'];
-        $Packagefacilities->description = $data['description'];
+        if ($existingFacility) {
+            return ServiceResponse::error('Package Facility Already Exists with Title');
+        }
 
-        $Packagefacilities->save();
+        // Create a new PackageFacility
+        $packageFacility = new PackageFacility();
+        $packageFacility->title = $data['title'];
+        $packageFacility->description = $data['description'];
 
-        $res = new PackageFacilityResource($Packagefacilities);
+        // Associate the Package with the PackageFacility
+        $packageFacility->package()->associate($package);
+
+        $packageFacility->save();
+
+        // Use the PackageFacilityResource to transform the result
+        $res = new PackageFacilityResource($packageFacility);
 
         return ServiceResponse::success('Package Added', $res);
     }
+
 
 
 
