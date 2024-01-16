@@ -20,11 +20,20 @@ class PackageFacilityResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
-        return [
+        $data = [
             "id" => $obj->id,
-            "package_id" => $obj->package->id,
             "title" => $obj->title,
             "description" => $obj->description,
         ];
+
+        // Check if the 'package' relationship is not null before accessing its 'id' property
+        if ($obj->package) {
+            $data["package_id"] = $obj->package->id;
+        } else {
+            $data["package_id"] = null; // Or any default value you want to assign when the relationship is null
+        }
+
+        return $data;
     }
+
 }
