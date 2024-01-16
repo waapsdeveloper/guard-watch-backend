@@ -29,38 +29,29 @@ use App\Models\User;
         {
             $user = Auth::user();
 
-            // Check if 'package_id' and 'cost' keys exist in the $data array
-            if (!isset($data['package_id']) || !isset($data['cost'])) {
-                return ServiceResponse::error('Invalid data. Missing package_id or cost.');
-            }
-
-            // Find the package using the specified ID and retrieve its 'cost' attribute
+            // Retrieve the package with only the 'cost' attribute
             $package = Package::findOrFail($data['package_id'], ['cost']);
 
-            // Find the user using the specified ID
+            // Retrieve the user
             $user = User::findOrFail($data['user_id']);
 
             // Create a new PackageUser instance
             $item = new PackageUser();
-
-            // Set purchase_date to the current date and expiry_date to 30 days from now
             $item->purchase_date = Carbon::now();
             $item->expiry_date = Carbon::now()->addDays(30);
 
-            // Associate the Package and User models with the PackageUser instance
+            // Associate the related models
             $item->package()->associate($package);
             $item->user()->associate($user);
 
-            // Save the PackageUser instance
+            // Save the new PackageUser record
             $item->save();
 
-            // Create a PackageUserResource instance for the response
+            // Create a PackageUserResource for the response
             $result = new PackageUserResource($item);
 
-            // Return a success response with a message and the result data
             return ServiceResponse::success('Invite Request Added', $result);
         }
-
 
 
 
