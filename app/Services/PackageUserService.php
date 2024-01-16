@@ -21,12 +21,13 @@ class PackageUserService
     {
         $user = Auth::user();
 
-        // Retrieve the list of packages (adjust the model name accordingly)
-        $packages = Package::get();
+        // Retrieve the list of package users
+        $packageUsers = PackageUser::where('user_id', $user->id)->get();
 
-        $res = PackageResource::collection($packages);
+        // Transform the data using the PackageUserResource
+        $res = PackageUserResource::collection($packageUsers);
 
-        return ServiceResponse::success('Package List', $res);
+        return ServiceResponse::success('Package User List', $res);
     }
 
 
@@ -62,33 +63,28 @@ class PackageUserService
 
 
 
-
-
-
     public function edit($id, $data)
     {
         $user = Auth::user();
 
-        // Find the package by ID
-        $package = Package::where([
-            'id' => $id
-        ])->first();
+        // Find the PackageUser by ID
+        $packageUser = PackageUser::find($id);
 
-        if (!$package) {
-            return ServiceResponse::error('Package not found');
+        if (!$packageUser) {
+            return ServiceResponse::error('PackageUser not found');
         }
+        $packageUser->cost = $data['cost'];
+        $packageUser->purchase_date = $data['purchase_date'];
+        $packageUser->expiry_date = $data['expiry_date'];
+        $packageUser->save();
 
-        // Update the package
-        $package->title = $data['title'];
-        $package->description = $data['description'];
-        $package->cost = $data['cost'];
-        $package->picture = $data['picture'];
-        $package->save();
+        $res = new PackageUserResource($packageUser);
 
-        $res = new PackageResource($package);
-
-        return ServiceResponse::success('Package Updated', $res);
+        return ServiceResponse::success('PackageUser Updated', $res);
     }
+
+
+
 
 
 
@@ -96,17 +92,16 @@ class PackageUserService
     {
         $user = Auth::user();
 
-        // Find the package by ID
-        $package = Package::find($id);
+        // Find the PackageUser by ID
+        $packageUser = PackageUser::find($id);
 
-        if (!$package) {
-            return ServiceResponse::error('Package not found');
+        if (!$packageUser) {
+            return ServiceResponse::error('PackageUser not found');
         }
 
-        // Delete the package
-        $package->delete();
+        $packageUser->delete();
 
-        return ServiceResponse::success('Package Deleted');
+        return ServiceResponse::success('PackageUser Deleted');
     }
 
 
