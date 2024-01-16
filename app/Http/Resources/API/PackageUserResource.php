@@ -5,9 +5,7 @@ namespace App\Http\Resources\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\API\UserResource;
-use App\Http\Resources\API\PackageResource;
-class PackageUserResource extends JsonResource
+class PackageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,16 +20,12 @@ class PackageUserResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
-        $result = [
+        return [
             "id" => $obj->id,
-            'package_id' => PackageResource::toObject($obj->id),
-//            "package_id" => ($obj->package)->id, // Check if $obj->package is null
-            "user_id" => ($obj->user)->id, // Check if $obj->user is null
-            'cost' => ($obj->package)->cost, // Check if $obj->package is null
-            'purchase_date' => $obj->purchase_date,
+            "title" => $obj->title,
+            "description" => $obj->description,
+            'cost'=>$obj->cost,
+            'picture' =>$obj->picture,
         ];
-
-        return $result;
     }
-
 }
