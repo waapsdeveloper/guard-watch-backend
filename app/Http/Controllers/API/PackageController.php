@@ -98,7 +98,7 @@ class PackageController extends Controller
 
 
 
-    public function myBoughtPackage(Request $request, $id)
+    public function getBoughtPackage(Request $request, $id)
     {
         $res = $this->service->list();
 
