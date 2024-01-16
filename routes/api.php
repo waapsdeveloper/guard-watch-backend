@@ -14,6 +14,7 @@ use App\Http\Controllers\API\InviteRequestController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\PackageController;
 use App\Http\Controllers\API\PackageUserController;
+use App\Http\Controllers\API\PackageFacilityController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -196,5 +197,16 @@ Route::group(['prefix' => 'package-users', 'middleware' => ['auth:api']], functi
     Route::post('/add', [PackageUserController::class, 'add'] );
     Route::post('/edit/{id}', [PackageUserController::class, 'edit'] );
     Route::delete('/delete/{id}', [PackageUserController::class, 'delete'] );
+
+});
+
+
+
+Route::group(['prefix' => 'package-facilities', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [PackageFacilityController::class, 'list'] );
+    Route::post('/add', [PackageFacilityController::class, 'add'] );
+    Route::post('/edit/{id}', [PackageFacilityController::class, 'edit'] );
+    Route::delete('/delete/{id}', [PackageFacilityController::class, 'delete'] );
 
 });
