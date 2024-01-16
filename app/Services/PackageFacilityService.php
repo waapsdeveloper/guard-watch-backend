@@ -41,7 +41,7 @@ class PackageFacilityService
             'title' => $data['title']
         ])->first();
 
-        if ($existingPackage) {
+        if ($Packagefacilities) {
             return ServiceResponse::error('Package facility Already Exists with Title');
         }
         $Packagefacilities = Package::findOrFail($data['package_id']);
