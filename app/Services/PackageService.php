@@ -116,22 +116,12 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Check if the package exists
-        $package = Package::with('packageUsers')->find($data['id']);
+        // Retrieve the list of packages (adjust the model name accordingly)
+        $packages = Package::get();
 
-        if (!$package) {
-            return ServiceResponse::error('Package Does not Exist');
-        }
+        $res = PackageResource::collection($packages);
 
-        // Get package users associated with the package
-        $packageUsers = $package->packageUsers;
-
-        $responseData = [
-            'package' => $package,
-            'packageUsers' => $packageUsers,
-        ];
-
-        return ServiceResponse::success('Package and Package Users', $responseData);
+        return ServiceResponse::success('Package List', $res);
     }
 
 

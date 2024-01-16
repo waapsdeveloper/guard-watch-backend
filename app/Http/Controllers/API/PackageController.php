@@ -100,27 +100,13 @@ class PackageController extends Controller
 
     public function myBoughtPackage(Request $request, $id)
     {
-        $data = $request->all();
-        $data['id'] = $id;
-
-        // Validating the required fields
-        $validation = Validator::make($data, [
-            'id' => 'required|exists:packages,id',
-        ]);
-
-        // If validation failed
-        if ($validation->fails()) {
-            return self::failure($validation->errors()->first());
-        }
-
-        // Call the service method to get package details and associated users
-        $res = $this->service->myBoughtPackage($data); // Pass the entire $data array
+        $res = $this->service->list();
 
         if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package and Package Users", $res['data']);
+        return self::success("Package List", $res);
     }
 
 
