@@ -5,6 +5,8 @@ namespace App\Http\Resources\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Models\User;
+use App\Models\Package;
 class PackageUserResource extends JsonResource
 {
     /**
