@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\InviteRequestService;
 use App\Helpers\Helper;
 
+use App\Services\InviteService;
+
 class InviteRequestController extends Controller
 {
     //
@@ -71,7 +73,7 @@ class InviteRequestController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'id' => 'required'
+            'id' => 'required|exists:spaces,id'
         ]);
 
         // if validation failed
@@ -80,7 +82,7 @@ class InviteRequestController extends Controller
         }
 
         //
-        $res = $this->service->getSpaceInvitesById($data);
+        $res = $this->service->getInvitesBySpaceId($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
