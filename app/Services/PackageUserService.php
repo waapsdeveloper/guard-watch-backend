@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Models\PackageUser;
+use App\Models\Package;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageUserResource;
 use App\Http\Resources\API\PackageUserCollection;
+use App\Http\Resources\API\PackageResource;
+use App\Http\Resources\API\PackageCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -39,10 +42,10 @@ class PackageUserService
         $user = Auth::user();
 
         // Assuming PackageUser model is named PackageUser
-        $existingPackageUser = PackageUser::where([
-            'package_id' => $data['package_id'],
-            'user_id' => $data['user_id'],
-            'package' => $data['cost'],
+        $existingPackage = PackageUser::where([
+            'package_id' => $package['id'],
+            'user_id' => $package['user_id'],
+            'cost' => $package['cost'],
         ])->first();
 
         if ($existingPackageUser) {
