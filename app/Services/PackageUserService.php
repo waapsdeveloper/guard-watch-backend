@@ -30,12 +30,13 @@ use App\Models\User;
             $user = Auth::user();
 
             $package = Package::findOrFail($data['package_id']);
+            $package = Package::findOrFail($data['cost']);
             $user = User::findOrFail($data['user_id']);
+            // $item->cost = $data['cost'];
 
             $item = new PackageUser();
-            $item->cost = $data['cost'];
-            $item->purchase_date = $data['purchase_date'];
-            $item->expiry_date = $data['expiry_date'];
+            $item->purchase_date = carbon::now();
+            $item->expiry_date = carbon::now()+ day(30);
 
             // Assigning the related models directly
             $item->package()->associate($package);
