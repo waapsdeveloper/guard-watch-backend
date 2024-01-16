@@ -42,6 +42,7 @@ class PackageUserService
         $existingPackageUser = PackageUser::where([
             'package_id' => $data['package_id'],
             'user_id' => $data['user_id'],
+            'package' => $data['cost'],
         ])->first();
 
         if ($existingPackageUser) {
@@ -49,9 +50,6 @@ class PackageUserService
         }
 
         $packageUser = new PackageUser();
-        $packageUser->package_id = $data['package_id'];
-        $packageUser->user_id = $data['user_id'];
-        $packageUser->cost = $data['cost'];
         $packageUser->purchase_date = $data['purchase_date'];
         $packageUser->expiry_date = $data['expiry_date'];
         $packageUser->save();
