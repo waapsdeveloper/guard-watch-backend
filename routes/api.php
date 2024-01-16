@@ -13,6 +13,7 @@ use App\Http\Controllers\API\QrcodeController;
 use App\Http\Controllers\API\InviteRequestController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\PackageController;
+use App\Http\Controllers\API\PackageUserController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -184,5 +185,16 @@ Route::group(['prefix' => 'packages', 'middleware' => ['auth:api']], function ()
     Route::post('/add', [PackageController::class, 'add'] );
     Route::post('/edit/{id}', [PackageController::class, 'edit'] );
     Route::delete('/delete/{id}', [PackageController::class, 'delete'] );
+
+});
+
+
+
+Route::group(['prefix' => 'package-users', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [PackageUserController::class, 'list'] );
+    Route::post('/add', [PackageUserController::class, 'add'] );
+    Route::post('/edit/{id}', [PackageUserController::class, 'edit'] );
+    Route::delete('/delete/{id}', [PackageUserController::class, 'delete'] );
 
 });
