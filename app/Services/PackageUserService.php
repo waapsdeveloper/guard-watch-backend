@@ -21,16 +21,15 @@ class PackageUserService
         $user = Auth::user();
 
         $package = Package::where(['id' => $data['package_id']])->first();
+        $user = User::where(['id' => $data['user_id']])->first();
 
 
         $item = new PackageUser();
-        $item->name = $data['name'];
-        $item->phone_number = $data['phone_number'];
-        $item->dial_code = $data['dial_code'];
-        $item->comments = $data['comments'];
-        $item->date = $data['date'];
-        $item->space_id = $space->id;
-        $item->space_name = $space->title;
+        $item->cost = $data['cost'];
+        $item->purchase_date = $data['purchase_date'];
+        $item->expiry_date = $data['expiry_date'];
+        $item->package_id = $package->id;
+        $item->user_id = $user->id;
         $item->save();
 
         $result = new PackageUserResource($item);
