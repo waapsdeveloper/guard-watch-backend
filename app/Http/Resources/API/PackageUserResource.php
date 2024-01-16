@@ -24,8 +24,8 @@ class PackageUserResource extends JsonResource
     {
         return [
             "id" => $obj->id,
-            "package_id" => $obj->$package->id,
-            "user_id" => $obj->$user->id,
+            "package_id" => $obj->package->id,
+            "user_id" => $obj->user->id,
             'cost' => $obj->package->cost,
             'purchase_date' => $obj->purchase_date,
         ];
