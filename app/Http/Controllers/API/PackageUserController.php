@@ -19,5 +19,31 @@ class PackageUserController extends Controller
     }
 
 
+    public function add(Request $request)
+    {
+        $data = $request->all();
 
+        // Validating the required fields (excluding 'qr_code')
+        $validation = Validator::make($data, [
+            'package_id' => 'required|exists:packages,id',
+            'user_id' => 'required|exists:users,id',
+            'cost' => 'required|exists:packages',
+            'purchase_date' => 'required|date',
+            'expiry_date' => 'required|date'
+
+        ]);
+
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        // Your existing logic to add the data
+        $res = $this->service->add($data);
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("package user  Result", $res);
+    }
 }
