@@ -26,7 +26,7 @@ class PackageController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Notification List", $res);
+        return self::success("Package List", $res);
     }
 
     public function add(Request $request)
@@ -64,8 +64,8 @@ class PackageController extends Controller
         $validation = Validator::make($data, [
             'title' => 'required|string',
             'description' => 'required|string',
-            'type' => 'required|string',
-            'expiry' => 'required|date',
+            'cost' => 'required|numeric',
+            'picture' => 'required|string',
         ]);
 
         // If validation failed
@@ -79,7 +79,7 @@ class PackageController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Notification Updated", $res);
+        return self::success("Package Updated", $res);
     }
 
 
@@ -93,7 +93,7 @@ class PackageController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Notification Deleted", $res);
+        return self::success("Package Deleted", $res);
     }
 
 

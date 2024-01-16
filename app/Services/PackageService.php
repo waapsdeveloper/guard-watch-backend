@@ -21,12 +21,12 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Retrieve the list of notifications for the authenticated user
-        $notifications = Notification::get();
+        // Retrieve the list of packages (adjust the model name accordingly)
+        $packages = Package::get();
 
-        $res = NotificationResource::collection($notifications);
+        $res = PackageResource::collection($packages);
 
-        return ServiceResponse::success('Notification List', $res);
+        return ServiceResponse::success('Package List', $res);
     }
 
 
@@ -64,25 +64,25 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Find the notification by ID
-        $notification = Notification::where([
+        // Find the package by ID
+        $package = Package::where([
             'id' => $id
         ])->first();
 
-        if (!$notification) {
-            return ServiceResponse::error('Notification not found');
+        if (!$package) {
+            return ServiceResponse::error('Package not found');
         }
 
-        // Update the notification
-        $notification->title = $data['title'];
-        $notification->description = $data['description'];
-        $notification->type = $data['type'];
-        $notification->expiry = $data['expiry'];
-        $notification->save();
+        // Update the package
+        $package->title = $data['title'];
+        $package->description = $data['description'];
+        $package->cost = $data['cost'];
+        $package->picture = $data['picture'];
+        $package->save();
 
-        $res = new NotificationResource($notification);
+        $res = new PackageResource($package);
 
-        return ServiceResponse::success('Notification Updated', $res);
+        return ServiceResponse::success('Package Updated', $res);
     }
 
 
@@ -91,19 +91,17 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Find the notification by ID
-        $notification = Notification::where([
-            'id' => $id
-        ])->first();
+        // Find the package by ID
+        $package = Package::find($id);
 
-        if (!$notification) {
-            return ServiceResponse::error('Notification not found');
+        if (!$package) {
+            return ServiceResponse::error('Package not found');
         }
 
-        // Delete the notification
-        $notification->delete();
+        // Delete the package
+        $package->delete();
 
-        return ServiceResponse::success('Notification Deleted');
+        return ServiceResponse::success('Package Deleted');
     }
 
 
