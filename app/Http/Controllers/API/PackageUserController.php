@@ -19,6 +19,18 @@ class PackageUserController extends Controller
     }
 
 
+    public function list(Request $request)
+    {
+        $data = $request->all();
+        $res = $this->service->list($data);
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+    }
+
     public function add(Request $request)
     {
         $data = $request->all();
@@ -45,6 +57,56 @@ class PackageUserController extends Controller
 
         return self::success("Test Result", $res);
     }
+
+
+    public function edit(Request $request, $id)
+{
+    $data = $request->all();
+    $data['id'] = $id;
+
+    // validating the required fields
+    $validation = Validator::make($data, [
+        'cost' => 'required|numeric',
+        'purchase_date' => 'required|date',
+        'expiry_date' => 'required|date',
+    ]);
+
+    // if validation failed
+    if ($validation->fails()) {
+        return self::failure($validation->errors()->first());
+    }
+
+    $res = $this->service->edit($data);
+
+    if ($res['bool'] == false) {
+        return self::failure($res['message'], $res);
+    }
+
+    return self::success("PackageUser Edit Result", $res);
+}
+
+
+public function delete(Request $request, $id)
+{
+    // Validating the required fields
+    $validation = Validator::make(['id' => $id], [
+        'id' => 'required',
+    ]);
+
+    // If validation fails
+    if ($validation->fails()) {
+        return self::failure($validation->errors()->first());
+    }
+
+    // Data is valid, proceed with deletion
+    $res = $this->service->delete($id);
+
+    if ($res['bool'] == false) {
+        return self::failure($res['message'], $res);
+    }
+
+    return self::success("", $res);
+}
 
 
 }
