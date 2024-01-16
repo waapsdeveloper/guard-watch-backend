@@ -85,7 +85,7 @@ class PackageFacilityService
             'id' => $id
         ])->first();
 
-        if (!$package) {
+        if (!$packageFacility) {
             return ServiceResponse::error('Package facilty not found');
         }
 
