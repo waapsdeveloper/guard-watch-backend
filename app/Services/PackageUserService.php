@@ -29,26 +29,20 @@ use App\Models\User;
         {
             $user = Auth::user();
 
-            // Retrieve the package with only the 'cost' attribute
             $package = Package::findOrFail($data['package_id']);
-            // $package = Package::findOrFail($data['cost']);
 
-            // Retrieve the user
             $user = User::findOrFail($data['user_id']);
 
-            // Create a new PackageUser instance
             $item = new PackageUser();
             $item->purchase_date = Carbon::now();
             $item->expiry_date = Carbon::now()->addDays(30);
 
-            // Associate the related models
             $item->package()->associate($package);
             $item->user()->associate($user);
 
-            // Save the new PackageUser record
             $item->save();
 
-            // Create a PackageUserResource for the response
+
             $result = new PackageUserResource($item);
 
             return ServiceResponse::success('package user Added', $result);
