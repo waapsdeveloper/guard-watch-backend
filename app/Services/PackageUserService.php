@@ -30,7 +30,7 @@ use App\Models\User;
             $user = Auth::user();
 
             // Retrieve the package with only the 'cost' attribute
-            $package = Package::findOrFail($data['package_id']);
+            // $package = Package::findOrFail($data['package_id']);
             $package = Package::findOrFail($data['cost']);
 
             // Retrieve the user
