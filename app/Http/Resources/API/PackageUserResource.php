@@ -24,7 +24,7 @@ class PackageUserResource extends JsonResource
     {
         $result = [
             "id" => $obj->id,
-            'package_id' => PackageResource::toObject($obj->package_id),
+            'package_id' => PackageResource::toObject($obj->id),
 //            "package_id" => ($obj->package)->id, // Check if $obj->package is null
             "user_id" => ($obj->user)->id, // Check if $obj->user is null
             'cost' => ($obj->package)->cost, // Check if $obj->package is null
