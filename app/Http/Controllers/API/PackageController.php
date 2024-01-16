@@ -101,7 +101,6 @@ class PackageController extends Controller
     public function myBoughtPackage(Request $request, $id)
     {
         $data = $request->all();
-        $data['id'] = $id;
 
         // Validating the required fields
         $validation = Validator::make($data, [
