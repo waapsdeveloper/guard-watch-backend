@@ -29,8 +29,8 @@ use App\Models\User;
         {
             $user = Auth::user();
 
-            $package = Package::findOrFail($data['package_id']);
-            $package = Package::findOrFail($data['cost']);
+            $package = Package::findOrFail($data['package_id'],['cost']);
+            // $package = Package::findOrFail($data['cost']);
             $user = User::findOrFail($data['user_id']);
             // $item->cost = $data['cost'];
 
