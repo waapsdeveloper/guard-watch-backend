@@ -186,6 +186,7 @@ Route::group(['prefix' => 'packages', 'middleware' => ['auth:api']], function ()
     Route::post('/add', [PackageController::class, 'add'] );
     Route::post('/edit/{id}', [PackageController::class, 'edit'] );
     Route::delete('/delete/{id}', [PackageController::class, 'delete'] );
+    Route::get('/list', [PackageController::class, 'myBoughtPackages'] );
 
 });
 

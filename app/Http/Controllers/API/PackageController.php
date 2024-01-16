@@ -96,7 +96,11 @@ class PackageController extends Controller
         return self::success("Package Deleted", $res);
     }
 
+    public function myBoughtPackages()
+    {
+        echo "hello";
 
+    }
 
 
 
