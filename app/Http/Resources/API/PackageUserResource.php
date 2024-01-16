@@ -22,12 +22,15 @@ class PackageUserResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
-        return [
+        $result = [
             "id" => $obj->id,
-            "package_id" => $obj->package->id,
-            "user_id" => $obj->user->id,
-            'cost' => $obj->package->cost,
+            "package_id" => optional($obj->package)->id, // Check if $obj->package is null
+            "user_id" => optional($obj->user)->id, // Check if $obj->user is null
+            'cost' => optional($obj->package)->cost, // Check if $obj->package is null
             'purchase_date' => $obj->purchase_date,
         ];
+
+        return $result;
     }
+
 }
