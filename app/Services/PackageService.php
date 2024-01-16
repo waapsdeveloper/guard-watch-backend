@@ -8,6 +8,7 @@ use App\Http\Resources\API\PackageResource;
 use App\Http\Resources\API\PackageCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\PackageUser;
 
 class PackageService
 {
@@ -108,6 +109,30 @@ class PackageService
     }
 
 
+
+
+
+    public function myBoughtPackage($data)
+    {
+        $user = Auth::user();
+
+        // Check if the package exists
+        $package = Package::with('packageUsers')->find($data['id']);
+
+        if (!$package) {
+            return ServiceResponse::error('Package Does not Exist');
+        }
+
+        // Get package users associated with the package
+        $packageUsers = $package->packageUsers;
+
+        $responseData = [
+            'package' => $package,
+            'packageUsers' => $packageUsers,
+        ];
+
+        return ServiceResponse::success('Package and Package Users', $responseData);
+    }
 
 
 }
