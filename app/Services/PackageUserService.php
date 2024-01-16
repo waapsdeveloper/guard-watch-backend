@@ -30,7 +30,7 @@ use App\Models\User;
             $user = Auth::user();
 
             // Retrieve the package with only the 'cost' attribute
-            $package = Package::findOrFail($data['package_id'], ['cost']);
+            $package = Package::findOrFail($data['package_id']);
 
             // Retrieve the user
             $user = User::findOrFail($data['user_id']);
@@ -50,7 +50,7 @@ use App\Models\User;
             // Create a PackageUserResource for the response
             $result = new PackageUserResource($item);
 
-            return ServiceResponse::success('Invite Request Added', $result);
+            return ServiceResponse::success('package user Added', $result);
         }
 
 

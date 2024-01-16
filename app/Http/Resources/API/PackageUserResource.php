@@ -22,8 +22,8 @@ namespace App\Http\Resources\API;
         {
             return [
                 "id" => $obj->id,
-                "package_id" => $obj->package->id, // Assuming there's a relationship between PackageUser and Package
-                "user_id" => $obj->user->id, // Assuming there's a relationship between PackageUser and User
+                "package_id" => $obj->package->id,
+                "user_id" => $obj->user->id,
                 'cost' => $obj->cost,
                 'purchase_date' => $obj->purchase_date,
                 'expiry_date' => $obj->expiry_date,
