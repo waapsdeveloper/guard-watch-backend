@@ -12,6 +12,7 @@ use App\Http\Controllers\API\VehiclesController;
 use App\Http\Controllers\API\QrcodeController;
 use App\Http\Controllers\API\InviteRequestController;
 use App\Http\Controllers\API\NotificationController;
+use App\Http\Controllers\API\PackageController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -174,5 +175,14 @@ Route::group(['prefix' => 'notifications', 'middleware' => ['auth:api']], functi
     Route::post('/add', [NotificationController::class, 'add'] );
     Route::post('/edit/{id}', [NotificationController::class, 'edit'] );
     Route::delete('/delete/{id}', [NotificationController::class, 'delete'] );
+
+});
+
+Route::group(['prefix' => 'packages', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [PackageController::class, 'list'] );
+    Route::post('/add', [PackageController::class, 'add'] );
+    Route::post('/edit/{id}', [PackageController::class, 'edit'] );
+    Route::delete('/delete/{id}', [PackageController::class, 'delete'] );
 
 });
