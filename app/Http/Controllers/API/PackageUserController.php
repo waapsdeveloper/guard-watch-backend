@@ -26,7 +26,7 @@ class PackageUserController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package List", $res);
+        return self::success("Package User List", $res);
     }
 
     public function add(Request $request)
@@ -64,10 +64,9 @@ class PackageUserController extends Controller
 
         // Validating the required fields
         $validation = Validator::make($data, [
-            'title' => 'required|string',
-            'description' => 'required|string',
             'cost' => 'required|numeric',
-            'picture' => 'required|string',
+            'purchase_date' => 'required|date',
+            'expiry_date' => 'required|date',
         ]);
 
         // If validation failed
@@ -81,21 +80,22 @@ class PackageUserController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package Updated", $res);
+        return self::success("PackageUser Updated", $res);
     }
+
 
 
 
 
     public function delete($id)
     {
-        $res = $this->service->delete($id);
+        $result = $this->service->delete($id);
 
-        if ($res['bool'] == false) {
-            return self::failure($res['message'], $res);
+        if ($result['success']) {
+            return self::success("PackageUser Deleted", $result['data']);
+        } else {
+            return self::failure($result['message'], $result['data']);
         }
-
-        return self::success("Package Deleted", $res);
     }
 
 
