@@ -18,12 +18,12 @@ class PackageUser extends Model
     ];
     public function package()
     {
-        return $this->belongsTo(Package::class);
+        return $this->belongsTo(Package::class , 'package_id');
     }
 
     // Assuming a relationship with the User model
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
     }
 }
