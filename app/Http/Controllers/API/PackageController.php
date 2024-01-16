@@ -114,7 +114,7 @@ class PackageController extends Controller
         }
 
         // Call the service method to get package details and associated users
-        $res = $this->service->myBoughtPackage($id);
+        $res = $this->service->myBoughtPackage($data); // Pass the entire $data array
 
         if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
@@ -122,6 +122,7 @@ class PackageController extends Controller
 
         return self::success("Package and Package Users", $res['data']);
     }
+
 
 
 }

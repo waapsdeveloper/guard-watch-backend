@@ -112,7 +112,7 @@ class PackageService
 
 
 
-    public function myBoughtPackage($id)
+    public function myBoughtPackage($data)
     {
         $user = Auth::user();
 
@@ -133,6 +133,7 @@ class PackageService
 
         return ServiceResponse::success('Package and Package Users', $responseData);
     }
+
 
 
 }
