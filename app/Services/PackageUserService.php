@@ -3,13 +3,9 @@
 namespace App\Services;
 
 use App\Models\PackageUser;
-use App\Models\Package;
-use App\Models\User;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageUserResource;
 use App\Http\Resources\API\PackageUserCollection;
-use App\Http\Resources\API\PackageResource;
-use App\Http\Resources\API\PackageCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -36,30 +32,31 @@ class PackageUserService
 
 
 
-    public function add(array $data)
+    public function add($data)
     {
+        // You can add additional validation logic if needed
+
         $user = Auth::user();
 
-        // Add the authenticated user ID to the data
-        $data['user_id'] = $user->id;
-        $data['package_id'] = $package->id;
-        $data['cost'] = $package->cost;
+        // Assuming PackageUser model is named PackageUser
+        $existingPackageUser = PackageUser::where([
+            'package_id' => $data['package_id'],
+            'user_id' => $data['user_id'],
+        ])->first();
 
-        // Validate the data
-        $validation = Validator::make($data, [
-            'purchase_date' => 'required|date',
-            'expiry_date' => 'required|date',
-        ]);
-
-        if ($validation->fails()) {
-            return ServiceResponse::failure($validation->errors()->first());
+        if ($existingPackageUser) {
+            return ServiceResponse::error('PackageUser Already Exists for this Package and User');
         }
 
-        // Create a new PackageUser record
-        $packageUser = PackageUser::create($data);
+        $packageUser = new PackageUser();
+        $packageUser->package_id = $data['package_id'];
+        $packageUser->user_id = $data['user_id'];
+        $packageUser->cost = $data['cost'];
+        $packageUser->purchase_date = $data['purchase_date'];
+        $packageUser->expiry_date = $data['expiry_date'];
+        $packageUser->save();
 
-        // You can return the created PackageUser if needed
-        $res = new PackageUserResource($packageUser);
+        $res = new PackageUserResource($packageUser); // Assuming you have a PackageUserResource class
 
         return ServiceResponse::success('PackageUser Added', $res);
     }
