@@ -2,8 +2,8 @@
 
 namespace App\Services;
 use App\Http\Resources\API\SpaceResource;
-use App\Models\Invite;
 use App\Models\Space;
+use App\Models\Invite;
 use App\Models\InviteContact;
 use App\Models\InviteScanHistories;
 use App\Helpers\ServiceResponse;

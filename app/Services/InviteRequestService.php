@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Helpers\Helper;
 
+use App\Http\Resources\API\SpaceResource;
+
 class InviteRequestService {
 
 
