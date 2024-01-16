@@ -66,30 +66,26 @@ class InviteRequestController extends Controller
     }
 
 
-    public function getSpaceInvitesById(Request $request, $id){
-
+    public function getSpaceInvitesById(Request $request, $id)
+    {
         $data = $request->all();
         $data['id'] = $id;
 
-        // validating the required fields
         $validation = Validator::make($data, [
             'id' => 'required|exists:spaces,id'
         ]);
 
-        // if validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
 
-        //
         $res = $this->service->getSpaceInvitesById($data);
 
-        if($res['bool'] == false){
+        if ($res['bool'] == false) {
             return self::failure($res['message'], $res);
         }
 
         return self::success("", $res);
-
     }
 
 
