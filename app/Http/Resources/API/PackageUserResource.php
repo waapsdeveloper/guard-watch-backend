@@ -5,7 +5,7 @@ namespace App\Http\Resources\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PackageResource extends JsonResource
+class PackageUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,10 +22,10 @@ class PackageResource extends JsonResource
     {
         return [
             "id" => $obj->id,
-            "title" => $obj->title,
-            "description" => $obj->description,
-            'cost'=>$obj->cost,
-            'picture' =>$obj->picture,
+            "package_id" => $obj->package->id, // Assuming there's a relationship between PackageUser and Package
+            "user_id" => $obj->user->id, // Assuming there's a relationship between PackageUser and User
+            'cost' => $obj->cost,
+            'picture' => $obj->picture,
         ];
     }
 }
