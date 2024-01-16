@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\PackageUser;
 use App\Models\Package;
+use App\Models\User;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageUserResource;
 use App\Http\Resources\API\PackageUserCollection;
@@ -35,29 +36,30 @@ class PackageUserService
 
 
 
-    public function add($data)
+    public function add(array $data)
     {
-        // You can add additional validation logic if needed
-
         $user = Auth::user();
 
-        // Assuming PackageUser model is named PackageUser
-        $existingPackage = PackageUser::where([
-            'package_id' => $package['id'],
-            'user_id' => $package['user_id'],
-            'cost' => $package['cost'],
-        ])->first();
+        // Add the authenticated user ID to the data
+        $data['user_id'] = $user->id;
+        $data['package_id'] = $package->id;
+        $data['cost'] = $package->cost;
 
-        if ($existingPackageUser) {
-            return ServiceResponse::error('PackageUser Already Exists for this Package and User');
+        // Validate the data
+        $validation = Validator::make($data, [
+            'purchase_date' => 'required|date',
+            'expiry_date' => 'required|date',
+        ]);
+
+        if ($validation->fails()) {
+            return ServiceResponse::failure($validation->errors()->first());
         }
 
-        $packageUser = new PackageUser();
-        $packageUser->purchase_date = $data['purchase_date'];
-        $packageUser->expiry_date = $data['expiry_date'];
-        $packageUser->save();
+        // Create a new PackageUser record
+        $packageUser = PackageUser::create($data);
 
-        $res = new PackageUserResource($packageUser); // Assuming you have a PackageUserResource class
+        // You can return the created PackageUser if needed
+        $res = new PackageUserResource($packageUser);
 
         return ServiceResponse::success('PackageUser Added', $res);
     }
