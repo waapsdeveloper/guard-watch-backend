@@ -9,6 +9,7 @@ use App\Http\Resources\API\PackageUserCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Package;
+use App\Models\User;
 
 class PackageUserService
 {
