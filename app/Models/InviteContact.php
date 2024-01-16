@@ -2,43 +2,43 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Invite;
-use App\Models\Contact;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+    use App\Models\User;
+    use App\Models\Invite;
+    use App\Models\Contact;
 
-class InviteContact extends Model
-{
-    use HasFactory;
-
-    protected $fillable = [
-        'user_id',
-        'invite_id',
-        'contact_id',
-        'qrcode',
-        'is_scanned',
-        'name',
-        'dial_code',
-        'phone_number',
-        'space'
-    ];
-
-
-    public function user()
+    class InviteContact extends Model
     {
-        return $this->belongsTo(User::class);
+        use HasFactory;
+
+        protected $fillable = [
+            'user_id',
+            'invite_id',
+            'contact_id',
+            'qrcode',
+            'is_scanned',
+            'name',
+            'dial_code',
+            'phone_number',
+            'space'
+        ];
+
+
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
+
+
+        public function invite()
+        {
+            return $this->belongsTo(Invite::class, 'invite_id');
+        }
+
+
+        public function contact()
+        {
+            return $this->belongsTo(Contact::class, 'contact_id');
+        }
     }
-
-
-    public function invite()
-    {
-        return $this->belongsTo(Invite::class, 'invite_id');
-    }
-
-
-    public function contact()
-    {
-        return $this->belongsTo(Contact::class, 'contact_id');
-    }
-}

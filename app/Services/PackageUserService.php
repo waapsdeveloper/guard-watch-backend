@@ -11,85 +11,87 @@ use Carbon\Carbon;
 use App\Models\Package;
 use App\Models\User;
 
-class PackageUserService
-{
-
-    public function list($data)
+    class PackageUserService
     {
-        $user = Auth::user();
-        $packageUsers = PackageUser::all(); // You may adjust this query based on your specific requirements
-        $collection = new PackageUserCollection($packageUsers); // Assuming you have a collection class
 
-        return ServiceResponse::success('Package Users List', $collection);
-    }
+        public function list($data)
+        {
+            $user = Auth::user();
+            $packageUsers = PackageUser::all();
+            $collection = new PackageUserCollection($packageUsers);
 
-
-
-    public function add($data)
-    {
-        $user = Auth::user();
-
-        $package = Package::findOrFail($data['package_id']);
-        $user = User::findOrFail($data['user_id']);
-
-        $item = new PackageUser();
-        $item->cost = $data['cost'];
-        $item->purchase_date = $data['purchase_date'];
-        $item->expiry_date = $data['expiry_date'];
-
-        // Assigning the related models directly
-        $item->package()->associate($package);
-        $item->user()->associate($user);
-
-        $item->save();
-
-        $result = new PackageUserResource($item);
-
-        return ServiceResponse::success('Invite Request Add', $result);
-    }
-
-
-
-    public function edit($data)
-    {
-        $user = Auth::user();
-
-        $packageUser = PackageUser::find($data['id']);
-
-        if (!$packageUser) {
-            return ServiceResponse::error('PackageUser Does not Exist');
+            return ServiceResponse::success('Package Users List', $collection);
         }
 
 
-        $packageUser->cost = $data['cost'];
-        $packageUser->purchase_date = $data['purchase_date'];
-        $packageUser->expiry_date = $data['expiry_date'];
 
-        $packageUser->save();
+        public function add($data)
+        {
+            $user = Auth::user();
 
-        $res = new PackageUserResource($packageUser);
+            $package = Package::findOrFail($data['package_id']);
+            $user = User::findOrFail($data['user_id']);
 
-        return ServiceResponse::success('PackageUser Edit', $res);
-    }
+            $item = new PackageUser();
+            $item->cost = $data['cost'];
+            $item->purchase_date = $data['purchase_date'];
+            $item->expiry_date = $data['expiry_date'];
 
+            // Assigning the related models directly
+            $item->package()->associate($package);
+            $item->user()->associate($user);
 
+            $item->save();
 
-    public function delete($id)
-    {
-        $user = Auth::user();
+            $result = new PackageUserResource($item);
 
-        // Check if the PackageUser exists
-        $item = PackageUser::find($id);
-
-        if (!$item) {
-            return ServiceResponse::error('PackageUser Does not Exist');
+            return ServiceResponse::success('Invite Request Add', $result);
         }
 
-        $item->delete();
 
-        $res = ['id' => $id];
 
-        return ServiceResponse::success('PackageUser Deleted', $res);
+            public function edit($data)
+            {
+                $user = Auth::user();
+
+                $packageUser = PackageUser::find($data['id']);
+
+                if (!$packageUser) {
+                    return ServiceResponse::error('PackageUser Does not Exist');
+                }
+
+
+                $packageUser->cost = $data['cost'];
+                $packageUser->purchase_date = $data['purchase_date'];
+                $packageUser->expiry_date = $data['expiry_date'];
+
+                $packageUser->save();
+
+                $res = new PackageUserResource($packageUser);
+
+                return ServiceResponse::success('PackageUser Edit', $res);
+            }
+
+
+
+
+
+        public function delete($id)
+        {
+            $user = Auth::user();
+
+            // Check if the PackageUser exists
+            $item = PackageUser::find($id);
+
+            if (!$item) {
+                return ServiceResponse::error('PackageUser Does not Exist');
+            }
+
+            $item->delete();
+
+            $res = ['id' => $id];
+
+            return ServiceResponse::success('PackageUser Deleted', $res);
+        }
+
     }
-
-}
