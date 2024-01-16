@@ -82,7 +82,7 @@ class InviteRequestController extends Controller
         }
 
         //
-        $res = $this->service->getInvitesBySpaceId($data);
+        $res = $this->service->getSpaceInvitesById($data);
 
         if($res['bool'] == false){
             return self::failure($res['message'], $res);
