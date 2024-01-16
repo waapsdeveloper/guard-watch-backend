@@ -25,33 +25,29 @@ class PackageUserService
 
 
 
-    public function add($data){
+    public function add($data)
+    {
         $user = Auth::user();
 
-        $package = Package::with(['id' => $data['package_id']])->first();
-        $user = User::with(['id' => $data['user_id']])->first();
-
+        $package = Package::findOrFail($data['package_id']);
+        $user = User::findOrFail($data['user_id']);
 
         $item = new PackageUser();
         $item->cost = $data['cost'];
         $item->purchase_date = $data['purchase_date'];
         $item->expiry_date = $data['expiry_date'];
-        $item->package_id = $package->id;
-        $item->user_id = $user->id;
+
+        // Assigning the related models directly
+        $item->package()->associate($package);
+        $item->user()->associate($user);
+
         $item->save();
 
         $result = new PackageUserResource($item);
 
-        // $result = [
-        //     'name' => $item->name,
-        //     'phone_number' => $item->phone_number,
-        //     'dial_code' => $item->dial_code,
-        //     'space_name' => $item->space_name,
-        // ];
-
         return ServiceResponse::success('Invite Request Add', $result);
-
     }
+
 
 
     public function edit($data)
