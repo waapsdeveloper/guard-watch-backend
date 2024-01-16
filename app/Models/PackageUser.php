@@ -19,6 +19,7 @@ namespace App\Models;
         public function package()
         {
             return $this->belongsTo(Package::class , 'package_id');
+            return $this->belongsTo(Package::class , 'cost');
         }
 
         // Assuming a relationship with the User model
