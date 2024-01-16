@@ -26,8 +26,11 @@ class PackageFacilityController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package List", $res);
+        return self::success("Package facility List", $res);
     }
+
+
+
 
     public function add(Request $request)
     {
@@ -90,7 +93,7 @@ class PackageFacilityController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package Deleted", $res);
+        return self::success("Package facility Deleted", $res);
     }
 
 

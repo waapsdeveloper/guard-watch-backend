@@ -23,11 +23,11 @@ class PackageFacilityService
         $user = Auth::user();
 
         // Retrieve the list of packages (adjust the model name accordingly)
-        $packages = Package::get();
+        $packageFacility = PackageFacility::get();
 
-        $res = PackageResource::collection($packages);
+        $res = PackageFacilityResource::collection($packageFacility);
 
-        return ServiceResponse::success('Package List', $res);
+        return ServiceResponse::success('Package facility List', $res);
     }
 
 
@@ -80,7 +80,6 @@ class PackageFacilityService
     {
         $user = Auth::user();
 
-        // Find the package by ID
         $packageFacility = PackageFacility::where([
             'id' => $id
         ])->first();
@@ -89,7 +88,6 @@ class PackageFacilityService
             return ServiceResponse::error('Package facilty not found');
         }
 
-        // Update the package
         $packageFacility->title = $data['title'];
         $packageFacility->description = $data['description'];
         $packageFacility->save();
@@ -105,17 +103,16 @@ class PackageFacilityService
     {
         $user = Auth::user();
 
-        // Find the package by ID
-        $package = Package::find($id);
+        $packageFacility = PackageFacility::find($id);
 
-        if (!$package) {
-            return ServiceResponse::error('Package not found');
+        if (!$packageFacility) {
+            return ServiceResponse::error('Package facility not found');
         }
 
         // Delete the package
-        $package->delete();
+        $packageFacility->delete();
 
-        return ServiceResponse::success('Package Deleted');
+        return ServiceResponse::success('Package facility Deleted');
     }
 
 
