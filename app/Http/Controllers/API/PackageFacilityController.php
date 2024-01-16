@@ -62,9 +62,7 @@ class PackageFacilityController extends Controller
         // Validating the required fields
         $validation = Validator::make($data, [
             'title' => 'required|string',
-            'description' => 'required|string',
-            'cost' => 'required|numeric',
-            'picture' => 'required|string',
+            'description' => 'required|string'
         ]);
 
         // If validation failed
@@ -78,7 +76,7 @@ class PackageFacilityController extends Controller
             return self::failure($res['message'], $res);
         }
 
-        return self::success("Package Updated", $res);
+        return self::success("Package facility Updated", $res);
     }
 
 
