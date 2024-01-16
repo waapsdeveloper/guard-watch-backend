@@ -21,8 +21,8 @@ class PackageUserService
     public function add($data){
         $user = Auth::user();
 
-        $package = Package::where(['id' => $obj['package_id']])->first();
-        $user = User::where(['id' => $obj['user_id']])->first();
+        $package = Package::where(['id' => $data['package_id']])->first();
+        $user = User::where(['id' => $data['user_id']])->first();
 
 
         $item = new PackageUser();

@@ -24,6 +24,8 @@ class PackageUserController extends Controller
         $data = $request->all();
 
         $validation = Validator::make($data, [
+            'package_id' => 'required|exists:packages,id',
+            'user_id' => 'required|exists:users,id',
             'cost' => 'required|integer ',
             'purchase_date' => 'required|date',
             'expiry_date' => 'required|date'
