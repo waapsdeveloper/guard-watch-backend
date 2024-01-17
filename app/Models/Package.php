@@ -15,4 +15,13 @@ class Package extends Model
         'cost',
         'picture',
     ];
+
+    public function packageUser()
+    {
+        return $this->belongsTo(PackageUser::class);
+    }
+    public function packageFacility()
+    {
+        return $this->belongsTo(PackageFacility::class);
+    }
 }
