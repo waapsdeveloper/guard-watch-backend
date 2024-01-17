@@ -117,16 +117,27 @@ class PackageService
     {
         $user = Auth::user();
 
+        // Fetch packages
         $packages = Package::get();
 
-        $packageFacility = PackageFacility::get();
+        // Fetch package facilities
+        $packageFacilities = PackageFacility::get();
 
-        $res = PackageFacilityResource::collection($packageFacility);
+        // Transform packages data
+        $packageResources = PackageResource::collection($packages);
 
-        $res = PackageResource::collection($packages);
+        // Transform package facilities data
+        $packageFacilityResources = PackageFacilityResource::collection($packageFacilities);
 
-        return ServiceResponse::success('Package List', $res);
+        // Combine the two sets of data
+        $combinedData = [
+            'packages' => $packageResources,
+            'packageFacilities' => $packageFacilityResources,
+        ];
+
+        return ServiceResponse::success('Package List', $combinedData);
     }
+
 
 
 
