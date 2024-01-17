@@ -118,12 +118,13 @@ class PackageService
 
         // Retrieve the list of packages (adjust the model name accordingly)
         $packages = Package::get();
+        $packageUsers = PackageUser::all();
 
-        $res = PackageResource::collection($packages);
+        $res = PackageResource::collection($packages, $packageUsers);
 
         return ServiceResponse::success('Package List', $res);
     }
 
-
+    // $collection = new PackageUserCollection($packageUsers);
 
 }
