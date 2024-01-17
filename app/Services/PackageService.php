@@ -112,7 +112,14 @@ class PackageService
 
     public function getBoughtPackage()
     {
+        $user = Auth::user();
 
+        // Retrieve the list of packages (adjust the model name accordingly)
+        $packages = Package::get();
+
+        $res = PackageResource::collection($packages);
+
+        return ServiceResponse::success('Package List', $res);
     }
 
 
