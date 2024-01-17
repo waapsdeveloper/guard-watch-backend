@@ -9,6 +9,7 @@ use App\Http\Resources\API\PackageCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\PackageUser;
+use App\Models\PackageFacility;
 
 class PackageService
 {
@@ -116,16 +117,24 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Retrieve the list of packages (adjust the model name accordingly)
+
         $packages = Package::get();
         $packageUsers = PackageUser::all();
+        $packageFacilities = PackageFacility::all();
 
-        $res = PackageResource::collection($packages);
-        $res = PackageUserResource::collection($packageUsers);
 
-        return ServiceResponse::success('Package List', $res);
+        $packageResource = PackageResource::collection($packages);
+        $packageUserResource = PackageUserResource::collection($packageUsers);
+        $packageFacilityResource = PackageFacilityResource::collection($packageFacilities);
+
+
+        return ServiceResponse::success('Package List', [
+            'packages' => $packageResource,
+            'packageUsers' => $packageUserResource,
+            'packageFacilities' => $packageFacilityResource,
+        ]);
     }
 
-    // $collection = new PackageUserCollection($packageUsers);
+
 
 }
