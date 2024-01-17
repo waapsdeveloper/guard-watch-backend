@@ -10,9 +10,7 @@ namespace App\Models;
         use HasFactory;
 
         protected $fillable = [
-            'package_id',
             'user_id',
-            'cost',
             'purchase_date',
             'expiry_date'
         ];
