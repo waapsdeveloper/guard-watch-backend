@@ -112,7 +112,7 @@ class PackageService
 
 
 
-    public function getBoughtPackage($data)
+    public function getBoughtPackage()
     {
         $user = Auth::user();
 
