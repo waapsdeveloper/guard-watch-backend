@@ -120,7 +120,8 @@ class PackageService
         $packages = Package::get();
         $packageUsers = PackageUser::all();
 
-        $res = PackageResource::collection($packages, $packageUsers);
+        $res = PackageResource::collection($packages);
+        $res = PackageUserResource::collection($packageUsers);
 
         return ServiceResponse::success('Package List', $res);
     }
