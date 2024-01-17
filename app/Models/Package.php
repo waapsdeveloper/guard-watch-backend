@@ -12,7 +12,7 @@ class Package extends Model
     protected $fillable = [
         'title',
         'description',
-        'cost',
+        // 'cost',
         'picture',
     ];
     public function packageuser()
