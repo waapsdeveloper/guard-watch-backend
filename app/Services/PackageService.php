@@ -114,8 +114,11 @@ class PackageService
     {
         $user = Auth::user();
 
-        // Retrieve the list of packages (adjust the model name accordingly)
         $packages = Package::get();
+
+        $packageFacility = PackageFacility::get();
+
+        $res = PackageFacilityResource::collection($packageFacility);
 
         $res = PackageResource::collection($packages);
 
