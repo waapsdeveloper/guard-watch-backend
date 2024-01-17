@@ -12,12 +12,12 @@ class Package extends Model
     protected $fillable = [
         'title',
         'description',
-        // 'cost',
+        'cost',
         'picture',
     ];
-    public function packageuser()
+    public function package()
     {
-        return $this->belongsTo(PackageUser::class);
+        return $this->belongsTo(Package::class)->with('cost');
     }
 
 
