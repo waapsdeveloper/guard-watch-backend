@@ -24,7 +24,7 @@ namespace App\Http\Resources\API;
                 "id" => $obj->id,
                 // "package_id" => $obj->package->id,
                 "user_id" => $obj->user->id,
-                'cost' => $obj->package->cost,
+                // 'cost' => $obj->package->cost,
                 'purchase_date' => $obj->purchase_date,
                 'expiry_date' => $obj->expiry_date,
             ];
