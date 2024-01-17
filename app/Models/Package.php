@@ -18,7 +18,7 @@ class Package extends Model
 
     public function packageUser()
     {
-        return $this->belongsTo(PackageUser::class);
+        return $this->belongsTo(PackageUser::class)->with('purchase_date');
     }
     public function packageFacility()
     {
