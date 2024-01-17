@@ -110,5 +110,11 @@ class PackageService
 
 
 
+    public function getBoughtPackage()
+    {
+
+    }
+
+
 
 }

@@ -97,7 +97,11 @@ class PackageController extends Controller
     }
 
 
+    public function getBoughtPackage()
+    {
+     echo "hello";
 
+    }
 
 
 
