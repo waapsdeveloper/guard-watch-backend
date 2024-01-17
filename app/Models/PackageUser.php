@@ -16,12 +16,10 @@ namespace App\Models;
             'purchase_date',
             'expiry_date'
         ];
-        // public function package()
-        // {
-        //     return $this->belongsTo(Package::class, 'package_id');
-        // }
-        public function package(){
-            return $this->hasMany(package::class, 'package_id')->with('cost');
+
+        public function package()
+        {
+            return $this->belongsTo(Package::class, 'package_id');
         }
 
         // Assuming a relationship with the User model
