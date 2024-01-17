@@ -4,11 +4,14 @@ namespace App\Services;
 
 use App\Models\Package;
 use App\Models\PackageFacility;
+use App\Models\PackageUser;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageResource;
 use App\Http\Resources\API\PackageCollection;
 use App\Http\Resources\API\PackageFacilityResource;
 use App\Http\Resources\API\PackageFacilityCollection;
+use App\Http\Resources\API\PackageUserResource;
+use App\Http\Resources\API\PackageUserCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -123,20 +126,28 @@ class PackageService
         // Fetch package facilities
         $packageFacilities = PackageFacility::get();
 
+        // Fetch package users
+        $packageUsers = PackageUser::get();
+
         // Transform packages data
         $packageResources = PackageResource::collection($packages);
 
         // Transform package facilities data
         $packageFacilityResources = PackageFacilityResource::collection($packageFacilities);
 
-        // Combine the two sets of data
+        // Transform package users data
+        $packageUserResources = PackageUserResource::collection($packageUsers);
+
+        // Combine the three sets of data
         $combinedData = [
             'packages' => $packageResources,
             'packageFacilities' => $packageFacilityResources,
+            'packageUsers' => $packageUserResources,
         ];
 
         return ServiceResponse::success('Package List', $combinedData);
     }
+
 
 
 
