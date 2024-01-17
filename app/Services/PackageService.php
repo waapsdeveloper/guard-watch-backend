@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Models\Package;
+use App\Models\PackageFacility;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageResource;
 use App\Http\Resources\API\PackageCollection;
+use App\Http\Resources\API\PackageFacilityResource;
+use App\Http\Resources\API\PackageFacilityCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
