@@ -116,15 +116,7 @@ class PackageFacilityService
     }
 
 
-    public function getBoughtPackage($data)
-    {
-        // Retrieve the list of packages (adjust the model name accordingly)
-        $packageFacility = PackageFacility::get();
 
-        $res = PackageFacilityResource::collection($packageFacility);
-
-        return ServiceResponse::success('Package facility List', $res);
-    }
 
 
 
