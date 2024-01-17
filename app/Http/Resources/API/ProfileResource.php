@@ -7,15 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request)
     {
-        $obj = self::toObject($this);
-        return $obj;
+        return self::toObject($this);
     }
 
     public static function toObject($obj, $lang = 'en')
@@ -26,8 +20,8 @@ class ProfileResource extends JsonResource
             "space_id" => $obj->space->id,
             "title" => $obj->title,
             "description" => $obj->description,
-            'last_active_hour'=>$obj->last_active_hour,
-            'picture' =>$obj->picture,
+            'last_active_hour' => $obj->last_active_hour,
+            'picture' => $obj->picture,
         ];
     }
 }
