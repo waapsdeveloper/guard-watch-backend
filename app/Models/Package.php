@@ -15,4 +15,6 @@ class Package extends Model
         'cost',
         'picture',
     ];
+
+
 }
