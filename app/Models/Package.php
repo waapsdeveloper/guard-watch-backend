@@ -15,10 +15,7 @@ class Package extends Model
         'cost',
         'picture',
     ];
-    public function package()
-    {
-        return $this->belongsTo(Package::class)->with('cost');
-    }
+
 
 
 }
