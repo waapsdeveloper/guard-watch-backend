@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Profile;
+use App\Models\Space;
+use App\Models\User;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\ProfileResource;
 use App\Http\Resources\API\ProfileCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\Space;
-use App\Models\User;
 
 class ProfileService
 {
@@ -37,31 +37,36 @@ class ProfileService
     {
         $user = Auth::user();
 
-        // check existing package
-        $profiles = Profile::where([
-            'title' => $data['title']
-        ])->first();
+        // Check if a profile with the same title already exists
+        $existingProfile = Profile::where('title', $data['title'])->first();
 
-        if ($profiles) {
+        if ($existingProfile) {
             return ServiceResponse::error('Profile Already Exists with Title');
         }
 
-        $profiles = new profile();
+        // Create a new profile
+        $profile = new Profile();
 
-        $space = space::findOrFail($data['space_id']);
-
+        // Find the associated space and user
+        $space = Space::findOrFail($data['space_id']);
         $user = User::findOrFail($data['user_id']);
 
-        $profiles->title = $data['title'];
-        $profiles->description = $data['description'];
-        $profiles->last_active_hour = $data['last_active_hour'];
-        $profiles->picture = $data['picture'];
-        $profiles->save();
+        // Set profile data
+        $profile->title = $data['title'];
+        $profile->description = $data['description'];
+        $profile->last_active_hour = $data['last_active_hour'];
+        $profile->picture = $data['picture'];
 
-        $res = new ProfileResource($profiles);
+        // Save the profile
+        $profile->save();
 
-        return ServiceResponse::success('Profile Added', $res);
+        // Create a resource for the profile
+        $resource = new ProfileResource($profile);
+
+        // Return success response with the created resource
+        return ServiceResponse::success('Profile Added', $resource);
     }
+
 
 
 
