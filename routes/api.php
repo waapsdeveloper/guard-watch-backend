@@ -216,11 +216,3 @@ Route::group(['prefix' => 'package-facilities', 'middleware' => ['auth:api']], f
 
 
 
-Route::group(['prefix' => 'profiles', 'middleware' => ['auth:api']], function () {
-
-    Route::get('/list', [PackageFacilityController::class, 'list'] );
-    Route::post('/add', [PackageFacilityController::class, 'add'] );
-    Route::post('/edit/{id}', [PackageFacilityController::class, 'edit'] );
-    Route::delete('/delete/{id}', [PackageFacilityController::class, 'delete'] );
-
-});
