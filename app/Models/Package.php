@@ -16,12 +16,5 @@ class Package extends Model
         'picture',
     ];
 
-    public function packageUser()
-    {
-        return $this->belongsTo(PackageUser::class);
-    }
-    public function packageFacility()
-    {
-        return $this->belongsTo(PackageFacility::class);
-    }
+
 }
