@@ -21,8 +21,8 @@ class ProfileController extends Controller
         $data = $request->all();
 
         $validation = Validator::make($data, [
-            'user_id' => 'required|exists:users,id',
-            'space_id' => 'required|exists:spaces,id',
+            // 'user_id' => 'required|exists:users,id',
+            // 'space_id' => 'required|exists:spaces,id',
             'title' => 'required|string',
             'description' => 'required|string',
             'last_active_hour' => 'required|date',

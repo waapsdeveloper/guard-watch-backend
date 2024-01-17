@@ -26,8 +26,8 @@ class ProfileService
         $profile = new Profile();
 
         // Find the associated space and user
-        $space = Space::findOrFail($data['space_id']);
-        $user = User::findOrFail($data['user_id']);
+        // $space = Space::findOrFail($data['space_id']);
+        // $user = User::findOrFail($data['user_id']);
 
         // Set profile data
         $profile->fill([

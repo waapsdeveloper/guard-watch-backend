@@ -16,8 +16,8 @@ class ProfileResource extends JsonResource
     {
         return [
             "id" => $obj->id,
-            "user_id" => $obj->user->id,
-            "space_id" => $obj->space->id,
+            // "user_id" => $obj->user->id,
+            // "space_id" => $obj->space->id,
             "title" => $obj->title,
             "description" => $obj->description,
             'last_active_hour' => $obj->last_active_hour,
