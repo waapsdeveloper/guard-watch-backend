@@ -186,7 +186,6 @@ Route::group(['prefix' => 'packages', 'middleware' => ['auth:api']], function ()
     Route::post('/add', [PackageController::class, 'add'] );
     Route::post('/edit/{id}', [PackageController::class, 'edit'] );
     Route::delete('/delete/{id}', [PackageController::class, 'delete'] );
-    Route::get('/get-bought-package', [PackageController::class, 'getBoughtPackage'] );
 
 });
 
@@ -209,5 +208,6 @@ Route::group(['prefix' => 'package-facilities', 'middleware' => ['auth:api']], f
     Route::post('/add', [PackageFacilityController::class, 'add'] );
     Route::post('/edit/{id}', [PackageFacilityController::class, 'edit'] );
     Route::delete('/delete/{id}', [PackageFacilityController::class, 'delete'] );
+    Route::get('/get-bought-package', [PackageController::class, 'getBoughtPackage'] );
 
 });

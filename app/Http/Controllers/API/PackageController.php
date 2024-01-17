@@ -98,16 +98,7 @@ class PackageController extends Controller
 
 
 
-    public function getBoughtPackage(Request $request, $id)
-    {
-        $res = $this->service->list();
 
-        if ($res['bool'] == false) {
-            return self::failure($res['message'], $res);
-        }
-
-        return self::success("Package List", $res);
-    }
 
 
 
