@@ -21,7 +21,7 @@ namespace App\Models;
         //     return $this->belongsTo(Package::class, 'package_id');
         // }
         public function package(){
-            return $this->hasMany(Event::class, 'package_id', 'cost');
+            return $this->hasMany(package::class, 'package_id', 'cost');
         }
 
         // Assuming a relationship with the User model
