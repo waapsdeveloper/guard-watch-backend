@@ -5,13 +5,9 @@ namespace App\Services;
 use App\Models\Package;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\PackageResource;
-use App\Http\Resources\API\PackageUserResource;
-use App\Http\Resources\API\PackageFacilityResource;
 use App\Http\Resources\API\PackageCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\PackageUser;
-use App\Models\PackageFacility;
 
 class PackageService
 {
@@ -112,30 +108,6 @@ class PackageService
     }
 
 
-
-
-
-    public function getBoughtPackage()
-    {
-        $user = Auth::user();
-
-
-        $packages = Package::get();
-        $packageUsers = PackageUser::all();
-        $packageFacilities = PackageFacility::all();
-
-
-        $packageResource = PackageResource::collection($packages);
-        $packageUserResource = PackageUserResource::collection($packageUsers);
-        $packageFacilityResource = PackageFacilityResource::collection($packageFacilities);
-
-
-        return ServiceResponse::success('Package List', [
-            'packages' => $packageResource,
-            'packageUsers' => $packageUserResource,
-            'packageFacilities' => $packageFacilityResource,
-        ]);
-    }
 
 
 
