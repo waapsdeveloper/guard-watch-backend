@@ -48,6 +48,32 @@ class ProfileController extends Controller
     }
 
 
+    public function edit(Request $request, $id)
+    {
+        $data = $request->all();
+
+        // Validating the required fields
+        $validation = Validator::make($data, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'last_active_hour' => 'required|string',
+            'picture' => 'required|string',
+        ]);
+
+        // If validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        $res = $this->service->edit($id, $data);
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("profile Updated", $res);
+    }
+
 
 
 

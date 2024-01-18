@@ -48,6 +48,32 @@ class ProfileService
 
 
 
+    public function edit($id, $data)
+    {
+        $user = Auth::user();
+
+        // Find the notification by ID
+        $item = Profile::where([
+            'id' => $id
+        ])->first();
+
+        if (!$item) {
+            return ServiceResponse::error('Notification not found');
+        }
+
+        // Update the notification
+        $item->title = $data['title'];
+        $item->description = $data['description'];
+        $item->last_active_hour = $data['last_active_hour'];
+        $item->picture = $data['picture'];
+        $item->save();
+
+        $res = new ProfileResource($item);
+
+        return ServiceResponse::success('Profile Updated', $res);
+    }
+
+
 
 
 
