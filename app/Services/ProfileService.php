@@ -16,7 +16,16 @@ class ProfileService
 
 
 
+    public function list()
+    {
+        $user = Auth::user();
 
+        $item = Profile::get();
+
+        $res = ProfileResource::collection($item);
+
+        return ServiceResponse::success('Profile List', $res);
+    }
 
 
 
@@ -52,7 +61,6 @@ class ProfileService
     {
         $user = Auth::user();
 
-        // Find the notification by ID
         $item = Profile::where([
             'id' => $id
         ])->first();
@@ -61,7 +69,6 @@ class ProfileService
             return ServiceResponse::error('Notification not found');
         }
 
-        // Update the notification
         $item->title = $data['title'];
         $item->description = $data['description'];
         $item->last_active_hour = $data['last_active_hour'];
@@ -73,6 +80,27 @@ class ProfileService
         return ServiceResponse::success('Profile Updated', $res);
     }
 
+
+
+
+    public function delete($id)
+    {
+        $user = Auth::user();
+
+
+        $item = Profile::where([
+            'id' => $id
+        ])->first();
+
+        if (!$item) {
+            return ServiceResponse::error('Profile not found');
+        }
+
+        // Delete the notification
+        $item->delete();
+
+        return ServiceResponse::success('Profile Deleted');
+    }
 
 
 

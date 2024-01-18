@@ -20,6 +20,17 @@ class ProfileController extends Controller
 
 
 
+    public function list()
+    {
+        $res = $this->service->list();
+
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Profile List", $res);
+    }
+
 
     public function add(Request $request)
     {
@@ -52,7 +63,6 @@ class ProfileController extends Controller
     {
         $data = $request->all();
 
-        // Validating the required fields
         $validation = Validator::make($data, [
             'title' => 'required|string',
             'description' => 'required|string',
@@ -60,7 +70,6 @@ class ProfileController extends Controller
             'picture' => 'required|string',
         ]);
 
-        // If validation failed
         if ($validation->fails()) {
             return self::failure($validation->errors()->first());
         }
@@ -75,7 +84,16 @@ class ProfileController extends Controller
     }
 
 
+    public function delete($id)
+    {
+        $res = $this->service->delete($id);
 
+        if ($res['bool'] == false) {
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("Profile Deleted", $res);
+    }
 
 
 
