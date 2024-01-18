@@ -18,16 +18,6 @@ class ProfileController extends Controller
         $this->service = $service;
     }
 
-    // public function list()
-    // {
-    //     $res = $this->service->list();
-
-    //     if ($res['bool'] == false) {
-    //         return self::failure($res['message'], $res);
-    //     }
-
-    //     return self::success("Package List", $res);
-    // }
 
 
 
@@ -36,8 +26,8 @@ class ProfileController extends Controller
         $data = $request->all();
 
         $validation = Validator::make($data, [
-            'user_id' => 'required',
-            'package_id' => 'required',
+            'user_id' => 'required |exists:users,id',
+            'package_id' => 'required|exists:packages,id',
             'title' => 'required|string',
             'description' => 'required|string',
             'last_active_hour' => 'required|date',
@@ -59,46 +49,6 @@ class ProfileController extends Controller
 
 
 
-
-    // public function edit(Request $request, $id)
-    // {
-    //     $data = $request->all();
-
-    //     // Validating the required fields
-    //     $validation = Validator::make($data, [
-    //         'title' => 'required|string',
-    //         'description' => 'required|string',
-    //         'cost' => 'required|numeric',
-    //         'picture' => 'required|string',
-    //     ]);
-
-    //     // If validation failed
-    //     if ($validation->fails()) {
-    //         return self::failure($validation->errors()->first());
-    //     }
-
-    //     $res = $this->service->edit($id, $data);
-
-    //     if ($res['bool'] == false) {
-    //         return self::failure($res['message'], $res);
-    //     }
-
-    //     return self::success("Package Updated", $res);
-    // }
-
-
-
-
-    // public function delete($id)
-    // {
-    //     $res = $this->service->delete($id);
-
-    //     if ($res['bool'] == false) {
-    //         return self::failure($res['message'], $res);
-    //     }
-
-    //     return self::success("Package Deleted", $res);
-    // }
 
 
 
