@@ -46,7 +46,7 @@ class ProfileService
 
         // Assuming your Package model has a belongsTo relationship with User
         $profile = new Profile();
-        $profile->user_id = $user->id; // Set the user_id
+        $profile->user_id = $data['user_id'];
         $profile->title = $data['title'];
         $profile->description = $data['description'];
         $profile->last_active_hour = $data['last_active_hour'];
