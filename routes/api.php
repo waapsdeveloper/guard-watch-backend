@@ -15,6 +15,7 @@ use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\PackageController;
 use App\Http\Controllers\API\PackageUserController;
 use App\Http\Controllers\API\PackageFacilityController;
+use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -213,6 +214,16 @@ Route::group(['prefix' => 'package-facilities', 'middleware' => ['auth:api']], f
 });
 
 
+
+
+Route::group(['prefix' => 'profiles', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [ProfileController::class, 'list'] );
+    Route::post('/add', [ProfileController::class, 'add'] );
+    Route::post('/edit/{id}', [ProfileController::class, 'edit'] );
+    Route::delete('/delete/{id}', [ProfileController::class, 'delete'] );
+
+});
 
 
 
