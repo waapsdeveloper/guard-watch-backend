@@ -30,7 +30,7 @@ class ProfileController extends Controller
             'package_id' => 'required|exists:packages,id',
             'title' => 'required|string',
             'description' => 'required|string',
-            'last_active_hour' => 'required|time',
+            'last_active_hour' => 'required|string',
             'picture' => 'required|string',
         ]);
 
