@@ -53,7 +53,7 @@ class ProfileService
         $profile->picture = $data['picture'];
         $profile->save();
 
-        $res = new PackageResource($profile);
+        $res = new ProfileResource($profile);
 
         return ServiceResponse::success('Profile Added', $res);
     }
