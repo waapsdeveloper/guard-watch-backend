@@ -48,6 +48,7 @@ Route::get('/generate-random-code', function () {
 
 Route::group(['prefix' => 'auth'], function () {
 
+    Route::get('/user', [AuthController::class, 'getUser'] )->middleware('auth:api');
     Route::post('/register', [AuthController::class, 'register'] );
     Route::post('/login', [AuthController::class, 'login'] );
     Route::post('/forget-password', [AuthController::class, 'forgetPassword'] );

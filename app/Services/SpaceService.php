@@ -47,7 +47,7 @@ class SpaceService {
         $item->created_by = $user->id;
         $item->title = $data['title'];
         $item->description = $data['description'];
-        $item->name = $data['name'];
+        // $item->name = $data['name'];
         $item->location = $data['location'];
         $item->save();
 

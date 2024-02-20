@@ -20,6 +20,13 @@ class AuthService {
 
     }
 
+    public function getAuthUser(){
+
+        $user = Auth::user();
+        return ServiceResponse::success('User', $user);
+
+    }
+
     // user signup
     public function userSignup($data)
     {

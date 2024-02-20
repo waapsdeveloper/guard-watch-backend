@@ -15,6 +15,13 @@ class AuthController extends Controller
         $this->service = $service;
     }
 
+    public function getUser(Request $request){
+
+        $res = $this->service->getAuthUser($request);
+        return self::success("Auth user", $res);
+
+    }
+
     //
     public function register(Request $request){
 
