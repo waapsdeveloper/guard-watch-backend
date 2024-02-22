@@ -15,6 +15,29 @@ class AuthController extends Controller
         $this->service = $service;
     }
 
+    public function isPhoneExistAndVerifiedOnDevice(Request $request){
+
+        $data = $request->all();
+
+        // validating the required fields
+        $validation = Validator::make($data, [
+            'phone_number' => 'required|min:10',
+            'dial_code' => 'required|string',
+            'device_id' => 'required|string'
+        ]);
+
+        // if validation failed
+        if ($validation->fails()) {
+            return self::failure($validation->errors()->first());
+        }
+
+        $validatedData = $validation->validated();
+
+        $res = $this->service->isPhoneExistAndVerifiedOnDevice($validatedData);
+        return self::success("Auth user", $res);
+
+    }
+
     public function getUser(Request $request){
 
         $res = $this->service->getAuthUser($request);

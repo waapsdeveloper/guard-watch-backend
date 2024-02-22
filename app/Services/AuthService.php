@@ -20,6 +20,21 @@ class AuthService {
 
     }
 
+    public function isPhoneExistAndVerifiedOnDevice($data){
+
+        $user = User::where([ 'phone_number' => $data['phone_number'], 'dial_code' => $data['dial_code'] ])->first();
+        if(!$user){
+
+            
+
+            return ServiceResponse::success('User', $user);
+        }
+
+        $user = Auth::user();
+        return ServiceResponse::success('User', $user);
+
+    }
+
     public function getAuthUser(){
 
         $user = Auth::user();
