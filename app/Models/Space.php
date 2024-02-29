@@ -14,6 +14,7 @@ class Space extends Model
         'title',
         'description',
         'name',
+        'type',
         'location',
     ];
 
