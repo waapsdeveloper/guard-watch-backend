@@ -65,7 +65,7 @@ class SpaceController extends Controller
         $validation = Validator::make($data, [
             'title' => 'required|string',
             'description' => 'required|string',
-            // 'name' => 'required|string',
+            'type' => 'required|string',
             'location' => 'required|string',
 
         ]);
@@ -97,6 +97,7 @@ class SpaceController extends Controller
             'id' => 'required|exists:spaces,id',
             'title' => 'required|string',
             'description' => 'required|string',
+            'type' => 'required|string',
             'location' => 'required|string',
         ]);
 
