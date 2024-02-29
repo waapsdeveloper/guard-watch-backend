@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgetPassword;
 use Carbon\Carbon;
 use App\Models\SpaceAdmin;
+use App\Models\PhoneNumber;
 
 class AuthService {
 
@@ -22,15 +23,12 @@ class AuthService {
 
     public function isPhoneExistAndVerifiedOnDevice($data){
 
-        $user = User::where([ 'phone_number' => $data['phone_number'], 'dial_code' => $data['dial_code'] ])->first();
-        if(!$user){
+        $pn = PhoneNumber::updateOrCreate(
+            ['dial_code' => $data['dial_code'], 'phone_number' => $data['phone_number']],
+            ['device_id' => $data['device_id']]
+        );
 
-            
-
-            return ServiceResponse::success('User', $user);
-        }
-
-        $user = Auth::user();
+        $user = User::where([ 'phone_number' => $data['phone_number'], 'dial_code' => $data['dial_code'] ])->first();        
         return ServiceResponse::success('User', $user);
 
     }
@@ -62,7 +60,7 @@ class AuthService {
 
         $res = new UserResource($user);
 
-        return ServiceResponse::success('User', $res);
+        return $this->userLogin($data); //ServiceResponse::success('User', $res);
 
     }
 
@@ -90,8 +88,8 @@ class AuthService {
         $res['token'] = $token;
 
         // check if user is a guard of any space
-        $gspaces = SpaceAdmin::where(['user_id' => $user->id])->get();
-        $res['guard_spaces'] = $gspaces;
+        // $gspaces = SpaceAdmin::where(['user_id' => $user->id])->get();
+        // $res['guard_spaces'] = $gspaces;
 
         return ServiceResponse::success('User', $res);
 
