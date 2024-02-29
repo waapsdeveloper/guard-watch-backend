@@ -37,8 +37,7 @@ class NotificationController extends Controller
         $validation = Validator::make($data, [
             'title' => 'required|string',
             'description' => 'required|string',
-            'type' => 'required|string',
-            'expiry' => 'required|date', // Assuming 'expiry' should be a date
+            'type' => 'required|string',            
         ]);
 
         // if validation failed
