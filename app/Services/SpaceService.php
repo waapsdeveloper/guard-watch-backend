@@ -48,7 +48,7 @@ class SpaceService {
         $item->title = $data['title'];
         $item->description = $data['description'];
         $item->type = $data['type'];
-        $item->location = $data['location'];
+        $item->address = $data['address'];
         $item->save();
 
         // add a role entry to space admins
@@ -79,7 +79,7 @@ class SpaceService {
         $item->title = $data['title'];
         $item->description = $data['description'];
         $item->type = $data['type'];
-        $item->location = $data['location'];
+        $item->address = $data['address'];
         $item->save();
 
         $res = new SpaceResource($item);

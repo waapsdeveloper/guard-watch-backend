@@ -66,7 +66,7 @@ class SpaceController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'type' => 'required|string',
-            'location' => 'required|string',
+            'address' => 'required|string',
 
         ]);
 
@@ -98,7 +98,7 @@ class SpaceController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'type' => 'required|string',
-            'location' => 'required|string',
+            'address' => 'required|string',
         ]);
 
         // if validation failed

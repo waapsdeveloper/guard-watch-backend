@@ -26,7 +26,7 @@ class SpaceResource extends JsonResource
             "description" => $obj->description,
             "name" => $obj->name,
             "type" => $obj->type,
-            "location" => $obj->location,
+            "address" => $obj->address,
         ];
     }
 }

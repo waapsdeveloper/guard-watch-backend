@@ -15,7 +15,7 @@ class Space extends Model
         'description',
         'name',
         'type',
-        'location',
+        'address',
     ];
 
     public function events(){
