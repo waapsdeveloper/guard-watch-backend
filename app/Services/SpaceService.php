@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Space;
 use App\Models\SpaceAdmin;
+use App\Models\House;
 use App\Models\Contact;
 use App\Models\Role;
 use App\Helpers\ServiceResponse;
@@ -17,6 +18,16 @@ class SpaceService {
 
     public function __construct()
     {
+
+    }
+
+    public function melist($data){
+
+        $user = Auth::user();
+        $ids = SpaceAdmin::where('user_id', $user->id)->pluck('id');
+        $spaces = Space::whereIn('id', $ids)->get();
+        $list = new SpaceCollection($spaces);
+        return ServiceResponse::success('Spaces List', $list);
 
     }
 
@@ -91,10 +102,17 @@ class SpaceService {
     public function byId($data){
 
         $user = Auth::user();
+
+        $check = SpaceAdmin::where([ 'id' => $data['id'], 'user_id' => $user->id])->count();
+
+        if($check == 0){
+            return ServiceResponse::error('Space Does not Exist For your id');
+        }
+
+
         // check existing contact
         $item = Space::where([
             'id' => $data['id'],
-            'created_by' => $user->id,
         ])->first();
 
         if(!$item){
@@ -102,8 +120,9 @@ class SpaceService {
         }
 
         $res = new SpaceResource($item);
+        $houses = House::where('space_id', $item->id)->get();
 
-        return ServiceResponse::success('Space One', $res);
+        return ServiceResponse::success('Space One', ['space' => $res, 'houses' => $houses ]);
 
     }
 

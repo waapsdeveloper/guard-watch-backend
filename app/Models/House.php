@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class House extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'space_id',
+        'visibility',
+        'status',
+    ];
 }

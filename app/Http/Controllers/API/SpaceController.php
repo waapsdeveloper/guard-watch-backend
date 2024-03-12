@@ -16,6 +16,21 @@ class SpaceController extends Controller
         $this->service = $service;
     }
 
+    public function melist(Request $request){
+
+        $data = $request->all();
+
+        //
+        $res = $this->service->melist($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
     public function list(Request $request){
 
         $data = $request->all();

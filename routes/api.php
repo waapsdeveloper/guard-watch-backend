@@ -71,7 +71,7 @@ Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function ()
 Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
 
 
-
+    Route::get('me/list', [SpaceController::class, 'melist'] );
     Route::get('/list', [SpaceController::class, 'list'] );
     Route::get('/by-id/{id}', [SpaceController::class, 'byId'] );
     Route::post('/add', [SpaceController::class, 'add'] );
