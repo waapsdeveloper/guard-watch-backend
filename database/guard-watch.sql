@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 02:19 PM
+-- Generation Time: Mar 12, 2024 at 12:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -65,17 +65,17 @@ CREATE TABLE `data_rows` (
 --
 
 INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, `required`, `browse`, `read`, `edit`, `add`, `delete`, `details`, `order`) VALUES
-(1, 1, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
-(2, 1, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
-(3, 1, 'email', 'text', 'Email', 1, 1, 1, 1, 1, 1, NULL, 3),
-(4, 1, 'password', 'password', 'Password', 1, 0, 0, 1, 1, 0, NULL, 4),
-(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, NULL, 5),
-(6, 1, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, NULL, 6),
-(7, 1, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 7),
-(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, NULL, 8),
-(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Role', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":0}', 10),
+(1, 1, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, '{}', 1),
+(2, 1, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
+(3, 1, 'email', 'text', 'Email', 0, 1, 1, 1, 1, 1, '{}', 3),
+(4, 1, 'password', 'password', 'Password', 0, 0, 0, 1, 1, 0, '{}', 4),
+(5, 1, 'remember_token', 'text', 'Remember Token', 0, 0, 0, 0, 0, 0, '{}', 5),
+(6, 1, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 0, 0, 0, '{}', 6),
+(7, 1, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7),
+(8, 1, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, '{}', 8),
+(9, 1, 'user_belongsto_role_relationship', 'relationship', 'Role', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}', 10),
 (10, 1, 'user_belongstomany_role_relationship', 'relationship', 'Roles', 0, 1, 1, 1, 1, 0, '{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}', 11),
-(11, 1, 'settings', 'hidden', 'Settings', 0, 0, 0, 0, 0, 0, NULL, 12),
+(11, 1, 'settings', 'hidden', 'Settings', 0, 0, 0, 0, 0, 0, '{}', 12),
 (12, 2, 'id', 'number', 'ID', 1, 0, 0, 0, 0, 0, NULL, 1),
 (13, 2, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
 (14, 2, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 3),
@@ -85,7 +85,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (18, 3, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 3),
 (19, 3, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 4),
 (20, 3, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, NULL, 5),
-(21, 1, 'role_id', 'text', 'Role', 1, 1, 1, 1, 1, 1, NULL, 9),
+(21, 1, 'role_id', 'text', 'Role', 0, 1, 1, 1, 1, 1, '{}', 9),
 (22, 5, 'id', 'text', 'Id', 1, 1, 1, 0, 0, 0, '{}', 1),
 (23, 5, 'created_by', 'text', 'Created By', 0, 1, 1, 1, 1, 1, '{}', 3),
 (24, 5, 'title', 'text', 'Title', 0, 1, 1, 1, 1, 1, '{}', 4),
@@ -105,7 +105,20 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (40, 9, 'space_id', 'text', 'Space Id', 0, 1, 1, 1, 1, 1, '{}', 6),
 (41, 9, 'visibility', 'select_dropdown', 'Visibility', 0, 1, 1, 1, 1, 1, '{\"default\":\"1\",\"options\":{\"0\":\"Private\",\"1\":\"Public\"}}', 7),
 (42, 9, 'status', 'checkbox', 'Status', 0, 1, 1, 1, 1, 1, '{\"on\":\"Active\",\"off\":\"Inactive\",\"checked\":true}', 8),
-(43, 9, 'house_belongsto_space_relationship', 'relationship', 'spaces', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Space\",\"table\":\"spaces\",\"type\":\"belongsTo\",\"column\":\"space_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"contacts\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5);
+(43, 9, 'house_belongsto_space_relationship', 'relationship', 'spaces', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Space\",\"table\":\"spaces\",\"type\":\"belongsTo\",\"column\":\"space_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"contacts\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
+(44, 1, 'phone_number', 'text', 'Phone Number', 0, 1, 1, 1, 1, 1, '{}', 5),
+(45, 1, 'dial_code', 'text', 'Dial Code', 0, 1, 1, 1, 1, 1, '{}', 6),
+(46, 1, 'email_verified_at', 'timestamp', 'Email Verified At', 0, 1, 1, 1, 1, 1, '{}', 8),
+(47, 11, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(48, 11, 'user_id', 'text', 'User Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(49, 11, 'contact_id', 'text', 'Contact Id', 0, 0, 0, 0, 0, 0, '{}', 4),
+(50, 11, 'space_id', 'text', 'Space Id', 1, 1, 1, 1, 1, 1, '{}', 6),
+(51, 11, 'role_id', 'text', 'Role Id', 1, 1, 1, 1, 1, 1, '{}', 8),
+(52, 11, 'created_at', 'text', 'Created At', 0, 0, 0, 0, 0, 0, '{}', 9),
+(53, 11, 'updated_at', 'text', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 10),
+(54, 11, 'space_admin_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"user_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"contacts\",\"pivot\":\"0\",\"taggable\":\"0\"}', 2),
+(55, 11, 'space_admin_belongsto_space_relationship', 'relationship', 'spaces', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Space\",\"table\":\"spaces\",\"type\":\"belongsTo\",\"column\":\"space_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"contacts\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
+(56, 11, 'space_admin_belongsto_role_relationship', 'relationship', 'roles', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"contacts\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7);
 
 -- --------------------------------------------------------
 
@@ -136,11 +149,12 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `policy_name`, `controller`, `description`, `generate_permissions`, `server_side`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', '', 1, 0, NULL, '2023-11-24 07:11:02', '2023-11-24 07:11:02'),
+(1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2023-11-24 07:11:02', '2024-03-12 00:25:32'),
 (2, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, '', '', 1, 0, NULL, '2023-11-24 07:11:02', '2023-11-24 07:11:02'),
 (3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', '', 1, 0, NULL, '2023-11-24 07:11:02', '2023-11-24 07:11:02'),
 (5, 'spaces', 'spaces', 'Space', 'Spaces', NULL, 'App\\Models\\Space', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-03-11 06:34:11', '2024-03-11 08:09:12'),
-(9, 'houses', 'houses', 'House', 'Houses', NULL, 'App\\Models\\House', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-03-11 08:15:21', '2024-03-11 08:16:20');
+(9, 'houses', 'houses', 'House', 'Houses', NULL, 'App\\Models\\House', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-03-11 08:15:21', '2024-03-11 08:16:20'),
+(11, 'space_admins', 'space-admins', 'Space Admin', 'Space Admins', NULL, 'App\\Models\\SpaceAdmin', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-03-12 00:45:23', '2024-03-12 02:53:25');
 
 -- --------------------------------------------------------
 
@@ -332,7 +346,8 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 13, '2023-11-24 07:11:02', '2023-11-24 07:11:02', 'voyager.bread.index', NULL),
 (10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, NULL, 14, '2023-11-24 07:11:02', '2023-11-24 07:11:02', 'voyager.settings.index', NULL),
 (11, 1, 'Spaces', '', '_self', NULL, NULL, NULL, 15, '2024-03-11 06:34:12', '2024-03-11 06:34:12', 'voyager.spaces.index', NULL),
-(14, 1, 'Houses', '', '_self', NULL, NULL, NULL, 16, '2024-03-11 08:15:21', '2024-03-11 08:15:21', 'voyager.houses.index', NULL);
+(14, 1, 'Houses', '', '_self', NULL, NULL, NULL, 16, '2024-03-11 08:15:21', '2024-03-11 08:15:21', 'voyager.houses.index', NULL),
+(15, 1, 'Space Admins', '', '_self', NULL, NULL, NULL, 17, '2024-03-12 00:45:23', '2024-03-12 00:45:23', 'voyager.space-admins.index', NULL);
 
 -- --------------------------------------------------------
 
@@ -422,6 +437,7 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('004319a591f23eddf2e78200b50719836b2e4e8007e2838d1f7e0d9564fef2fbd60fe6042777ea98', 21, 3, 'ZUUL Systems', '[]', 0, '2023-12-22 19:38:37', '2023-12-22 19:38:37', '2024-12-22 12:38:37'),
 ('01dd1cf6fcfbbe7e51ccdb30604d6b11f5453b1111440dbf2c50eaf6f8b8c92aec727571e5d1dda0', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-02 16:21:22', '2024-01-02 16:21:22', '2025-01-02 09:21:22'),
+('03b569cfa24dc6755f0ebc9bb12c7a7f1525c5f9488be836191dc1f1ef1a5409a2b1b10da56e928e', 46, 9, 'ZUUL Systems', '[]', 0, '2024-03-12 06:14:46', '2024-03-12 06:14:46', '2025-03-12 11:14:46'),
 ('06154126f73925ac52147edf4416c9a724bbe75dd7fea338c8076cf35748937eb1b3ee2fb9d89c71', 40, 7, 'ZUUL Systems', '[]', 0, '2024-02-20 05:16:47', '2024-02-20 05:16:47', '2025-02-20 10:16:47'),
 ('06640be3f8baf8be9e347ff0d6d95c11902b70fd30f6ab2aa795cb8e469a3d3069b676547e0fac5e', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-01 19:10:37', '2024-01-01 19:10:37', '2025-01-01 12:10:37'),
 ('06f8770c99db9e862b79a14b343c7ac132e3c6cf85d2733a6302b480e4cb4233383abe2a4badaae5', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-01 19:37:17', '2024-01-01 19:37:17', '2025-01-01 12:37:17'),
@@ -468,6 +484,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('2a0bbcb667460c040384b77e04e20d7cbbcffc1861b906db6813cb625c581587c70dc48d24375ec4', 36, 7, 'ZUUL Systems', '[]', 0, '2024-01-03 18:23:55', '2024-01-03 18:23:55', '2025-01-03 11:23:55'),
 ('2b7a1c84439080fd5da21ceac7ef25a85ebf6ba0851c65ca902a70b65734106d5d2ffb38551c1720', 41, 9, 'ZUUL Systems', '[]', 0, '2024-03-01 19:59:11', '2024-03-01 19:59:11', '2025-03-01 12:59:11'),
 ('2c9bfb32d0611299ea3938aec7a7030b365429c80da999c111f70d3681ed660109569d38ab94b45d', 22, 3, 'ZUUL Systems', '[]', 0, '2023-12-26 14:12:16', '2023-12-26 14:12:16', '2024-12-26 07:12:16'),
+('2cde1a09fa4955301c5a81e4b697cb21ba5f7f7597d4ba7387c5146d713907e259d39840535a3c64', 46, 9, 'ZUUL Systems', '[]', 0, '2024-03-12 05:23:35', '2024-03-12 05:23:35', '2025-03-12 10:23:35'),
 ('2e324a6abb3cc814d4a57281d4d053b93cc22f1463795e52ff540bcda6fcd2c4cb55c893fba9042e', 28, 7, 'ZUUL Systems', '[]', 0, '2023-12-26 21:33:25', '2023-12-26 21:33:25', '2024-12-26 14:33:25'),
 ('2ee7572c2887812ec5ea088615446fa5e09b6b616b4934100c3c460dc26ffec4e378ba57c91e936c', 38, 7, 'ZUUL Systems', '[]', 0, '2024-01-10 18:01:01', '2024-01-10 18:01:01', '2025-01-10 11:01:01'),
 ('2effbd1673443b045c7a0c15596b439a1a45a6a9d2ff7054288d299ab290aebe848a7d082e0280a0', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-04 15:01:42', '2024-01-04 15:01:42', '2025-01-04 08:01:42'),
@@ -485,6 +502,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('3de056f5499351d79314e6551477e226c092912430c7fd04d09d9132d3c68b2ab86245226d4f3ab0', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-01 20:03:58', '2024-01-01 20:03:58', '2025-01-01 13:03:58'),
 ('3e408be200968604d5df658f56f238abb6bd85177b9b9b7a033769ce9d38d0f71b3beb79f57f41f6', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-09 19:42:02', '2024-01-09 19:42:02', '2025-01-09 12:42:02'),
 ('403847f0987392e0d36caaa16d24aceb8f667d1b552f0647706a72e550fd15deb620035b8c21df65', 28, 7, 'ZUUL Systems', '[]', 0, '2023-12-27 15:42:05', '2023-12-27 15:42:05', '2024-12-27 08:42:05'),
+('40b4a3d04ed013f8207fd25e85768c29283be3277ff5f445499b80433599dacfae0dddf239b5ab26', 46, 9, 'ZUUL Systems', '[]', 0, '2024-03-12 05:36:44', '2024-03-12 05:36:44', '2025-03-12 10:36:44'),
 ('40dffb0d58acf6b0205f1dea6abefe82fc0724fb8d4bcb3b3c0a4504ed6894445add4fe2894cc5f1', 2, 7, 'ZUUL Systems', '[]', 0, '2024-01-10 18:39:36', '2024-01-10 18:39:36', '2025-01-10 11:39:36'),
 ('412e0d36f072eada3b658f716139d8fe5e13016ff6abff20d5850d9354a02c3d1b4a2994beac01e2', 31, 7, 'ZUUL Systems', '[]', 0, '2024-01-04 19:20:12', '2024-01-04 19:20:12', '2025-01-04 12:20:12'),
 ('41e52bacc394a6a14367da1e4b9307d5403c9059fee5b5a03c9b101147734ae555902acb85eeaa98', 31, 7, 'ZUUL Systems', '[]', 0, '2024-01-04 16:47:19', '2024-01-04 16:47:19', '2025-01-04 09:47:19'),
@@ -519,6 +537,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('69b78a65e14d05d2b4404fd98ed4a94b475e311688768e6d8d8d9f341bc8fc2fd2c5ad430acc13fc', 21, 3, 'ZUUL Systems', '[]', 0, '2023-12-06 15:18:13', '2023-12-06 15:18:13', '2024-12-06 08:18:13'),
 ('69c0038580d40af49fbffdbd248c499ab0ca2a898488fd6d0bc952fe27ba51b22b248f57950d776d', 40, 7, 'ZUUL Systems', '[]', 0, '2024-02-20 05:17:21', '2024-02-20 05:17:21', '2025-02-20 10:17:21'),
 ('6b07f9a87814ce3ffc39263ae8e107ff5b97d62b0ef87c6aa4a188f2ee8fd244f97adab14b18a981', 28, 7, 'ZUUL Systems', '[]', 0, '2023-12-26 21:50:25', '2023-12-26 21:50:25', '2024-12-26 14:50:25'),
+('6b8da92ffba3801ac2543fa2be0f61f498281b5795369ab0494f1492b01ec242c3f4a9b0f16b696e', 46, 9, 'ZUUL Systems', '[]', 0, '2024-03-12 03:02:42', '2024-03-12 03:02:42', '2025-03-12 08:02:42'),
 ('6cd7bee99b1e251a3978f7f305fbcd2217fba9cd18b003dc8baa1ac7da58637310ace8e5f020306f', 28, 7, 'ZUUL Systems', '[]', 0, '2023-12-26 20:37:42', '2023-12-26 20:37:42', '2024-12-26 13:37:42'),
 ('706bff8ff825f64264a079f8d0830a6298614c3ad9f06ab4db093e369ca29fdf401b74282b14a18d', 30, 7, 'ZUUL Systems', '[]', 0, '2023-12-29 17:43:36', '2023-12-29 17:43:36', '2024-12-29 10:43:36'),
 ('70e66011ea58547bc8d22afd066612fb3c763141a57ee75bbc34649215311a8270a3e1d020884154', 21, 3, 'ZUUL Systems', '[]', 0, '2023-11-29 23:23:14', '2023-11-29 23:23:14', '2024-11-29 16:23:14'),
@@ -545,6 +564,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('8a5f6d7a23e45a8ccab244389bdb5b78dc301e4ab3bc35a30fa562dd6239d1d7801c397c6bb09567', 28, 7, 'ZUUL Systems', '[]', 0, '2023-12-26 19:52:50', '2023-12-26 19:52:50', '2024-12-26 12:52:50'),
 ('8c3f2eed64877c3c4e1044be0ef365cecfb1a707672103bfe33edabb0400cb89b97386f6a45a7d82', 40, 7, 'ZUUL Systems', '[]', 0, '2024-02-18 10:12:01', '2024-02-18 10:12:01', '2025-02-18 15:12:01'),
 ('8cd66e984f79dc0fcb253b2cc890f9861ce00643e96cd671337f60701a1ebcb0039d92db2a4e58e7', 39, 7, 'ZUUL Systems', '[]', 0, '2024-01-04 16:42:13', '2024-01-04 16:42:13', '2025-01-04 09:42:13'),
+('8f96bae04d3b9b14ff0920f7b51ecc9640f2cd95a2f200767cf1a30b37ba6c82f8fb17e168df2646', 46, 9, 'ZUUL Systems', '[]', 0, '2024-03-12 06:22:48', '2024-03-12 06:22:48', '2025-03-12 11:22:48'),
 ('8fa079c82148c976e074eeab59f4211ebdf8be4ab0bc0386564ab28e24d8ad83b3ece5950a69f462', 22, 3, 'ZUUL Systems', '[]', 0, '2023-12-26 14:14:47', '2023-12-26 14:14:47', '2024-12-26 07:14:47'),
 ('911ac976785eee85b2a2448f52da2a05087973a574bd1bbe95e9b3c4dcea704d9454e4d6d27f2212', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-02 21:10:35', '2024-01-02 21:10:35', '2025-01-02 14:10:35'),
 ('940fd59d7f8477207ae96fac6bd48ca604f3c31d360ca125f823a9cd981d0e8da89db2dd67a4c59d', 20, 7, 'ZUUL Systems', '[]', 0, '2024-01-01 20:03:20', '2024-01-01 20:03:20', '2025-01-01 13:03:20'),
@@ -846,7 +866,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (42, 'read_houses', 'houses', '2024-03-11 08:15:21', '2024-03-11 08:15:21'),
 (43, 'edit_houses', 'houses', '2024-03-11 08:15:21', '2024-03-11 08:15:21'),
 (44, 'add_houses', 'houses', '2024-03-11 08:15:21', '2024-03-11 08:15:21'),
-(45, 'delete_houses', 'houses', '2024-03-11 08:15:21', '2024-03-11 08:15:21');
+(45, 'delete_houses', 'houses', '2024-03-11 08:15:21', '2024-03-11 08:15:21'),
+(46, 'browse_space_admins', 'space_admins', '2024-03-12 00:45:23', '2024-03-12 00:45:23'),
+(47, 'read_space_admins', 'space_admins', '2024-03-12 00:45:23', '2024-03-12 00:45:23'),
+(48, 'edit_space_admins', 'space_admins', '2024-03-12 00:45:23', '2024-03-12 00:45:23'),
+(49, 'add_space_admins', 'space_admins', '2024-03-12 00:45:23', '2024-03-12 00:45:23'),
+(50, 'delete_space_admins', 'space_admins', '2024-03-12 00:45:23', '2024-03-12 00:45:23');
 
 -- --------------------------------------------------------
 
@@ -898,7 +923,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (42, 1),
 (43, 1),
 (44, 1),
-(45, 1);
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1);
 
 -- --------------------------------------------------------
 
@@ -933,6 +963,14 @@ CREATE TABLE `phone_numbers` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `phone_numbers`
+--
+
+INSERT INTO `phone_numbers` (`id`, `device_id`, `dial_code`, `phone_number`, `created_at`, `updated_at`) VALUES
+(3, 'rwrew54353', '+92', '3432322009', '2024-03-12 08:01:25', '2024-03-12 08:01:25'),
+(4, 'rwrew54353', '+92', '3432322008', '2024-03-12 08:02:15', '2024-03-12 08:02:15');
 
 -- --------------------------------------------------------
 
@@ -1045,9 +1083,9 @@ CREATE TABLE `spaces` (
   `address` text DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `type` varchar(100) NOT NULL,
+  `type` int(1) NOT NULL,
   `coordinates` point DEFAULT NULL,
-  `visibility` varchar(10) DEFAULT NULL,
+  `visibility` int(1) DEFAULT NULL,
   `status` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1056,7 +1094,7 @@ CREATE TABLE `spaces` (
 --
 
 INSERT INTO `spaces` (`id`, `created_by`, `title`, `description`, `address`, `created_at`, `updated_at`, `type`, `coordinates`, `visibility`, `status`) VALUES
-(8, 44, 'Raza Square', 'Raza Square Apartment', 'N6 Raza Square, Block 10, Gulshan-e-Iqbal Karachi', '2024-03-11 12:57:43', '2024-03-11 12:57:43', '1', 0x0000000001010000007f2e1a329ec65040b998558e7fe93840, '1', 1);
+(8, 1, 'Raza Square', 'Raza Square Apartment', 'N6 Raza Square, Block 10, Gulshan-e-Iqbal Karachi', '2024-03-11 12:57:43', '2024-03-12 05:42:38', 1, 0x0000000001010000002bfa43334f4a5dc09240834d9d5b4040, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1066,13 +1104,20 @@ INSERT INTO `spaces` (`id`, `created_by`, `title`, `description`, `address`, `cr
 
 CREATE TABLE `space_admins` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `contact_id` int(11) DEFAULT NULL,
-  `space_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
+  `space_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `space_admins`
+--
+
+INSERT INTO `space_admins` (`id`, `user_id`, `contact_id`, `space_id`, `role_id`, `created_at`, `updated_at`) VALUES
+(8, 46, NULL, 8, 5, '2024-03-12 08:03:14', '2024-03-12 08:03:14');
 
 -- --------------------------------------------------------
 
@@ -1119,7 +1164,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `phone_number`, `dial_code`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Super Admin', 'superadmin@email.com', NULL, NULL, 'users/default.png', NULL, '$2y$12$SnRJdWddHhn/bpJHHgOHk.6I/6o/szIRbqN94keeX9.SA0gydlSAy', NULL, NULL, '2024-02-17 03:08:54', '2024-02-17 03:08:54'),
-(44, 5, 'AP Admin', 'ap-admin@gmail.com', NULL, NULL, 'users/default.png', NULL, '$2y$12$AYTLKRXDSe/VEU9dGzGCXuG8.Rpm6pVptV51lo5yEWspQRhpaKvte', NULL, '{\"locale\":\"en\"}', '2024-03-11 07:21:52', '2024-03-11 07:21:52');
+(46, 2, 'shoaib uddin', 'shoaibuddin12fx@gmail.com', '3432322008', '+92', 'users/default.png', NULL, '$2y$12$dSTatSQL06iZB4IdfFi6tubIvxeUN/TqolcpYiBhKmCl930pq2QX.', NULL, NULL, '2024-03-12 03:02:42', '2024-03-12 03:02:42');
 
 -- --------------------------------------------------------
 
@@ -1447,13 +1492,13 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -1507,7 +1552,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1555,7 +1600,7 @@ ALTER TABLE `package_users`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1567,7 +1612,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `phone_numbers`
 --
 ALTER TABLE `phone_numbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -1603,7 +1648,7 @@ ALTER TABLE `spaces`
 -- AUTO_INCREMENT for table `space_admins`
 --
 ALTER TABLE `space_admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -1615,7 +1660,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `user_codes`
