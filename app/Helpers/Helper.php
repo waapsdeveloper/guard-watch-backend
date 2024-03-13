@@ -22,6 +22,7 @@ class Helper
             'result' => $data
         ];
     }
+
     public static function generateRandomCode($length = 20) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomCode = '';
@@ -32,6 +33,11 @@ class Helper
 
         return $randomCode;
     }
+
+
+
+
+
 }
 
 

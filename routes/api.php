@@ -16,6 +16,7 @@ use App\Http\Controllers\API\PackageController;
 use App\Http\Controllers\API\PackageUserController;
 use App\Http\Controllers\API\PackageFacilityController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\HouseController;
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\API\InviteScanHistoryController;
@@ -29,20 +30,8 @@ Route::get('/generate-random-code', function () {
 });
 
 
-Route::get('/generate-space-houses', function () {
-
-
-    $characters = "ABCDEFGHIJKLMN";
-    $rangeOfEach = 0;s;'s;curiqwqwueow[wiwauswieeioweiroqiopip[wirprwoe rojorworie iewo;[]\][pkvgrforrprofirwpewp'
-
-
-
-    return "A";
-});
-
-
-
-
+Route::post('/generate-space-houses',  [HouseController::class, 'addHousesBySpaceId'] );
+Route::post('/generate-space-houses-residents',  [HouseController::class, 'addResidentsByHousesBySpaceId'] );
 
 /*
 |--------------------------------------------------------------------------

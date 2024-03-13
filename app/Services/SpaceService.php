@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Space;
 use App\Models\SpaceAdmin;
 use App\Models\House;
+use App\Models\Resident;
 use App\Models\Contact;
 use App\Models\Role;
 use App\Helpers\ServiceResponse;
@@ -122,8 +123,13 @@ class SpaceService {
         $res = new SpaceResource($item);
         $houses = House::where('space_id', $item->id)->get();
 
-        return ServiceResponse::success('Space One', ['space' => $res, 'houses' => $houses ]);
+        $hids = $houses->pluck('id');
 
+        $residents = Resident::whereIn('house_id', $hids)->with('house')->get();
+
+
+
+        return ServiceResponse::success('Space One', ['space' => $res, 'houses' => $houses, 'residents' => $residents ]);
     }
 
     public function delete($data){
