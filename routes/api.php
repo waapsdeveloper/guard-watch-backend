@@ -29,6 +29,19 @@ Route::get('/generate-random-code', function () {
 });
 
 
+Route::get('/generate-space-houses', function () {
+
+
+    $characters = "ABCDEFGHIJKLMN";
+    $rangeOfEach = 0;s;'s;curiqwqwueow[wiwauswieeioweiroqiopip[wirprwoe rojorworie iewo;[]\][pkvgrforrprofirwpewp'
+
+
+
+    return "A";
+});
+
+
+
 
 
 /*
