@@ -32,6 +32,21 @@ class EventsController extends Controller
 
     }
 
+    public function melist(Request $request){
+
+        $data = $request->all();
+
+        //
+        $res = $this->service->melist($data);
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
     public function byId(Request $request, $id){
 
         $data = $request->all();

@@ -20,12 +20,18 @@ class SpaceResource extends JsonResource
 
     public static function toObject($obj, $lang = 'en')
     {
+        // Accessing coordinates as array
+
+        $cor = $obj->coordinates;
+        $coordinates = $cor ? unpack('x/x/x/x/corder/Ltype/dlatitude/dlongitude', $obj->coordinates) : null;
+
         return [
             "id" => $obj->id,
             "title" => $obj->title,
             "description" => $obj->description,
             "type" => $obj->type,
             "address" => $obj->address,
+            "coordinates" => $coordinates
         ];
     }
 }

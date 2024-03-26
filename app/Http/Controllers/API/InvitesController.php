@@ -87,7 +87,7 @@ class InvitesController extends Controller
         // Validating the required fields (excluding 'qr_code')
         $validation = Validator::make($data, [
             'space_id' => 'required|int|exists:spaces,id',
-            'name' => 'required|string',
+            // 'name' => 'required|string',
             'phone_number' => 'required|int',
             'dial_code' => 'required|string',
             'end_date' => 'required|string',
@@ -97,6 +97,7 @@ class InvitesController extends Controller
             'validity' => 'required|int',
             'visitor_type' => 'required|string',
             'comments' => 'required|string',
+            'location' => 'required'
         ]);
 
         // dd($validation);

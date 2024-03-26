@@ -26,6 +26,15 @@ class EventsService {
 
     }
 
+    public function melist($data){
+
+        $user = Auth::user();
+        $events = Event::where(['created_by' => $user->id])->orWhere(['created_by' => 1])->get();
+        $list = new EventCollection($events);
+        return ServiceResponse::success('Events List', $list);
+
+    }
+
     public function add($data){
 
         $user = Auth::user();
