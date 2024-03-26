@@ -308,6 +308,18 @@ class SpaceService {
 
     }
 
+    public function checkInCanSendPasses(){
+
+        $user = Auth::user();
+
+        // check if user is already a space admin
+        $spaceAdmins = SpaceAdmin::where(['user_id' => $user['id']])->whereIn('role_id', [4,5,7])->get();
+
+        // get space details
+        return ServiceResponse::success('Space Admins', $spaceAdmins);
+
+    }
+
 
 
 }

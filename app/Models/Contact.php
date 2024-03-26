@@ -15,6 +15,7 @@ class Contact extends Model
         'name',
         'phone_number',
         'dial_code',
+        'is_fav',
         'created_by'
     ];
     public function inviteContacts()

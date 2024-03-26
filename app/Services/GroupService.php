@@ -2,13 +2,16 @@
 
 namespace App\Services;
 use App\Models\Contact;
+use App\Models\Group;
 use App\Helpers\ServiceResponse;
 use App\Http\Resources\API\ContactResource;
 use App\Http\Resources\API\ContactCollection;
+use App\Http\Resources\API\GroupResource;
+use App\Http\Resources\API\GroupCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
-class ContactService {
+class GroupService {
 
 
 
@@ -20,20 +23,9 @@ class ContactService {
     public function list($data){
 
         $user = Auth::user();
-
-        $query = Contact::query();
-
-        $query->where(['created_by' => $user->id]);
-
-        if(isset($data['is_fav'])){
-            $query->where(['is_fav' => $data['is_fav']]);
-        }
-
-        $result = $query->get();
-
-
-        $list = new ContactCollection($result);
-        return ServiceResponse::success('Contacts List', $list);
+        $contacts = Group::where(['created_by' => $user->id])->get();
+        $list = new GroupCollection($contacts);
+        return ServiceResponse::success('Groups List', $list);
 
     }
 
@@ -41,26 +33,24 @@ class ContactService {
 
         $user = Auth::user();
         // check existing contact
-        $item = Contact::where([
+        $item = Group::where([
             'created_by' => $user->id,
-            'dial_code' => $data['dial_code'],
-            'phone_number' => $data['phone_number'],
+            'title' => $data['title'],
         ])->first();
 
         if($item){
-            return ServiceResponse::error('Contact Already Exist With Phone Number');
+            return ServiceResponse::error('Group Already Exist With title');
         }
 
-        $item = new Contact();
+        $item = new Group();
         $item->created_by = $user->id;
-        $item->name = $data['name'];
-        $item->phone_number = $data['phone_number'];
-        $item->dial_code = $data['dial_code'];
+        $item->title = $data['title'];
+        $item->description = $data['description'];
         $item->save();
 
-        $res = new ContactResource($item);
+        $res = new GroupResource($item);
 
-        return ServiceResponse::success('Contacts Add', $res);
+        return ServiceResponse::success('Group Add', $res);
 
     }
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
+use App\Http\Controllers\API\GroupController;
 use App\Http\Controllers\API\SpaceController;
 use App\Http\Controllers\API\InvitesController;
 use App\Http\Controllers\API\EventsController;
@@ -68,6 +69,19 @@ Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function ()
     Route::post('/edit/{id}', [ContactController::class, 'edit'] );
     Route::delete('/delete/{id}', [ContactController::class, 'delete'] );
 
+    Route::post('/add-to-fav', [ContactController::class, 'addToFav'] );
+
+});
+
+
+Route::group(['prefix' => 'groups', 'middleware' => ['auth:api']], function () {
+
+    Route::get('/list', [GroupController::class, 'list'] );
+    Route::get('/by-id/{id}', [GroupController::class, 'byId'] );
+    Route::post('/add', [GroupController::class, 'add'] );
+    Route::post('/edit/{id}', [GroupController::class, 'edit'] );
+    Route::delete('/delete/{id}', [GroupController::class, 'delete'] );
+
 });
 
 Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
@@ -88,6 +102,8 @@ Route::group(['prefix' => 'spaces', 'middleware' => ['auth:api']], function () {
     Route::get('/get-my-moderation-spaces-by-user-id', [SpaceController::class, 'getMyModerationSpacesByUserId'] );
 
     Route::get('/get-global-spaces', [SpaceController::class, 'getGlobalSpaces'] );
+    Route::get('/check-in-can-send-passes', [SpaceController::class, 'checkInCanSendPasses'] );
+
 
 
 });
@@ -122,6 +138,8 @@ Route::group(['prefix' => 'events', 'middleware' => ['auth:api']], function () {
     Route::post('/add', [EventsController::class, 'add'] );
     Route::post('/edit/{id}', [EventsController::class, 'edit'] );
     Route::delete('/delete/{id}', [EventsController::class, 'delete'] );
+
+    Route::get('me/list', [EventsController::class, 'melist'] );
 
 });
 

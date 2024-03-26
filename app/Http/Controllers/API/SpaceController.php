@@ -309,4 +309,19 @@ class SpaceController extends Controller
 
     }
 
+    public function checkInCanSendPasses(){
+
+
+        $res = $this->service->checkInCanSendPasses();
+
+        if($res['bool'] == false){
+            return self::failure($res['message'], $res);
+        }
+
+        return self::success("", $res);
+
+    }
+
+
+
 }

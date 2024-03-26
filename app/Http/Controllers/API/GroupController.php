@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Services\ContactService;
+use App\Services\GroupService;
 
-class ContactController extends Controller
+class GroupController extends Controller
 {
     //
     protected $service;
 
-    public function __construct(ContactService $service){
+    public function __construct(GroupService $service){
         $this->service = $service;
     }
 
@@ -63,9 +64,8 @@ class ContactController extends Controller
 
         // validating the required fields
         $validation = Validator::make($data, [
-            'name' => 'required|string',
-            'dial_code' => 'required|string',
-            'phone_number' => 'required|min:10',
+            'title' => 'required|string',
+            'description' => 'required|string',
         ]);
 
         // if validation failed
